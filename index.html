@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" name="viewport"/>
+  <title>Manufacturing ERP Software Dubai &amp; UAE | Suvrin Technologies Odoo Partner</title>
+  <meta name="description" content="Turnkey Odoo Manufacturing ERP implementation for UAE factories. Shop floor routing, finite capacity, multi-warehouse JAFZA tracking, and FTA 5% VAT compliance." />
+
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              ink: "#141414",
+              blue: "#002098",
+              "blue-bright": "#1A3FD4",
+              green: "#80B070",
+              "green-deep": "#5F9450",
+              mist: "#F5F7FA",
+              line: "#E4E9F0"
+            }
+          },
+          fontFamily: {
+            heading: ["'Outfit'", "sans-serif"],
+            body: ["'Plus Jakarta Sans'", "sans-serif"]
+          },
+          boxShadow: {
+            soft: "0 1px 2px rgba(20,20,20,0.04), 0 8px 24px rgba(20,20,20,0.06)",
+            lift: "0 4px 6px rgba(20,20,20,0.04), 0 16px 40px rgba(0,32,152,0.08)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --ink: #141414;
+      --blue: #002098;
+      --blue-bright: #1A3FD4;
+      --green: #80B070;
+      --green-deep: #5F9450;
+      --mist: #F5F7FA;
+      --line: #E4E9F0;
+      --surface: #FFFFFF;
+      --muted: #5B6575;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      color: var(--ink);
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    p, span, div, li, a, button, label, input, select, textarea {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Ambient background layers */
+    #webgl-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #ambient-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    .bg-atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 65% 45% at 82% 12%, rgba(0, 32, 152, 0.11) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 42% at 12% 72%, rgba(128, 176, 112, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 55% 95%, rgba(0, 32, 152, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 45%, #FFFFFF 100%);
+      animation: atmosphereShift 22s ease-in-out infinite alternate;
+    }
+
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(48px);
+      will-change: transform, opacity;
+      mix-blend-mode: multiply;
+    }
+    .bg-orb-a {
+      width: min(42vw, 480px);
+      height: min(42vw, 480px);
+      top: -8%;
+      right: -4%;
+      background: radial-gradient(circle, rgba(0, 32, 152, 0.22) 0%, rgba(0, 32, 152, 0.06) 45%, transparent 70%);
+      animation: orbDriftA 18s ease-in-out infinite;
+    }
+    .bg-orb-b {
+      width: min(38vw, 420px);
+      height: min(38vw, 420px);
+      bottom: 8%;
+      left: -6%;
+      background: radial-gradient(circle, rgba(128, 176, 112, 0.28) 0%, rgba(128, 176, 112, 0.08) 45%, transparent 72%);
+      animation: orbDriftB 22s ease-in-out infinite;
+    }
+    .bg-orb-c {
+      width: min(28vw, 320px);
+      height: min(28vw, 320px);
+      top: 42%;
+      left: 38%;
+      background: radial-gradient(circle, rgba(26, 63, 212, 0.14) 0%, rgba(128, 176, 112, 0.08) 40%, transparent 70%);
+      animation: orbDriftC 26s ease-in-out infinite;
+    }
+    .bg-orb-d {
+      width: min(24vw, 260px);
+      height: min(24vw, 260px);
+      bottom: 18%;
+      right: 12%;
+      background: radial-gradient(circle, rgba(128, 176, 112, 0.18) 0%, transparent 68%);
+      animation: orbDriftD 20s ease-in-out infinite;
+    }
+
+    .bg-light-sweep {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 32, 152, 0.035) 48%,
+        rgba(128, 176, 112, 0.04) 52%,
+        transparent 60%,
+        transparent 100%
+      );
+      background-size: 220% 220%;
+      animation: lightSweep 16s ease-in-out infinite;
+    }
+
+    @keyframes atmosphereShift {
+      0% {
+        filter: hue-rotate(0deg) saturate(1);
+        transform: scale(1);
+      }
+      100% {
+        filter: hue-rotate(8deg) saturate(1.08);
+        transform: scale(1.03);
+      }
+    }
+    @keyframes orbDriftA {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+      50% { transform: translate(-6%, 10%) scale(1.12); opacity: 1; }
+    }
+    @keyframes orbDriftB {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+      50% { transform: translate(10%, -8%) scale(1.15); opacity: 1; }
+    }
+    @keyframes orbDriftC {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+      33% { transform: translate(8%, -6%) scale(1.1); opacity: 0.95; }
+      66% { transform: translate(-5%, 8%) scale(0.95); opacity: 0.8; }
+    }
+    @keyframes orbDriftD {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.75; }
+      50% { transform: translate(-8%, -10%) scale(1.18); opacity: 1; }
+    }
+    @keyframes lightSweep {
+      0% { background-position: 0% 50%; opacity: 0.55; }
+      50% { background-position: 100% 50%; opacity: 0.9; }
+      100% { background-position: 0% 50%; opacity: 0.55; }
+    }
+
+    .js-reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .js-reveal.is-pending {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-atmosphere,
+      .bg-orb,
+      .bg-light-sweep {
+        animation: none !important;
+      }
+      .js-reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .grid-lines-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      opacity: 0.5;
+    }
+    .grid-lines-overlay > div {
+      border-right: 1px solid rgba(0, 32, 152, 0.06);
+    }
+
+    .progress-track {
+      width: 2px;
+      height: 200px;
+      background: var(--line);
+      position: relative;
+      border-radius: 2px;
+    }
+    .progress-thumb {
+      position: absolute;
+      width: 3px;
+      height: 36px;
+      left: -0.5px;
+      background: linear-gradient(180deg, var(--blue) 0%, var(--green) 100%);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(0, 32, 152, 0.25);
+      transition: top 0.3s cubic-bezier(0.2, 1, 0.4, 1);
+    }
+
+    .surface-panel {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      box-shadow: none;
+    }
+
+    .section-band {
+      background: transparent;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .eyebrow.eyebrow-alert {
+      color: #DC2626;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0, 32, 152, 0.22);
+    }
+    .btn-primary:hover {
+      background: var(--blue-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 32, 152, 0.28);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 9999px;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(0, 32, 152, 0.35);
+      background: transparent;
+      box-shadow: 0 4px 14px rgba(0, 32, 152, 0.06);
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: rgba(128, 176, 112, 0.12);
+      color: var(--green-deep);
+      font-weight: 700;
+      font-size: 0.75rem;
+      border: 1px solid rgba(128, 176, 112, 0.45);
+      border-radius: 9999px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-whatsapp:hover {
+      background: rgba(128, 176, 112, 0.2);
+      border-color: var(--green-deep);
+    }
+
+    .field-input {
+      width: 100%;
+      height: 2.75rem;
+      padding: 0 1rem;
+      border-radius: 0.75rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.875rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0, 32, 152, 0.1);
+    }
+    .field-input::placeholder {
+      color: #94A3B8;
+    }
+    select.field-input {
+      background-color: #fff;
+    }
+
+    .faq-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    .faq-panel.active {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .pulse-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 9999px;
+      background: var(--blue);
+      animation: softPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes softPulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 32, 152, 0.35); }
+      50% { opacity: 0.75; transform: scale(0.92); box-shadow: 0 0 0 6px rgba(0, 32, 152, 0); }
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.03); }
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(40px);
+      animation: floatOrb 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      background: transparent !important;
+    }
+    .logo-link img {
+      height: 52px;
+      width: auto;
+      max-width: min(280px, 48vw);
+      object-fit: contain;
+      object-position: left center;
+      background: transparent !important;
+      mix-blend-mode: normal;
+      transition: opacity 0.2s ease;
+    }
+    @media (min-width: 640px) {
+      .logo-link img { height: 58px; }
+    }
+    @media (min-width: 768px) {
+      .logo-link img { height: 64px; max-width: 320px; }
+    }
+    .logo-link:hover img {
+      opacity: 0.88;
+    }
+
+    /* Sticky header — solid mask so content slides cleanly underneath */
+    #siteHeader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(228, 233, 240, 0.9), 0 8px 24px rgba(20, 20, 20, 0.04);
+      transition: box-shadow 0.25s ease;
+    }
+    #siteHeader.scrolled {
+      box-shadow: 0 1px 0 var(--line), 0 12px 28px rgba(20, 20, 20, 0.07);
+    }
+
+    html {
+      scroll-padding-top: 96px;
+    }
+
+    /* Content layer stays below sticky header */
+    .page-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 479px) {
+      .xs\:inline { display: inline; }
+    }
+
+    section, footer, header {
+      max-width: 100vw;
+    }
+
+    /* Mobile bottom padding for sticky bar */
+    @media (max-width: 639px) {
+      body {
+        padding-bottom: 4.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-brand-ink bg-transparent selection:bg-brand-blue selection:text-white">
+
+  <div class="bg-atmosphere" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+    <div class="bg-orb bg-orb-c"></div>
+    <div class="bg-orb bg-orb-d"></div>
+  </div>
+  <div class="bg-light-sweep" aria-hidden="true"></div>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <div class="grid-lines-overlay hidden md:grid" aria-hidden="true">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Progress rail -->
+  <aside class="fixed left-5 sm:left-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-start gap-4 pointer-events-none" style="margin-top: 12px;">
+    <span id="progressIndicatorLabel" class="font-heading font-bold text-xs text-brand-blue tracking-widest uppercase">
+      01 / 07
+    </span>
+    <div class="progress-track my-1">
+      <div id="progressIndicatorThumb" class="progress-thumb" style="top: 0px;"></div>
+    </div>
+    <div class="space-y-1 text-[11px] uppercase tracking-wider text-slate-400 font-medium">
+      <div id="progressTitle" class="text-brand-ink font-bold transition-all duration-300">Overview</div>
+      <div class="text-[9px] text-slate-400 font-heading tracking-widest">Suvrin ERP UAE</div>
+    </div>
+  </aside>
+
+  <div class="page-content">
+
+    <!-- Header — always visible while scrolling -->
+    <header id="siteHeader">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 md:px-10 h-[76px] sm:h-[84px] flex items-center justify-between gap-4">
+
+        <a href="#chapter-hero" aria-label="Suvrin Technologies Home" class="logo-link shrink-0">
+          <img src="logo.png?v=2" alt="Suvrin Technologies"/>
+        </a>
+
+        <div class="hidden md:flex items-center gap-3 lg:gap-3.5">
+          <a href="tel:+971551120975" class="btn-secondary h-10 px-4 text-xs">
+            <span class="material-symbols-outlined text-[17px] text-brand-blue">call</span>
+            <span>+971 551 120 975</span>
+          </a>
+          <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Manufacturing%20ERP%20in%20Dubai" target="_blank" rel="noopener noreferrer" class="btn-whatsapp h-10 px-4">
+            <span class="material-symbols-outlined text-[17px]">chat</span>
+            <span>WhatsApp</span>
+          </a>
+          <a href="#chapter-audit" class="btn-primary h-10 px-5">
+            <span>Book Audit</span>
+            <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+          </a>
+        </div>
+
+        <div class="flex md:hidden items-center gap-2">
+          <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Manufacturing%20ERP%20in%20Dubai" target="_blank" rel="noopener noreferrer" class="btn-whatsapp h-9 px-3 sm:px-4 active:scale-95">
+            <span class="material-symbols-outlined text-[16px]">chat</span>
+            <span class="hidden xs:inline sm:inline">WhatsApp</span>
+          </a>
+          <a href="#chapter-audit" class="btn-primary h-9 px-3 sm:px-4 active:scale-95">
+            <span>Book Audit</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="chapter-hero" data-chapter="1" data-title="Overview" class="chapter-section relative min-h-[100svh] pt-28 sm:pt-32 pb-16 sm:pb-24 overflow-hidden">
+
+      <!-- Soft glow only — fully transparent so global animation shows through -->
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="hero-orb w-72 h-72 bg-brand-blue/10 top-[18%] right-[8%] hidden lg:block" style="animation-delay: 0s;"></div>
+        <div class="hero-orb w-56 h-56 bg-brand-green/15 bottom-[16%] right-[18%] hidden lg:block" style="animation-delay: 1.5s;"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:pl-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center w-full">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-transparent border border-brand-line mb-6">
+            <span class="pulse-dot"></span>
+            <span class="text-[10.5px] uppercase tracking-wider font-semibold text-brand-blue">Dubai &amp; UAE Manufacturing ERP</span>
+          </div>
+
+          <h1 class="font-heading text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold text-brand-ink leading-[1.08] mb-5">
+            Manufacturing ERP<br/>
+            <span class="text-brand-blue">for Dubai &amp; UAE Industry</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-700 font-semibold mb-3 leading-snug max-w-xl">
+            Connect Production, Multi-Warehouse Inventory, Procurement &amp; UAE VAT Accounting
+          </p>
+
+          <p class="text-sm text-slate-500 mb-8 leading-relaxed max-w-xl">
+            Suvrin helps UAE manufacturers implement and customise Odoo ERP around real-world factory routing, finite capacity, scrap control, and bilingual compliance across Dubai, Sharjah, and Abu Dhabi plants.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">
+            <a href="#chapter-audit" class="btn-primary px-7 py-4">
+              <span>Book a Free ERP Consultation</span>
+              <span class="material-symbols-outlined text-[17px]">arrow_forward</span>
+            </a>
+            <a href="tel:+971551120975" class="btn-secondary px-6 py-4">
+              <span class="material-symbols-outlined text-[18px] text-brand-blue">call</span>
+              <span>Direct Dubai Desk: +971 551 120 975</span>
+            </a>
+          </div>
+
+          <div class="pt-6 border-t border-brand-line grid grid-cols-3 sm:grid-cols-6 gap-4 text-left">
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Odoo MRP</span>
+              <span class="text-[11px] text-slate-500">Shop Floor App</span>
+            </div>
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Multi-WH</span>
+              <span class="text-[11px] text-slate-500">JAFZA / KIZAD</span>
+            </div>
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">FTA VAT</span>
+              <span class="text-[11px] text-slate-500">5% Tax Ready</span>
+            </div>
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Costing</span>
+              <span class="text-[11px] text-slate-500">Live Job Costing</span>
+            </div>
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Bilingual</span>
+              <span class="text-[11px] text-slate-500">Arabic &amp; English</span>
+            </div>
+            <div>
+              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Audits</span>
+              <span class="text-[11px] text-slate-500">On-Site in UAE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space reserved for scroll-driven 3D ERP stage -->
+        <div class="lg:col-span-5 relative min-h-[220px] sm:min-h-[280px] lg:min-h-[440px] pointer-events-none" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Advisory pillars -->
+    <section class="section-band py-16 sm:py-20 px-4 sm:px-8 md:px-12 lg:pl-28">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-10 max-w-2xl">
+          <span class="eyebrow mb-2">Gulf Advisory Foundation</span>
+          <h2 class="font-heading text-2xl sm:text-3xl text-brand-ink">ERP Implementation That Goes Beyond Installing Software</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          <div class="border-t-2 border-brand-blue pt-5">
+            <span class="font-heading text-xs text-brand-blue font-bold block mb-2 tracking-wider">01 / CONSULTING</span>
+            <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Business-First Consulting</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              We audit your shop floor routing, scrap percentages, and multi-currency supply chain before configuring Odoo.
+            </p>
+          </div>
+          <div class="border-t-2 border-brand-blue pt-5">
+            <span class="font-heading text-xs text-brand-blue font-bold block mb-2 tracking-wider">02 / MASTERY</span>
+            <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Odoo Enterprise Mastery</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Certified specialists delivering custom Python modules, automated workflow triggers, and legacy data cleansing.
+            </p>
+          </div>
+          <div class="border-t-2 border-brand-green pt-5">
+            <span class="font-heading text-xs text-brand-green-deep font-bold block mb-2 tracking-wider">03 / DEPTH</span>
+            <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Manufacturing Depth</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Engineered for multi-level BOMs, finite work center scheduling, sub-assembly staging, and batch traceability.
+            </p>
+          </div>
+          <div class="border-t-2 border-brand-green pt-5">
+            <span class="font-heading text-xs text-brand-green-deep font-bold block mb-2 tracking-wider">04 / PRESENCE</span>
+            <h3 class="font-heading text-base font-bold text-brand-ink mb-2">UAE &amp; GCC Delivery</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Direct Dubai Marina desk. Rapid on-site factory visits across Dubai Industrial City, JAFZA, KIZAD, and Al Quoz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottlenecks -->
+    <section id="chapter-bottlenecks" data-chapter="2" data-title="Bottlenecks" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-start">
+        <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
+          <div class="mb-8">
+            <span class="eyebrow eyebrow-alert mb-2">Operational Bottlenecks</span>
+            <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
+              Is Your Factory Still Hamstrung by Disconnected Systems?
+            </h2>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Industrial businesses in the UAE lose up to 14% operating margin through spreadsheet divergence and inventory drift.
+            </p>
+          </div>
+
+          <div class="space-y-5">
+            <div class="border-b border-brand-line pb-4">
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Excel Spreadsheet Dependency</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">01 Friction</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Production schedules, inventory valuation, and job costing spreadsheets diverge across teams. Planners and accountants operate on conflicting numbers.
+              </p>
+            </div>
+            <div class="border-b border-brand-line pb-4">
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Zero Shop Floor Visibility</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">02 Blindspots</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Leadership cannot determine machine utilization, live downtime, or bottleneck work centers until the month ends.
+              </p>
+            </div>
+            <div class="border-b border-brand-line pb-4">
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Inventory Drift &amp; Stockouts</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">03 Capital</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Raw materials, WIP buffers, and finished stock numbers do not align. High-value stock remains tied up while critical components stock out.
+              </p>
+            </div>
+            <div class="border-b border-brand-line pb-4">
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Procurement Lag &amp; Manual POs</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">04 Lead Times</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Purchasing teams place orders reactively via WhatsApp instead of relying on dynamic MRP reordering rules driven by real production demand.
+              </p>
+            </div>
+            <div class="border-b border-brand-line pb-4">
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Inaccurate Job Costing</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">05 Margins</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                True manufacturing costs—combining direct materials, machine electricity, and labor hours—are calculated weeks too late.
+              </p>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between gap-4 mb-1">
+                <h3 class="font-heading text-lg font-bold text-brand-ink">Isolated Accounting (Tally Silos)</h3>
+                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">06 Silos</span>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed UAE FTA VAT filings.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-brand-line flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <span class="text-sm text-slate-500">Eliminate factory blindspots across Dubai &amp; JAFZA.</span>
+            <a href="#chapter-audit" class="text-xs font-bold uppercase tracking-wider text-brand-blue hover:text-brand-blue-bright flex items-center gap-1 transition-colors">
+              <span>Audit Your Factory Flow</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hidden lg:flex lg:col-span-5 items-center justify-center min-h-[360px] relative pointer-events-none">
+          <div class="relative z-10 text-center space-y-2 px-6 rounded-2xl bg-transparent border border-brand-line py-6">
+            <span class="font-heading text-5xl font-extrabold text-brand-blue">14%</span>
+            <p class="text-sm text-slate-500 leading-snug max-w-[200px] mx-auto">Avg. margin lost to disconnected factory systems in the UAE</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline -->
+    <section id="chapter-pipeline" data-chapter="3" data-title="Connected Flow" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-start">
+          <div class="hidden lg:flex lg:col-span-5 items-center min-h-[420px] pt-8">
+            <div class="space-y-4 w-full max-w-xs relative z-10 rounded-2xl bg-transparent border border-brand-line p-5">
+              <div class="h-px w-16 bg-brand-blue"></div>
+              <p class="font-heading text-4xl font-extrabold text-brand-ink leading-tight">One live pipeline.<br/><span class="text-brand-blue">Zero silos.</span></p>
+              <p class="text-sm text-slate-500">From sales order to FTA e-invoice — every scan and decision stays connected.</p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
+            <div class="mb-8">
+              <span class="eyebrow mb-2">Unified Flow</span>
+              <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
+                One ERP. Your Entire Manufacturing Operation.
+              </h2>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Suvrin configures Odoo around your production routing—connecting every scan and management decision into a live pipeline.
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">01</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">Sales &amp; Demand Forecast</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">AED sales orders convert automatically into manufacturing demand forecasts and delivery commitments.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">02</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">BOM &amp; MRP Engine</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Multi-level BOM breakdown verifies component availability, lead times, scrap allowance, and sub-assemblies.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">03</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">Automated Procurement</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Auto-generate RFQs and LPOs based on minimum stock rules and supplier lead times with multi-tier approvals.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">04</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">Goods Receipt &amp; QC Quarantine</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Barcode-scanned raw material intake with lot/batch tracking, test cert verification, and quarantine routing.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">05</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">Work Center Routing &amp; Tablets</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Shop floor tablets guide operators with digital work instructions, machine logging, and real-time scrap recording.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">06</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">In-Line Quality Checkpoints</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Quality gates trigger automated Non-Conformance Reports (NCR) immediately upon parameter deviation.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
+                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">07</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-ink">Packaging &amp; UAE Dispatch</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Serialised finished goods packaging, automated packing lists, delivery notes, and transport dispatch.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5">
+                <span class="font-heading text-xs font-bold text-brand-green-deep pt-1 tabular-nums">08</span>
+                <div>
+                  <h4 class="font-heading text-base font-bold text-brand-green-deep">Job Costing &amp; UAE VAT e-Invoicing</h4>
+                  <p class="text-sm text-slate-500 mt-0.5">Instant WIP-to-COGS entries, actual cost vs standard variance analysis, and FTA-compliant 5% e-invoicing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modules -->
+    <section id="chapter-modules" data-chapter="4" data-title="10 Modules" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-center">
+        <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
+      <div class="mb-10 max-w-2xl">
+        <span class="eyebrow mb-2">Functional Architecture</span>
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
+          Odoo Manufacturing Suite Built Around Your Factory
+        </h2>
+        <p class="text-sm text-slate-500 leading-relaxed">
+          10 core modules tailored to discrete, process, and hybrid industrial Gulf manufacturing.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-10">
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">01 / Manufacturing MRP</h4>
+          <p class="text-sm text-slate-500">Work center load planning, routing, and operator tablet apps.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">02 / Multi-Level BOM</h4>
+          <p class="text-sm text-slate-500">Version control, sub-assemblies, scrap % and alternative RM rules.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">03 / Production MPS</h4>
+          <p class="text-sm text-slate-500">Master production schedules, bottleneck flags &amp; shift planning.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">04 / Multi-Warehouse</h4>
+          <p class="text-sm text-slate-500">JAFZA, KIZAD &amp; Al Quoz transfers with live barcode lot tracking.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">05 / Auto Procurement</h4>
+          <p class="text-sm text-slate-500">Min-stock automated RFQ triggers and tiered LPO approvals.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">06 / Quality Control</h4>
+          <p class="text-sm text-slate-500">In-line QC gates, raw material tests, NCR logs &amp; ISO 9001 audit.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">07 / Maintenance CMMS</h4>
+          <p class="text-sm text-slate-500">Preventive machine maintenance, MTBF/MTTR tracking &amp; spares.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">08 / Precise Job Costing</h4>
+          <p class="text-sm text-slate-500">True cost breakdown per batch: RM, machine power, and labor.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">09 / Sales &amp; MO Sync</h4>
+          <p class="text-sm text-slate-500">Auto-convert quotations directly into shop floor manufacturing orders.</p>
+        </div>
+        <div class="border-b border-brand-line pb-4">
+          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">10 / UAE VAT Finance</h4>
+          <p class="text-sm text-slate-500">FTA-compliant VAT returns, multi-currency ledger (AED/USD/SAR).</p>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-brand-line">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-4">Connected Ecosystem</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 text-sm">
+          <div class="border-l-2 border-brand-blue pl-3">
+            <strong class="text-brand-ink block font-heading text-sm">Tally Prime</strong>
+            <span class="text-xs text-slate-500">Bi-directional bridge</span>
+          </div>
+          <div class="border-l-2 border-brand-blue pl-3">
+            <strong class="text-brand-ink block font-heading text-sm">SCADA / PLCs</strong>
+            <span class="text-xs text-slate-500">Machine cycle sync</span>
+          </div>
+          <div class="border-l-2 border-brand-green pl-3">
+            <strong class="text-brand-ink block font-heading text-sm">UAE Banks</strong>
+            <span class="text-xs text-slate-500">ENBD, ADCB, FAB</span>
+          </div>
+          <div class="border-l-2 border-brand-green pl-3">
+            <strong class="text-brand-ink block font-heading text-sm">Weighbridges</strong>
+            <span class="text-xs text-slate-500">RS232 Serial sync</span>
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="hidden lg:block lg:col-span-5 min-h-[360px] pointer-events-none" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Compliance -->
+    <section id="chapter-compliance" data-chapter="5" data-title="UAE Compliance" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
+            <div class="mb-8">
+              <span class="eyebrow mb-2">Built for UAE Regulations</span>
+              <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
+                Odoo ERP Implementation for UAE Industry
+              </h2>
+              <p class="text-sm text-slate-500 leading-relaxed">
+                Suvrin combines international Odoo enterprise architecture with localized UAE business practices, Federal Tax Authority compliance, and free zone structures.
+              </p>
+            </div>
+
+            <div class="space-y-3.5 mb-8">
+              <div class="flex items-start gap-3 border-b border-brand-line pb-3">
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">FTA UAE VAT-Ready:</strong> Automated 5% tax reports and electronic tax invoice generation.</span>
+              </div>
+              <div class="flex items-start gap-3 border-b border-brand-line pb-3">
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">AED-Centric Accounting:</strong> Multi-currency conversion (USD, EUR, SAR) with live FX rates.</span>
+              </div>
+              <div class="flex items-start gap-3 border-b border-brand-line pb-3">
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">Multi-Company &amp; Free Zones:</strong> Unified consolidation for mainland and JAFZA/DAFZA/KIZAD.</span>
+              </div>
+              <div class="flex items-start gap-3 border-b border-brand-line pb-3">
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">Multi-Warehouse Routing:</strong> Inter-warehouse transfers between Dubai, Abu Dhabi, and Sharjah depots.</span>
+              </div>
+              <div class="flex items-start gap-3 border-b border-brand-line pb-3">
+                <span class="material-symbols-outlined text-brand-green-deep text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">Bilingual System:</strong> Native Arabic and English documentation, reports, and UI toggles.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-brand-green-deep text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="text-sm text-slate-600"><strong class="text-brand-ink">On-Site Factory Audits:</strong> Suvrin engineers physically walk your production lines in JAFZA, DIC, or Al Quoz.</span>
+              </div>
+            </div>
+
+            <div class="pt-5 border-t border-brand-line">
+              <span class="text-xs uppercase tracking-wider text-brand-ink font-bold block mb-4">Supported UAE Manufacturing Sectors</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Metal &amp; Steel</strong>
+                  <span class="text-[11px] text-slate-500">MT/KG &amp; scrap</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Equipment &amp; ETO</strong>
+                  <span class="text-[11px] text-slate-500">Serial tracking</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Plastics &amp; Polymers</strong>
+                  <span class="text-[11px] text-slate-500">Extrusion &amp; regrind</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Packaging</strong>
+                  <span class="text-[11px] text-slate-500">GSM &amp; die-cuts</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Joinery &amp; Wood</strong>
+                  <span class="text-[11px] text-slate-500">Project BOMs</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Food &amp; Beverage</strong>
+                  <span class="text-[11px] text-slate-500">Halal &amp; expiry</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Switchgear</strong>
+                  <span class="text-[11px] text-slate-500">Testing sign-offs</span>
+                </div>
+                <div class="border-t border-brand-line pt-2">
+                  <strong class="font-heading text-brand-ink block text-sm">Chemicals</strong>
+                  <span class="text-[11px] text-slate-500">MSDS &amp; blending</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col justify-end gap-4 lg:pt-8 min-h-[360px]">
+            <div class="rounded-2xl bg-transparent border border-brand-line p-6">
+              <span class="font-heading text-xs font-bold uppercase text-brand-blue tracking-wider">FTA Ready</span>
+              <p class="font-heading text-2xl font-bold text-brand-ink mt-2 mb-1">5% VAT · TRN Validated</p>
+              <p class="text-sm text-slate-500">Bilingual Arabic / English tax invoices and VAT 201 returns, configured for UAE manufacturing.</p>
+            </div>
+            <div class="rounded-2xl bg-transparent border border-brand-line p-6">
+              <span class="font-heading text-xs font-bold uppercase text-brand-green-deep tracking-wider">Free Zone Coverage</span>
+              <p class="font-heading text-2xl font-bold text-brand-ink mt-2 mb-1">JAFZA · DAFZA · KIZAD</p>
+              <p class="text-sm text-slate-500">Multi-company consolidation across mainland and free-zone entities in one ledger.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case study -->
+    <section id="chapter-case" data-chapter="6" data-title="Case Study &amp; KPIs" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex flex-col justify-center">
+      <div class="max-w-3xl mb-10">
+        <span class="eyebrow mb-2">Verified Implementation</span>
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
+          Precision Industrial Manufacturing Implementation
+        </h2>
+        <p class="text-sm text-slate-500 leading-relaxed">
+          A multi-facility precision manufacturing group in the UAE replaced disconnected spreadsheets with an end-to-end Odoo Enterprise solution connecting shop floor machines to VAT accounting.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-brand-line py-8">
+        <div>
+          <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-blue block mb-1">95%</span>
+          <span class="font-heading text-xs font-bold text-brand-ink uppercase block">Excel Reduction</span>
+          <span class="text-[11px] text-slate-500">Live Odoo work orders</span>
+        </div>
+        <div>
+          <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-green-deep block mb-1">&lt; 24h</span>
+          <span class="font-heading text-xs font-bold text-brand-ink uppercase block">Cost Reconciliation</span>
+          <span class="text-[11px] text-slate-500">Down from 21 days</span>
+        </div>
+        <div>
+          <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-ink block mb-1">99.4%</span>
+          <span class="font-heading text-xs font-bold text-brand-ink uppercase block">On-Time Dispatch</span>
+          <span class="text-[11px] text-slate-500">Across Emirates fleet</span>
+        </div>
+        <div>
+          <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-blue block mb-1">4.8x</span>
+          <span class="font-heading text-xs font-bold text-brand-ink uppercase block">ROI in 6 Months</span>
+          <span class="text-[11px] text-slate-500">Via scrap &amp; admin savings</span>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mb-12">
+        <blockquote class="text-lg sm:text-xl text-slate-700 leading-relaxed mb-4 border-l-2 border-brand-blue pl-5">
+          “Suvrin delivered the implementation in a timely fashion and thoroughly trained our plant personnel. The team communicated regularly and replied to queries promptly. They pushed the project across the finish line seamlessly.”
+        </blockquote>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 pl-5">
+          <span class="text-brand-ink font-bold">Shikhi Agarwal</span>
+          <span>•</span>
+          <span>Account Manager @ Velocity Opticals</span>
+          <span>•</span>
+          <span class="text-brand-green-deep font-semibold">Rating: 5.0 / 5.0 Verified</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pt-8 border-t border-brand-line">
+        <div class="md:col-span-7">
+          <div class="mb-4">
+            <span class="font-heading text-xs font-bold uppercase text-brand-ink">Planned vs Actual Output</span>
+            <span class="text-[11px] text-slate-500 block">Monthly units across Emirates plants (Q1 2026)</span>
+          </div>
+          <div class="w-full h-40 flex items-end rounded-xl bg-transparent border border-brand-line px-3 pt-4 pb-2">
+            <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 350 180">
+              <line stroke="#E4E9F0" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="350" y1="30" y2="30"></line>
+              <line stroke="#E4E9F0" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="350" y1="80" y2="80"></line>
+              <line stroke="#E4E9F0" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="350" y1="130" y2="130"></line>
+              <line stroke="#CBD5E1" stroke-width="1" x1="0" x2="350" y1="160" y2="160"></line>
+              <rect fill="#94A3B8" height="80" width="18" x="20" y="80" rx="2"></rect>
+              <rect fill="#002098" height="92" width="18" x="42" y="68" rx="2"></rect>
+              <rect fill="#94A3B8" height="88" width="18" x="78" y="72" rx="2"></rect>
+              <rect fill="#002098" height="102" width="18" x="100" y="58" rx="2"></rect>
+              <rect fill="#94A3B8" height="95" width="18" x="136" y="65" rx="2"></rect>
+              <rect fill="#002098" height="110" width="18" x="158" y="50" rx="2"></rect>
+              <rect fill="#94A3B8" height="100" width="18" x="194" y="60" rx="2"></rect>
+              <rect fill="#002098" height="116" width="18" x="216" y="44" rx="2"></rect>
+              <rect fill="#94A3B8" height="105" width="18" x="252" y="55" rx="2"></rect>
+              <rect fill="#80B070" height="128" width="18" x="274" y="32" rx="2"></rect>
+            </svg>
+          </div>
+          <div class="flex items-center justify-between pt-3 mt-2 text-[10px] text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-slate-400 inline-block rounded-sm"></span> Plan</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-brand-blue inline-block rounded-sm"></span> Actual</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-brand-green inline-block rounded-sm"></span> Target Exceeded</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 flex flex-col justify-between">
+          <div>
+            <span class="font-heading text-xs font-bold uppercase text-brand-ink">Cost Absorption Variance</span>
+            <span class="text-[11px] text-slate-500 block mb-4">Real-time absorption across UAE batches</span>
+            <div class="flex items-center gap-6">
+              <div class="relative w-28 h-28 shrink-0 flex items-center justify-center">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" fill="none" r="38" stroke="#E4E9F0" stroke-width="12"></circle>
+                  <circle cx="50" cy="50" fill="none" r="38" stroke="#002098" stroke-dasharray="238.7" stroke-dashoffset="65" stroke-linecap="round" stroke-width="12"></circle>
+                  <circle cx="50" cy="50" fill="none" r="38" stroke="#80B070" stroke-dasharray="238.7" stroke-dashoffset="180" stroke-linecap="round" stroke-width="12"></circle>
+                </svg>
+                <div class="absolute text-center">
+                  <span class="font-heading text-sm font-bold text-brand-ink block">94.8%</span>
+                  <span class="text-[8px] text-slate-500 block">Efficiency</span>
+                </div>
+              </div>
+              <div class="flex-1 space-y-2 text-sm">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Raw Materials</span>
+                  <span class="font-heading text-brand-ink font-bold">68.4%</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Power &amp; Tools</span>
+                  <span class="font-heading text-brand-green-deep font-bold">18.2%</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Labor Absorb</span>
+                  <span class="font-heading text-slate-600 font-bold">13.4%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-[11px] text-brand-blue pt-4 border-t border-brand-line mt-6 font-medium">
+            Directly connected to Odoo Shop Floor Kiosks
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audit form -->
+    <section id="chapter-audit" data-chapter="7" data-title="Book Audit" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <span class="eyebrow mb-2">Technical Assessment</span>
+          <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-2">
+            Discuss Your Factory ERP Requirements
+          </h2>
+          <p class="text-sm text-slate-500 leading-relaxed max-w-2xl">
+            Our senior Dubai-based ERP architects will walk you through a tailored roadmap showing how Odoo connects your production, inventory, and UAE VAT accounting workflows.
+          </p>
+        </div>
+
+        <div class="bg-transparent border border-brand-line rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-brand-line">
+            <div>
+              <h3 class="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">Manufacturing ERP Audit</h3>
+              <p class="text-[11px] text-slate-500">Confidential assessment &amp; preliminary BOM roadmap.</p>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs font-bold text-brand-blue font-heading">
+              <span class="pulse-dot"></span>
+              <span>DUBAI MARINA DESK</span>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <div class="flex items-center justify-between text-xs mb-2 font-heading">
+              <span id="titleStep1" class="text-brand-ink font-bold">01. CONTACT DETAILS</span>
+              <span id="titleStep2" class="text-slate-400">02. FACTORY SCOPE</span>
+            </div>
+            <div class="w-full h-1.5 bg-brand-mist rounded-full overflow-hidden">
+              <div id="formProgress" class="h-full bg-gradient-to-r from-brand-blue to-brand-green transition-all duration-300 w-1/2 rounded-full"></div>
+            </div>
+          </div>
+
+          <form id="erpLeadForm" novalidate class="space-y-4">
+            <div id="formStep1" class="space-y-4">
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="inputFullName">Full Name *</label>
+                <input type="text" id="inputFullName" required placeholder="e.g. Tariq Mansoor" class="field-input"/>
+                <p id="nameError" class="text-[11px] text-red-500 mt-1 hidden">Please enter your full name</p>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="inputCompanyName">Manufacturing Facility Name *</label>
+                <input type="text" id="inputCompanyName" required placeholder="e.g. Al Khaleej Precision Metal LLC" class="field-input"/>
+                <p id="compError" class="text-[11px] text-red-500 mt-1 hidden">Please enter your facility name</p>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="inputBusinessEmail">Business Email *</label>
+                <input type="email" id="inputBusinessEmail" required placeholder="tariq@alkhaleejmetal.ae" class="field-input"/>
+                <p id="emailError" class="text-[11px] text-red-500 mt-1 hidden">Please provide a valid company email</p>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="inputPhone">WhatsApp / Mobile (+971) *</label>
+                <div class="relative flex items-center">
+                  <div class="absolute left-4 flex items-center gap-1 text-brand-blue text-xs font-semibold">
+                    <span>+971</span>
+                  </div>
+                  <input type="tel" id="inputPhone" required placeholder="50 123 4567" class="field-input !pl-16"/>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-1.5">Our Dubai team sends preliminary notes via WhatsApp / SMS.</p>
+                <p id="phoneError" class="text-[11px] text-red-500 mt-1 hidden">Please enter a valid phone number</p>
+              </div>
+              <button type="button" id="btnNextStep" class="btn-primary w-full h-11 rounded-xl">
+                <span>Continue to Factory Scope (2/2)</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </button>
+            </div>
+
+            <div id="formStep2" class="space-y-4 hidden">
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="selectSector">Manufacturing Sector *</label>
+                <select id="selectSector" required class="field-input">
+                  <option value="" disabled selected>Select Industry Sector</option>
+                  <option value="metal">Metal &amp; Steel Fabrication</option>
+                  <option value="plastics">Plastics, Polymers &amp; Extrusion</option>
+                  <option value="packaging">Packaging, Paper &amp; Corrugated</option>
+                  <option value="equipment">Engineering, Machinery &amp; ETO</option>
+                  <option value="food">Food, Beverage &amp; Halal Processing</option>
+                  <option value="chemical">Industrial Chemicals &amp; Coatings</option>
+                  <option value="joinery">Joinery, Fitout &amp; Woodworking</option>
+                  <option value="other">Other Discrete / Process Manufacturing</option>
+                </select>
+                <p id="sectorError" class="text-[11px] text-red-500 mt-1 hidden">Please select your sector</p>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="selectCurrentSoftware">Current Software Setup</label>
+                <select id="selectCurrentSoftware" class="field-input">
+                  <option value="excel">Excel Spreadsheets &amp; WhatsApp</option>
+                  <option value="tally">Tally Prime / ERP 9</option>
+                  <option value="legacy">Legacy Custom ERP</option>
+                  <option value="quickbooks">QuickBooks / Zoho Books</option>
+                  <option value="sap_oracle">SAP / Oracle / Dynamics</option>
+                  <option value="greenfield">Greenfield Factory Buildout</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="inputFacility">Plant &amp; Warehouse Location</label>
+                <input type="text" id="inputFacility" placeholder="e.g. JAFZA South Plant + Al Quoz Depot" class="field-input"/>
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5" for="textBottlenecks">Primary Operational Bottleneck</label>
+                <textarea id="textBottlenecks" rows="2" placeholder="e.g. Inaccurate job costing, stockout delays, spreadsheet sync, 5% UAE VAT ledger reconciliation..." class="field-input !h-auto py-3"></textarea>
+              </div>
+              <div class="flex items-center gap-3 pt-1">
+                <button type="button" id="btnBackStep" class="btn-secondary h-11 px-5 rounded-xl text-xs">
+                  <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                  <span>Back</span>
+                </button>
+                <button type="submit" id="btnSubmitForm" class="btn-primary flex-1 h-11 rounded-xl">
+                  <span>Book Free ERP Consultation</span>
+                  <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="formSuccessMessage" class="hidden p-4 rounded-xl bg-emerald-50 border border-brand-green/40 text-left">
+              <div class="flex items-center gap-2 text-brand-green-deep font-bold mb-1 text-sm">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Consultation Request Confirmed!</span>
+              </div>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Thank you. A Senior UAE Manufacturing ERP Principal from our Dubai Marina office will contact you within 2 to 4 business hours with your preliminary BOM architecture outline.
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-brand-line flex items-center justify-center gap-1.5 text-[10px] text-slate-400 text-center">
+              <span class="material-symbols-outlined text-[13px] text-brand-blue">lock</span>
+              <span>Strict UAE Data Confidentiality &amp; NDA Guaranteed • Direct Dubai Desk</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 p-5 rounded-2xl bg-transparent border border-brand-line">
+          <div>
+            <span class="font-heading text-sm font-bold text-brand-ink block">Prefer instant WhatsApp communication?</span>
+            <span class="text-[11px] text-slate-500">Direct technical chat with our Dubai ERP Principal</span>
+          </div>
+          <a href="https://wa.me/9811021616?text=Hello%20Suvrin,%20I'd%20like%20a%20manufacturing%20ERP%20consultation" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-brand-green-deep hover:bg-brand-green text-white font-bold text-xs flex items-center gap-2 transition-colors active:scale-95 shrink-0">
+            <span class="material-symbols-outlined text-[17px]">chat</span>
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 sm:py-24 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-4xl mx-auto">
+      <div class="mb-10">
+        <span class="eyebrow mb-2">Clear Answers</span>
+        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-1" id="faqAccordion">
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>1. What is Manufacturing ERP vs basic accounting software?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel active pt-3 text-sm text-slate-500 leading-relaxed">
+            Basic accounting records historical numbers after production finishes. Manufacturing ERP actively coordinates the physical plant: multi-level BOMs, machine routing, scrap % calculation, WIP buffers, and barcode scanning, generating automated VAT ledger entries on execution.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>2. Why choose Odoo over Tier-1 ERPs (SAP/Oracle)?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Odoo delivers 90% of Tier-1 capability at a fraction of the cost of ownership, deploying in weeks instead of 18+ months. Its modern mobile and tablet UI is adopted easily by shop floor workers.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>3. Can Odoo handle multi-level nested BOMs?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Yes. Odoo supports unlimited hierarchical BOM nesting from parent assemblies through sub-assemblies to raw fasteners and chemicals, with engineering change orders (ECO) and scrap management.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>4. Can Odoo track raw materials and WIP across Emirates?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Yes. Every movement is barcode-scanned in real time: from raw stock at JAFZA port depots, to production floor WIP staging, through to finished stock at Dubai or Abu Dhabi fulfillment hubs.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>5. Is the system compliant with UAE FTA 5% VAT?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Completely. Suvrin UAE deployments come pre-configured with FTA-compliant VAT rate rules, bilingual Arabic/English tax invoices with mandatory TRN validation, and push-button generation of VAT 201 returns.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>6. Can you integrate Odoo with our existing Tally software?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Yes. If your finance team wants to retain Tally Prime while running shop floor and inventory in Odoo, we provide a bidirectional sync bridge. Or we can migrate historical ledgers fully into Odoo.
+          </div>
+        </div>
+        <div class="border-b border-brand-line py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>7. How long does a typical implementation take?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            A focused implementation for a single-plant discrete manufacturer takes 8 to 12 weeks from initial audit to live go-live. Multi-plant hybrid operations typically range from 14 to 20 weeks.
+          </div>
+        </div>
+        <div class="py-4">
+          <button type="button" class="faq-btn w-full text-left flex items-center justify-between gap-4 text-sm font-heading font-bold text-brand-ink hover:text-brand-blue transition-colors">
+            <span>8. Do you offer physical on-site audits in Dubai?</span>
+            <span class="faq-icon material-symbols-outlined text-[18px] text-brand-blue transition-transform duration-300">expand_more</span>
+          </button>
+          <div class="faq-panel pt-3 text-sm text-slate-500 leading-relaxed">
+            Yes. Our team is stationed at Living Marina Gate, Dubai Marina. We conduct physical walkthroughs and scoping sessions in DIC, JAFZA, KIZAD, Al Quoz, Sharjah, and across the Emirates.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-14 px-4 sm:px-8 md:px-12 lg:pl-28 border-t border-brand-line bg-transparent">
+      <div class="max-w-7xl mx-auto text-sm">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
+          <div class="md:col-span-6 space-y-4">
+            <a href="#chapter-hero" class="logo-link inline-block">
+            <img src="logo.png?v=2" alt="Suvrin Technologies" class="h-14 sm:h-16 w-auto object-contain block bg-transparent"/>
+            </a>
+            <p class="text-slate-500 leading-relaxed max-w-md text-sm">
+              Authoritative enterprise digital transformation and Odoo ERP implementation partner for industrial manufacturers across Dubai, Abu Dhabi, and the GCC.
+            </p>
+          </div>
+          <div class="md:col-span-6 space-y-1.5 text-slate-500">
+            <p class="text-brand-ink font-heading font-bold text-base mb-2">Suvrin Technologies / Maxcode Solutions LLC</p>
+            <p>Living Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, UAE</p>
+            <p class="text-brand-blue font-bold">Direct GCC Desk: +971 551 120 975</p>
+            <p class="text-xs text-slate-400">Email: sudeep@suvrin.com • Global: India (Delhi NCR) • USA (Delaware)</p>
+          </div>
+        </div>
+        <div class="pt-5 border-t border-brand-line flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+          <p>© 2026 Suvrin Technologies. In collaboration with Maxcode Solutions LLC, Dubai.</p>
+          <div class="flex items-center gap-3">
+            <span>Privacy Policy</span>
+            <span>•</span>
+            <span>Terms</span>
+            <span>•</span>
+            <span>ISO 9001 / GCC Compliant</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile sticky bar -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-brand-line px-4 py-2.5 flex sm:hidden items-center gap-3 shadow-[0_-8px_24px_rgba(20,20,20,0.06)]">
+    <a href="tel:+971551120975" class="w-11 h-11 rounded-xl border border-brand-line text-brand-blue flex items-center justify-center shrink-0 bg-white">
+      <span class="material-symbols-outlined text-[20px]">call</span>
+    </a>
+    <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20ERP%20for%20my%20factory" target="_blank" rel="noopener noreferrer" class="flex-1 min-h-[44px] px-3 rounded-xl bg-brand-green-deep text-white font-bold text-xs flex items-center justify-center gap-1.5">
+      <span class="material-symbols-outlined text-[17px]">chat</span>
+      <span>WhatsApp</span>
+    </a>
+    <a href="#chapter-audit" class="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-brand-blue text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1 shadow-md">
+      <span>Book Audit</span>
+      <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+    </a>
+  </div>
+
+  <script>
+    /* =========================================================================
+       Ambient 2D particles (lightweight underlay)
+       ========================================================================= */
+    (function initAmbientCanvas() {
+      const canvas = document.getElementById('ambient-canvas');
+      if (!canvas) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (reduceMotion) { canvas.style.display = 'none'; return; }
+
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr = 1, nodes = [], sparks = [], raf, running = true, lastTs = 0, scrollY = 0;
+      const BLUE = [0, 32, 152];
+      const GREEN = [128, 176, 112];
+      const rgba = (rgb, a) => `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = isMobile ? 18 : Math.min(36, Math.floor((w * h) / 45000));
+        nodes = Array.from({ length: count }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+          r: 1.2 + Math.random() * 1.8, pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.01 + Math.random() * 0.015, green: Math.random() > 0.6
+        }));
+        sparks = Array.from({ length: isMobile ? 10 : 22 }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.5, vy: -0.2 - Math.random() * 0.4,
+          r: 0.7 + Math.random() * 1.2, life: Math.random(), green: Math.random() > 0.5
+        }));
+      }
+
+      function draw() {
+        if (!running) return;
+        const now = performance.now();
+        const dt = Math.min(32, now - (lastTs || now));
+        lastTs = now;
+        ctx.clearRect(0, 0, w, h);
+        const maxDist = Math.min(150, w * 0.12);
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          a.x += a.vx * (dt / 16); a.y += a.vy * (dt / 16); a.pulse += a.pulseSpeed * (dt / 16);
+          if (a.x < 0 || a.x > w) a.vx *= -1;
+          if (a.y < 0 || a.y > h) a.vy *= -1;
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = a.x - b.x, dy = a.y - b.y, dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < maxDist) {
+              ctx.beginPath();
+              ctx.strokeStyle = rgba(a.green || b.green ? GREEN : BLUE, (1 - dist / maxDist) * 0.22);
+              ctx.lineWidth = 1;
+              ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            }
+          }
+          const pulse = 0.7 + Math.sin(a.pulse) * 0.3;
+          const rgb = a.green ? GREEN : BLUE;
+          ctx.beginPath();
+          ctx.fillStyle = rgba(rgb, 0.45 * pulse);
+          ctx.arc(a.x, a.y, a.r * pulse, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        for (let i = 0; i < sparks.length; i++) {
+          const s = sparks[i];
+          s.x += s.vx * (dt / 16); s.y += s.vy * (dt / 16); s.life += 0.004 * (dt / 16);
+          if (s.y < -10 || s.life > 1) { s.x = Math.random() * w; s.y = h + 8; s.life = 0; }
+          ctx.beginPath();
+          ctx.fillStyle = rgba(s.green ? GREEN : BLUE, Math.sin(s.life * Math.PI) * 0.4);
+          ctx.arc(s.x, s.y - scrollY * 0.01, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        raf = requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('scroll', () => { scrollY = window.scrollY || 0; }, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { running = false; cancelAnimationFrame(raf); }
+        else { running = true; lastTs = 0; raf = requestAnimationFrame(draw); }
+      });
+      resize();
+      raf = requestAnimationFrame(draw);
+    })();
+
+    /* =========================================================================
+       Three.js scroll stage — Manufacturing ERP themed chapters
+       ========================================================================= */
+    (function initErpScrollStage() {
+      const canvas = document.getElementById('webgl-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mobileMQ = window.matchMedia('(max-width: 1024px)');
+      let isMobile = mobileMQ.matches;
+
+      if (reduceMotion) {
+        canvas.style.display = 'none';
+        return;
+      }
+
+      const BLUE = 0x002098;
+      const GREEN = 0x80B070;
+      const INK = 0x1a1a1a;
+
+      let scene, camera, renderer, stage;
+      let chapterGroups = {};
+      let currentChapter = 1;
+      let target = { x: 3.2, y: 0.1, z: 0, rotY: -0.35, rotX: 0.08, scale: 1 };
+      let mouseX = 0, mouseY = 0;
+      let running = true;
+      let raf;
+      const clock = new THREE.Clock();
+
+      // Shared materials (reused for performance)
+      const matBlue = new THREE.MeshStandardMaterial({
+        color: BLUE, metalness: 0.55, roughness: 0.28, transparent: true, opacity: 0.92
+      });
+      const matGreen = new THREE.MeshStandardMaterial({
+        color: GREEN, metalness: 0.4, roughness: 0.32, transparent: true, opacity: 0.9
+      });
+      const matInk = new THREE.MeshStandardMaterial({
+        color: INK, metalness: 0.65, roughness: 0.22, transparent: true, opacity: 0.85
+      });
+      const matBlueSoft = new THREE.MeshStandardMaterial({
+        color: BLUE, metalness: 0.3, roughness: 0.4, transparent: true, opacity: 0.35
+      });
+      const matWireBlue = new THREE.MeshBasicMaterial({
+        color: BLUE, transparent: true, opacity: 0.35, wireframe: true
+      });
+
+      function makeGroup(name) {
+        const g = new THREE.Group();
+        g.name = name;
+        g.visible = false;
+        g.userData.opacity = 0;
+        stage.add(g);
+        chapterGroups[name] = g;
+        return g;
+      }
+
+      function addGlowSphere(parent, radius, color, opacity) {
+        const geo = new THREE.SphereGeometry(radius, 24, 24);
+        const mat = new THREE.MeshBasicMaterial({
+          color, transparent: true, opacity: opacity || 0.12, depth: THREE.AdditiveBlending, depthWrite: false
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        parent.add(mesh);
+        return mesh;
+      }
+
+      /* Ch1 — Unified ERP hub (constellation) */
+      function buildHub() {
+        const g = makeGroup('1');
+        const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.05, 1), matBlue.clone());
+        g.add(core);
+        g.userData.core = core;
+        addGlowSphere(g, 1.8, BLUE, 0.1);
+
+        [2.2, 2.9, 3.6].forEach((r, i) => {
+          const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(r, 0.035, 12, 96),
+            i === 1 ? matGreen.clone() : matBlueSoft.clone()
+          );
+          ring.rotation.x = Math.PI / 2.4 + i * 0.15;
+          ring.rotation.y = i * 0.4;
+          g.add(ring);
+          g.userData['ring' + i] = ring;
+        });
+
+        const orbiters = [];
+        for (let i = 0; i < 8; i++) {
+          const s = new THREE.Mesh(
+            new THREE.SphereGeometry(0.14, 12, 12),
+            i % 3 === 0 ? matGreen.clone() : matBlue.clone()
+          );
+          g.add(s);
+          orbiters.push({ mesh: s, angle: (i / 8) * Math.PI * 2, radius: 2.4 + (i % 3) * 0.45, speed: 0.35 + i * 0.04 });
+        }
+        g.userData.orbiters = orbiters;
+
+        // Link lines as thin cylinders between a few points
+        for (let i = 0; i < 6; i++) {
+          const link = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.015, 0.015, 1.8, 6),
+            matBlueSoft.clone()
+          );
+          link.position.set(Math.cos(i) * 1.2, Math.sin(i * 1.3) * 0.6, Math.sin(i) * 1.2);
+          link.rotation.z = i * 0.7;
+          g.add(link);
+        }
+      }
+
+      /* Ch2 — Fragmented silos / bottlenecks */
+      function buildFragments() {
+        const g = makeGroup('2');
+        const boxes = [];
+        for (let i = 0; i < (isMobile ? 8 : 14); i++) {
+          const box = new THREE.Mesh(
+            new THREE.BoxGeometry(0.45 + Math.random() * 0.35, 0.45 + Math.random() * 0.5, 0.35),
+            i % 4 === 0 ? matInk.clone() : matBlue.clone()
+          );
+          box.position.set(
+            (Math.random() - 0.5) * 5.5,
+            (Math.random() - 0.5) * 4.2,
+            (Math.random() - 0.5) * 3.2
+          );
+          box.rotation.set(Math.random(), Math.random(), Math.random());
+          g.add(box);
+          boxes.push(box);
+        }
+        g.userData.boxes = boxes;
+        // Broken ring
+        const broken = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.05, 8, 48, Math.PI * 1.4), matInk.clone());
+        broken.rotation.x = Math.PI / 2.5;
+        g.add(broken);
+      }
+
+      /* Ch3 — Connected manufacturing pipeline */
+      function buildPipeline() {
+        const g = makeGroup('3');
+        const path = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(0, 2.8, 0),
+          new THREE.Vector3(0.6, 1.6, 0.4),
+          new THREE.Vector3(-0.4, 0.4, -0.3),
+          new THREE.Vector3(0.5, -0.8, 0.5),
+          new THREE.Vector3(-0.2, -2.2, 0),
+          new THREE.Vector3(0.3, -3.2, -0.2)
+        ]);
+        const tube = new THREE.Mesh(
+          new THREE.TubeGeometry(path, 64, 0.08, 8, false),
+          matBlue.clone()
+        );
+        g.add(tube);
+        g.userData.path = path;
+
+        const nodes = [];
+        for (let i = 0; i < 8; i++) {
+          const t = i / 7;
+          const p = path.getPointAt(t);
+          const node = new THREE.Mesh(
+            new THREE.SphereGeometry(i === 7 ? 0.28 : 0.18, 14, 14),
+            i === 7 ? matGreen.clone() : matBlue.clone()
+          );
+          node.position.copy(p);
+          g.add(node);
+          nodes.push(node);
+          addGlowSphere(node, 0.45, i === 7 ? GREEN : BLUE, 0.15);
+        }
+        g.userData.nodes = nodes;
+
+        const beads = [];
+        for (let i = 0; i < 5; i++) {
+          const bead = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 10), matGreen.clone());
+          g.add(bead);
+          beads.push({ mesh: bead, t: i / 5 });
+        }
+        g.userData.beads = beads;
+      }
+
+      /* Ch4 — Odoo module grid */
+      function buildModules() {
+        const g = makeGroup('4');
+        const mods = [];
+        const cols = 5, rows = 2;
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const idx = r * cols + c;
+            const box = new THREE.Mesh(
+              new THREE.BoxGeometry(0.7, 0.7, 0.7),
+              idx % 3 === 0 ? matGreen.clone() : matBlue.clone()
+            );
+            box.position.set((c - 2) * 1.05, (0.5 - r) * 1.15, 0);
+            g.add(box);
+            mods.push(box);
+            const frame = new THREE.LineSegments(
+              new THREE.EdgesGeometry(new THREE.BoxGeometry(0.72, 0.72, 0.72)),
+              new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 })
+            );
+            box.add(frame);
+          }
+        }
+        g.userData.mods = mods;
+      }
+
+      /* Ch5 — UAE compliance shield */
+      function buildCompliance() {
+        const g = makeGroup('5');
+        const outer = new THREE.Mesh(
+          new THREE.CylinderGeometry(2.4, 2.4, 0.12, 6),
+          matBlueSoft.clone()
+        );
+        outer.rotation.x = Math.PI / 2;
+        g.add(outer);
+        const mid = new THREE.Mesh(
+          new THREE.CylinderGeometry(1.7, 1.7, 0.14, 6),
+          matBlue.clone()
+        );
+        mid.rotation.x = Math.PI / 2;
+        g.add(mid);
+        const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.85, 0), matGreen.clone());
+        g.add(core);
+        g.userData.core = core;
+        g.userData.outer = outer;
+        g.userData.mid = mid;
+        addGlowSphere(g, 2.8, BLUE, 0.08);
+        // Check-mark-ish bars
+        const bar1 = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.1, 0.18), matGreen.clone());
+        bar1.position.set(-0.25, -0.1, 0.9);
+        bar1.rotation.z = 0.5;
+        const bar2 = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.8, 0.18), matGreen.clone());
+        bar2.position.set(0.35, 0.15, 0.9);
+        bar2.rotation.z = -0.55;
+        g.add(bar1, bar2);
+      }
+
+      /* Ch6 — KPI bars + efficiency ring */
+      function buildKpis() {
+        const g = makeGroup('6');
+        const heights = [1.2, 1.8, 1.5, 2.3, 2.8];
+        const bars = [];
+        heights.forEach((h, i) => {
+          const bar = new THREE.Mesh(
+            new THREE.BoxGeometry(0.45, h, 0.45),
+            i === heights.length - 1 ? matGreen.clone() : matBlue.clone()
+          );
+          bar.position.set((i - 2) * 0.75, h / 2 - 1.2, 0);
+          g.add(bar);
+          bars.push(bar);
+        });
+        g.userData.bars = bars;
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.18, 16, 64), matBlue.clone());
+        ring.position.set(0, 0.2, -1.4);
+        g.add(ring);
+        g.userData.ring = ring;
+        const inner = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.08, 12, 64, Math.PI * 1.5), matGreen.clone());
+        inner.position.copy(ring.position);
+        g.add(inner);
+        g.userData.inner = inner;
+      }
+
+      /* Ch7 — Audit portal / focus */
+      function buildPortal() {
+        const g = makeGroup('7');
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.08, 16, 100), matBlue.clone());
+        g.add(ring);
+        g.userData.ring = ring;
+        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.7, 0.03, 12, 80), matGreen.clone());
+        ring2.rotation.x = 0.4;
+        g.add(ring2);
+        g.userData.ring2 = ring2;
+        const core = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 24), matBlueSoft.clone());
+        g.add(core);
+        addGlowSphere(g, 2.4, BLUE, 0.14);
+        addGlowSphere(g, 1.2, GREEN, 0.1);
+      }
+
+      function setGroupOpacity(group, opacity) {
+        group.traverse((obj) => {
+          if (obj.material) {
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+            mats.forEach((m) => {
+              if (m.userData.baseOpacity == null) m.userData.baseOpacity = m.opacity != null ? m.opacity : 1;
+              m.transparent = true;
+              m.opacity = m.userData.baseOpacity * opacity;
+            });
+          }
+        });
+        group.visible = opacity > 0.02;
+        group.userData.opacity = opacity;
+      }
+
+      const chapterTargets = {
+        1: { x: 3.4, y: 0.15, z: 0, rotY: -0.4, rotX: 0.1, scale: 1 },
+        2: { x: 4.0, y: 0.2, z: -0.4, rotY: -0.55, rotX: 0.05, scale: 0.95 },
+        3: { x: -4.0, y: 0.25, z: -0.3, rotY: 0.5, rotX: 0.08, scale: 1 },
+        4: { x: 3.6, y: 0.1, z: -0.5, rotY: -0.35, rotX: 0.12, scale: 1.05 },
+        5: { x: 3.8, y: 0.2, z: -0.4, rotY: -0.4, rotX: 0.05, scale: 1 },
+        6: { x: 3.2, y: 0.4, z: -1.2, rotY: -0.25, rotX: 0.15, scale: 0.95 },
+        7: { x: 0, y: 0.3, z: -2.5, rotY: 0, rotX: 0.2, scale: 0.85 }
+      };
+
+      function applyChapterTarget(ch) {
+        const t = chapterTargets[ch] || chapterTargets[1];
+        if (isMobile) {
+          target.x = 0;
+          target.y = 0.9;
+          target.z = -3.2;
+          target.rotY = t.rotY * 0.4;
+          target.rotX = 0.15;
+          target.scale = 0.72;
+        } else {
+          Object.assign(target, t);
+        }
+      }
+
+      function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 14);
+
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: !isMobile,
+          alpha: true,
+          powerPreference: 'high-performance'
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.75));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+
+        const ambient = new THREE.AmbientLight(0xffffff, 0.85);
+        scene.add(ambient);
+        const key = new THREE.DirectionalLight(0xffffff, 1.15);
+        key.position.set(8, 12, 10);
+        scene.add(key);
+        const fill = new THREE.DirectionalLight(0x80B070, 0.45);
+        fill.position.set(-8, 4, -4);
+        scene.add(fill);
+        const bluePoint = new THREE.PointLight(BLUE, 1.2, 40);
+        bluePoint.position.set(4, -2, 6);
+        scene.add(bluePoint);
+        const greenPoint = new THREE.PointLight(GREEN, 0.9, 35);
+        greenPoint.position.set(-5, 3, 4);
+        scene.add(greenPoint);
+
+        stage = new THREE.Group();
+        scene.add(stage);
+
+        buildHub();
+        buildFragments();
+        buildPipeline();
+        buildModules();
+        buildCompliance();
+        buildKpis();
+        buildPortal();
+
+        setGroupOpacity(chapterGroups['1'], 1);
+        chapterGroups['1'].visible = true;
+        applyChapterTarget(1);
+
+        window.addEventListener('resize', onResize, { passive: true });
+        window.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        }, { passive: true });
+        mobileMQ.addEventListener('change', (e) => {
+          isMobile = e.matches;
+          onResize();
+          applyChapterTarget(currentChapter);
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) { running = false; cancelAnimationFrame(raf); }
+          else { running = true; clock.start(); animate(); }
+        });
+      }
+
+      function onResize() {
+        if (!camera || !renderer) return;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.75));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      // Called from progress / scroll system
+      window.__suvrinSetChapter = function (ch) {
+        if (ch === currentChapter) return;
+        currentChapter = ch;
+        applyChapterTarget(ch);
+      };
+
+      function updateChapterFades(dt) {
+        Object.keys(chapterGroups).forEach((key) => {
+          const g = chapterGroups[key];
+          const want = Number(key) === currentChapter ? 1 : 0;
+          const next = g.userData.opacity + (want - g.userData.opacity) * Math.min(1, dt * 3.2);
+          setGroupOpacity(g, next);
+          // Soft scale punch when active
+          const s = 0.92 + next * 0.08;
+          g.scale.setScalar(g.scale.x + (s - g.scale.x) * 0.08);
+        });
+      }
+
+      function animateChapterMotion(t) {
+        const hub = chapterGroups['1'];
+        if (hub && hub.userData.opacity > 0.05) {
+          if (hub.userData.core) hub.userData.core.rotation.y = t * 0.35;
+          [0, 1, 2].forEach((i) => {
+            const ring = hub.userData['ring' + i];
+            if (ring) ring.rotation.z = t * (0.15 + i * 0.05);
+          });
+          (hub.userData.orbiters || []).forEach((o) => {
+            o.angle += o.speed * 0.01;
+            o.mesh.position.set(
+              Math.cos(o.angle) * o.radius,
+              Math.sin(o.angle * 0.7) * 0.55,
+              Math.sin(o.angle) * o.radius
+            );
+          });
+        }
+
+        const frag = chapterGroups['2'];
+        if (frag && frag.userData.opacity > 0.05) {
+          (frag.userData.boxes || []).forEach((b, i) => {
+            b.rotation.x += 0.003 + i * 0.0002;
+            b.rotation.y += 0.004;
+            b.position.y += Math.sin(t * 0.8 + i) * 0.002;
+          });
+        }
+
+        const pipe = chapterGroups['3'];
+        if (pipe && pipe.userData.opacity > 0.05 && pipe.userData.path) {
+          (pipe.userData.beads || []).forEach((b) => {
+            b.t = (b.t + 0.003) % 1;
+            b.mesh.position.copy(pipe.userData.path.getPointAt(b.t));
+          });
+        }
+
+        const mods = chapterGroups['4'];
+        if (mods && mods.userData.opacity > 0.05) {
+          (mods.userData.mods || []).forEach((m, i) => {
+            m.position.y += Math.sin(t * 1.2 + i * 0.7) * 0.003;
+            m.rotation.y = Math.sin(t * 0.5 + i) * 0.15;
+          });
+        }
+
+        const comp = chapterGroups['5'];
+        if (comp && comp.userData.opacity > 0.05) {
+          if (comp.userData.outer) comp.userData.outer.rotation.z = t * 0.2;
+          if (comp.userData.mid) comp.userData.mid.rotation.z = -t * 0.28;
+          if (comp.userData.core) comp.userData.core.rotation.y = t * 0.45;
+        }
+
+        const kpi = chapterGroups['6'];
+        if (kpi && kpi.userData.opacity > 0.05) {
+          (kpi.userData.bars || []).forEach((b, i) => {
+            b.scale.y = 0.85 + Math.sin(t * 1.5 + i) * 0.08;
+          });
+          if (kpi.userData.ring) kpi.userData.ring.rotation.z = t * 0.25;
+          if (kpi.userData.inner) kpi.userData.inner.rotation.z = -t * 0.4;
+        }
+
+        const portal = chapterGroups['7'];
+        if (portal && portal.userData.opacity > 0.05) {
+          if (portal.userData.ring) portal.userData.ring.rotation.z = t * 0.35;
+          if (portal.userData.ring2) {
+            portal.userData.ring2.rotation.z = -t * 0.25;
+            portal.userData.ring2.rotation.x = 0.4 + Math.sin(t) * 0.1;
+          }
+        }
+      }
+
+      function animate() {
+        if (!running) return;
+        raf = requestAnimationFrame(animate);
+        const dt = Math.min(0.05, clock.getDelta());
+        const t = clock.elapsedTime;
+
+        updateChapterFades(dt);
+        animateChapterMotion(t);
+
+        stage.position.x += (target.x - stage.position.x) * 0.055;
+        stage.position.y += (target.y - stage.position.y) * 0.055;
+        stage.position.z += (target.z - stage.position.z) * 0.055;
+        stage.rotation.y += (target.rotY + Math.sin(t * 0.4) * 0.04 - stage.rotation.y) * 0.045;
+        stage.rotation.x += (target.rotX - stage.rotation.x) * 0.045;
+        const sc = target.scale;
+        stage.scale.x += (sc - stage.scale.x) * 0.05;
+        stage.scale.y = stage.scale.x;
+        stage.scale.z = stage.scale.x;
+
+        camera.position.x += (mouseX * 0.7 - camera.position.x) * 0.03;
+        camera.position.y += (mouseY * 0.45 - camera.position.y) * 0.03;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+
+      init();
+      animate();
+    })();
+
+    /* Header scroll state */
+    (function () {
+      const header = document.getElementById('siteHeader');
+      const onScroll = () => {
+        if (!header) return;
+        header.classList.toggle('scrolled', window.scrollY > 12);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* Progress rail + chapter → 3D bridge */
+    (function setupProgress() {
+      const chapters = document.querySelectorAll('.chapter-section');
+      const progressThumb = document.getElementById('progressIndicatorThumb');
+      const progressLabel = document.getElementById('progressIndicatorLabel');
+      const progressTitle = document.getElementById('progressTitle');
+      let lastChapter = 1;
+
+      function onScroll() {
+        const scrollY = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollProgress = scrollY / (maxScroll || 1);
+        const trackHeight = 200 - 36;
+        if (progressThumb) progressThumb.style.top = (scrollProgress * trackHeight) + 'px';
+
+        let currentChapter = 1;
+        let chapterTitleText = 'Overview';
+        chapters.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.2) {
+            currentChapter = parseInt(sec.getAttribute('data-chapter')) || 1;
+            chapterTitleText = sec.getAttribute('data-title') || 'Overview';
+          }
+        });
+        if (progressLabel) progressLabel.innerText = `0${currentChapter} / 07`;
+        if (progressTitle) progressTitle.innerText = chapterTitleText;
+
+        if (currentChapter !== lastChapter) {
+          lastChapter = currentChapter;
+          if (typeof window.__suvrinSetChapter === 'function') {
+            window.__suvrinSetChapter(currentChapter);
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* Soft section reveal for premium scroll feel */
+    (function setupReveals() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const els = document.querySelectorAll('.surface-panel, #chapter-case > .max-w-3xl, #faqAccordion > div');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('is-pending');
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+      els.forEach((el) => {
+        // Only hide if below the fold — avoid content vanishing under header
+        const rect = el.getBoundingClientRect();
+        el.classList.add('js-reveal');
+        if (rect.top > window.innerHeight * 0.85) {
+          el.classList.add('is-pending');
+          io.observe(el);
+        } else {
+          el.classList.add('is-visible');
+        }
+      });
+      setTimeout(() => {
+        document.querySelectorAll('.js-reveal.is-pending').forEach((el) => {
+          el.classList.remove('is-pending');
+          el.classList.add('is-visible');
+        });
+      }, 3000);
+    })();
+
+    /* FAQ + Form */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.faq-btn').forEach(btn => {
+        const panel = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+        if (panel?.classList.contains('active') && icon) {
+          icon.style.transform = 'rotate(180deg)';
+        }
+        btn.addEventListener('click', () => {
+          const isActive = panel.classList.contains('active');
+          document.querySelectorAll('.faq-panel').forEach(p => p.classList.remove('active'));
+          document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+          if (!isActive) {
+            panel.classList.add('active');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+
+      const btnNextStep = document.getElementById('btnNextStep');
+      const btnBackStep = document.getElementById('btnBackStep');
+      const formStep1 = document.getElementById('formStep1');
+      const formStep2 = document.getElementById('formStep2');
+      const formProgress = document.getElementById('formProgress');
+      const titleStep2 = document.getElementById('titleStep2');
+      const erpLeadForm = document.getElementById('erpLeadForm');
+      const formSuccessMessage = document.getElementById('formSuccessMessage');
+
+      const inputFullName = document.getElementById('inputFullName');
+      const inputCompanyName = document.getElementById('inputCompanyName');
+      const inputBusinessEmail = document.getElementById('inputBusinessEmail');
+      const inputPhone = document.getElementById('inputPhone');
+      const selectSector = document.getElementById('selectSector');
+
+      const nameError = document.getElementById('nameError');
+      const compError = document.getElementById('compError');
+      const emailError = document.getElementById('emailError');
+      const phoneError = document.getElementById('phoneError');
+      const sectorError = document.getElementById('sectorError');
+
+      btnNextStep?.addEventListener('click', () => {
+        let valid = true;
+        if (!inputFullName.value.trim()) { nameError.classList.remove('hidden'); valid = false; }
+        else nameError.classList.add('hidden');
+        if (!inputCompanyName.value.trim()) { compError.classList.remove('hidden'); valid = false; }
+        else compError.classList.add('hidden');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(inputBusinessEmail.value.trim())) { emailError.classList.remove('hidden'); valid = false; }
+        else emailError.classList.add('hidden');
+        if (!inputPhone.value.trim() || inputPhone.value.trim().length < 7) { phoneError.classList.remove('hidden'); valid = false; }
+        else phoneError.classList.add('hidden');
+
+        if (valid) {
+          formStep1.classList.add('hidden');
+          formStep2.classList.remove('hidden');
+          formProgress.style.width = '100%';
+          titleStep2.classList.add('text-brand-ink', 'font-bold');
+          titleStep2.classList.remove('text-slate-400');
+        }
+      });
+
+      btnBackStep?.addEventListener('click', () => {
+        formStep2.classList.add('hidden');
+        formStep1.classList.remove('hidden');
+        formProgress.style.width = '50%';
+        titleStep2.classList.remove('text-brand-ink', 'font-bold');
+        titleStep2.classList.add('text-slate-400');
+      });
+
+      erpLeadForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!selectSector.value) {
+          sectorError.classList.remove('hidden');
+          return;
+        }
+        sectorError.classList.add('hidden');
+        formStep2.classList.add('hidden');
+        formSuccessMessage.classList.remove('hidden');
+        formSuccessMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  </script>
+  </script>
+</body>
+</html>
