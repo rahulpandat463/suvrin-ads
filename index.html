@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -77,15 +76,6 @@
     }
 
     /* Ambient background layers */
-    #webgl-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-
     #ambient-canvas {
       position: fixed;
       inset: 0;
@@ -420,20 +410,23 @@
       background: transparent !important;
     }
     .logo-link img {
-      height: 52px;
+      height: 40px;
       width: auto;
-      max-width: min(280px, 48vw);
+      max-width: min(170px, 42vw);
       object-fit: contain;
       object-position: left center;
       background: transparent !important;
       mix-blend-mode: normal;
       transition: opacity 0.2s ease;
     }
+    @media (min-width: 480px) {
+      .logo-link img { height: 46px; max-width: min(220px, 45vw); }
+    }
     @media (min-width: 640px) {
-      .logo-link img { height: 58px; }
+      .logo-link img { height: 56px; max-width: 280px; }
     }
     @media (min-width: 768px) {
-      .logo-link img { height: 64px; max-width: 320px; }
+      .logo-link img { height: 62px; max-width: 320px; }
     }
     .logo-link:hover img {
       opacity: 0.88;
@@ -491,7 +484,6 @@
     <div class="bg-orb bg-orb-d"></div>
   </div>
   <div class="bg-light-sweep" aria-hidden="true"></div>
-  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
   <canvas id="ambient-canvas" aria-hidden="true"></canvas>
 
   <div class="grid-lines-overlay hidden md:grid" aria-hidden="true">
@@ -519,7 +511,7 @@
 
     <!-- Header — always visible while scrolling -->
     <header id="siteHeader">
-      <div class="max-w-7xl mx-auto px-4 sm:px-8 md:px-10 h-[76px] sm:h-[84px] flex items-center justify-between gap-4">
+      <div class="max-w-7xl mx-auto px-3 sm:px-8 md:px-10 h-[68px] sm:h-[84px] flex items-center justify-between gap-2 sm:gap-4">
 
         <a href="#chapter-hero" aria-label="Suvrin Technologies Home" class="logo-link shrink-0">
           <img src="logo.png?v=2" alt="Suvrin Technologies"/>
@@ -531,7 +523,9 @@
             <span>+971 551 120 975</span>
           </a>
           <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Manufacturing%20ERP%20in%20Dubai" target="_blank" rel="noopener noreferrer" class="btn-whatsapp h-10 px-4">
-            <span class="material-symbols-outlined text-[17px]">chat</span>
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
             <span>WhatsApp</span>
           </a>
           <a href="#chapter-audit" class="btn-primary h-10 px-5">
@@ -540,14 +534,15 @@
           </a>
         </div>
 
-        <div class="flex md:hidden items-center gap-2">
-          <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Manufacturing%20ERP%20in%20Dubai" target="_blank" rel="noopener noreferrer" class="btn-whatsapp h-9 px-3 sm:px-4 active:scale-95">
-            <span class="material-symbols-outlined text-[16px]">chat</span>
-            <span class="hidden xs:inline sm:inline">WhatsApp</span>
+        <div class="flex md:hidden items-center gap-1.5 sm:gap-2">
+          <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Manufacturing%20ERP%20in%20Dubai" target="_blank" rel="noopener noreferrer" class="btn-whatsapp w-9 h-9 p-0 rounded-full flex items-center justify-center shrink-0 active:scale-95" aria-label="WhatsApp Us">
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
           </a>
-          <a href="#chapter-audit" class="btn-primary h-9 px-3 sm:px-4 active:scale-95">
+          <a href="#chapter-audit" class="btn-primary h-9 px-3 text-[11px] sm:text-xs tracking-wide shrink-0 active:scale-95">
             <span>Book Audit</span>
-            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
           </a>
         </div>
       </div>
@@ -562,67 +557,62 @@
         <div class="hero-orb w-56 h-56 bg-brand-green/15 bottom-[16%] right-[18%] hidden lg:block" style="animation-delay: 1.5s;"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:pl-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center w-full">
-        <div class="lg:col-span-7">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-transparent border border-brand-line mb-6">
-            <span class="pulse-dot"></span>
-            <span class="text-[10.5px] uppercase tracking-wider font-semibold text-brand-blue">Dubai &amp; UAE Manufacturing ERP</span>
-          </div>
-
-          <h1 class="font-heading text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold text-brand-ink leading-[1.08] mb-5">
-            Manufacturing ERP<br/>
-            <span class="text-brand-blue">for Dubai &amp; UAE Industry</span>
-          </h1>
-
-          <p class="text-base sm:text-lg text-slate-700 font-semibold mb-3 leading-snug max-w-xl">
-            Connect Production, Multi-Warehouse Inventory, Procurement &amp; UAE VAT Accounting
-          </p>
-
-          <p class="text-sm text-slate-500 mb-8 leading-relaxed max-w-xl">
-            Suvrin helps UAE manufacturers implement and customise Odoo ERP around real-world factory routing, finite capacity, scrap control, and bilingual compliance across Dubai, Sharjah, and Abu Dhabi plants.
-          </p>
-
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">
-            <a href="#chapter-audit" class="btn-primary px-7 py-4">
-              <span>Book a Free ERP Consultation</span>
-              <span class="material-symbols-outlined text-[17px]">arrow_forward</span>
-            </a>
-            <a href="tel:+971551120975" class="btn-secondary px-6 py-4">
-              <span class="material-symbols-outlined text-[18px] text-brand-blue">call</span>
-              <span>Direct Dubai Desk: +971 551 120 975</span>
-            </a>
-          </div>
-
-          <div class="pt-6 border-t border-brand-line grid grid-cols-3 sm:grid-cols-6 gap-4 text-left">
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Odoo MRP</span>
-              <span class="text-[11px] text-slate-500">Shop Floor App</span>
-            </div>
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Multi-WH</span>
-              <span class="text-[11px] text-slate-500">JAFZA / KIZAD</span>
-            </div>
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">FTA VAT</span>
-              <span class="text-[11px] text-slate-500">5% Tax Ready</span>
-            </div>
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Costing</span>
-              <span class="text-[11px] text-slate-500">Live Job Costing</span>
-            </div>
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Bilingual</span>
-              <span class="text-[11px] text-slate-500">Arabic &amp; English</span>
-            </div>
-            <div>
-              <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Audits</span>
-              <span class="text-[11px] text-slate-500">On-Site in UAE</span>
-            </div>
-          </div>
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-8 md:px-12 text-center w-full flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-transparent border border-brand-line mb-6">
+          <span class="pulse-dot"></span>
+          <span class="text-[10.5px] uppercase tracking-wider font-semibold text-brand-blue">Dubai &amp; UAE Manufacturing ERP</span>
         </div>
 
-        <!-- Space reserved for scroll-driven 3D ERP stage -->
-        <div class="lg:col-span-5 relative min-h-[220px] sm:min-h-[280px] lg:min-h-[440px] pointer-events-none" aria-hidden="true"></div>
+        <h1 class="font-heading text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold text-brand-ink leading-[1.08] mb-5 text-center">
+          Manufacturing ERP<br/>
+          <span class="text-brand-blue">for Dubai &amp; UAE Industry</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-700 font-semibold mb-3 leading-snug max-w-2xl mx-auto text-center">
+          Connect Production, Multi-Warehouse Inventory, Procurement &amp; UAE VAT Accounting
+        </p>
+
+        <p class="text-sm text-slate-500 mb-8 leading-relaxed max-w-2xl mx-auto text-center">
+          Suvrin helps UAE manufacturers implement and customise Odoo ERP around real-world factory routing, finite capacity, scrap control, and bilingual compliance across Dubai, Sharjah, and Abu Dhabi plants.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 mb-10 w-full sm:w-auto">
+          <a href="#chapter-audit" class="btn-primary px-7 py-4">
+            <span>Book a Free ERP Consultation</span>
+            <span class="material-symbols-outlined text-[17px]">arrow_forward</span>
+          </a>
+          <a href="tel:+971551120975" class="btn-secondary px-6 py-4">
+            <span class="material-symbols-outlined text-[18px] text-brand-blue">call</span>
+            <span>Direct Dubai Desk: +971 551 120 975</span>
+          </a>
+        </div>
+
+        <div class="pt-6 border-t border-brand-line grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-6 text-center w-full max-w-3xl mx-auto">
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Odoo MRP</span>
+            <span class="text-[11px] text-slate-500">Shop Floor App</span>
+          </div>
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Multi-WH</span>
+            <span class="text-[11px] text-slate-500">JAFZA / KIZAD</span>
+          </div>
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">FTA VAT</span>
+            <span class="text-[11px] text-slate-500">5% Tax Ready</span>
+          </div>
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Costing</span>
+            <span class="text-[11px] text-slate-500">Live Job Costing</span>
+          </div>
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Bilingual</span>
+            <span class="text-[11px] text-slate-500">Arabic &amp; English</span>
+          </div>
+          <div>
+            <span class="font-heading block text-xs font-bold uppercase text-brand-ink">Audits</span>
+            <span class="text-[11px] text-slate-500">On-Site in UAE</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -668,267 +658,466 @@
     </section>
 
     <!-- Bottlenecks -->
-    <section id="chapter-bottlenecks" data-chapter="2" data-title="Bottlenecks" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex items-center">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-start">
-        <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
-          <div class="mb-8">
-            <span class="eyebrow eyebrow-alert mb-2">Operational Bottlenecks</span>
-            <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
-              Is Your Factory Still Hamstrung by Disconnected Systems?
-            </h2>
-            <p class="text-sm text-slate-500 leading-relaxed">
-              Industrial businesses in the UAE lose up to 14% operating margin through spreadsheet divergence and inventory drift.
+    <section id="chapter-bottlenecks" data-chapter="2" data-title="Bottlenecks" class="chapter-section relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <span class="eyebrow eyebrow-alert mb-3 inline-block">The Compounding Bottleneck Loop</span>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
+          Is Your Factory Still Hamstrung by <span class="text-red-600">Disconnected Systems?</span>
+        </h2>
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          In UAE manufacturing, disconnected spreadsheets don't operate in isolation — they trigger a compounding chain reaction across departments that silently drains operational margins.
+        </p>
+      </div>
+
+      <!-- Interconnected Flow Grid -->
+      <div class="relative max-w-5xl mx-auto">
+
+        <!-- Connecting Line Background for Desktop (Visual Chain Link) -->
+        <div class="hidden md:block absolute left-1/2 top-10 bottom-10 w-0.5 -translate-x-1/2 bg-gradient-to-b from-red-400 via-brand-blue/30 to-red-500 z-0 opacity-40"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-12 md:gap-y-10 relative z-10">
+
+          <!-- Step 01 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">01</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Data Friction</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">table_chart</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Excel Spreadsheet Dependency</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Production schedules, inventory valuation, and job costing spreadsheets diverge across teams. Planners and accountants operate on conflicting numbers.
             </p>
-          </div>
-
-          <div class="space-y-5">
-            <div class="border-b border-brand-line pb-4">
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Excel Spreadsheet Dependency</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">01 Friction</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Production schedules, inventory valuation, and job costing spreadsheets diverge across teams. Planners and accountants operate on conflicting numbers.
-              </p>
-            </div>
-            <div class="border-b border-brand-line pb-4">
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Zero Shop Floor Visibility</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">02 Blindspots</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Leadership cannot determine machine utilization, live downtime, or bottleneck work centers until the month ends.
-              </p>
-            </div>
-            <div class="border-b border-brand-line pb-4">
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Inventory Drift &amp; Stockouts</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">03 Capital</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Raw materials, WIP buffers, and finished stock numbers do not align. High-value stock remains tied up while critical components stock out.
-              </p>
-            </div>
-            <div class="border-b border-brand-line pb-4">
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Procurement Lag &amp; Manual POs</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">04 Lead Times</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Purchasing teams place orders reactively via WhatsApp instead of relying on dynamic MRP reordering rules driven by real production demand.
-              </p>
-            </div>
-            <div class="border-b border-brand-line pb-4">
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Inaccurate Job Costing</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">05 Margins</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                True manufacturing costs—combining direct materials, machine electricity, and labor hours—are calculated weeks too late.
-              </p>
-            </div>
-            <div>
-              <div class="flex items-baseline justify-between gap-4 mb-1">
-                <h3 class="font-heading text-lg font-bold text-brand-ink">Isolated Accounting (Tally Silos)</h3>
-                <span class="text-[11px] text-red-500 font-semibold uppercase shrink-0">06 Silos</span>
-              </div>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed UAE FTA VAT filings.
-              </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+              <span>Triggers zero shop-floor visibility &amp; blindspots</span>
             </div>
           </div>
 
-          <div class="mt-8 pt-5 border-t border-brand-line flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <span class="text-sm text-slate-500">Eliminate factory blindspots across Dubai &amp; JAFZA.</span>
-            <a href="#chapter-audit" class="text-xs font-bold uppercase tracking-wider text-brand-blue hover:text-brand-blue-bright flex items-center gap-1 transition-colors">
-              <span>Audit Your Factory Flow</span>
-              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
+          <!-- Step 02 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">02</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Blindspots</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">visibility_off</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Zero Shop Floor Visibility</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Leadership cannot determine machine utilization, live downtime, or bottleneck work centers until the month ends.
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+              <span>Causes unmonitored material drift &amp; stockouts</span>
+            </div>
           </div>
+
+          <!-- Step 03 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">03</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Capital Lockup</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">inventory_2</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Inventory Drift &amp; Stockouts</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Raw materials, WIP buffers, and finished stock numbers do not align. High-value stock remains tied up while critical components stock out.
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+              <span>Forces reactive emergency purchasing via chat</span>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">04</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Lead Times</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">local_shipping</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Procurement Lag &amp; Manual POs</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Purchasing teams place orders reactively via WhatsApp instead of relying on dynamic MRP reordering rules driven by real production demand.
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+              <span>Distorts true manufacturing &amp; labor cost metrics</span>
+            </div>
+          </div>
+
+          <!-- Step 05 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">05</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Margin Erosion</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">request_quote</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Inaccurate Job Costing</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              True manufacturing costs—combining direct materials, machine electricity, and labor hours—are calculated weeks too late.
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+              <span>Creates accounting silos &amp; tax filing delays</span>
+            </div>
+          </div>
+
+          <!-- Step 06 -->
+          <div class="surface-panel p-6 sm:p-7 rounded-2xl border border-red-200/80 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-all relative group">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-red-100 text-red-600 font-heading font-extrabold text-xs flex items-center justify-center border border-red-200">06</span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-red-500">Accounting Silos</span>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-red-500 transition-colors text-[20px]">account_balance_wallet</span>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-brand-ink mb-2">Isolated Accounting (Tally Silos)</h3>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed UAE FTA VAT filings.
+            </p>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-red-600/90">
+              <span class="material-symbols-outlined text-[15px]">warning</span>
+              <span>Culminates in direct annual profit margin drain</span>
+            </div>
+          </div>
+
         </div>
 
-        <div class="hidden lg:flex lg:col-span-5 items-center justify-center min-h-[360px] relative pointer-events-none">
-          <div class="relative z-10 text-center space-y-2 px-6 rounded-2xl bg-transparent border border-brand-line py-6">
-            <span class="font-heading text-5xl font-extrabold text-brand-blue">14%</span>
-            <p class="text-sm text-slate-500 leading-snug max-w-[200px] mx-auto">Avg. margin lost to disconnected factory systems in the UAE</p>
+        <!-- Integrated Impact Stat Banner -->
+        <div class="mt-12 surface-panel p-5 sm:p-8 rounded-2xl border border-brand-line bg-gradient-to-r from-red-50/70 via-white to-brand-mist flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 shadow-sm">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 w-full md:w-auto">
+            <div class="w-20 h-20 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 flex flex-col items-center justify-center shrink-0">
+              <span class="font-heading text-3xl font-extrabold text-brand-blue leading-none">14%</span>
+              <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider mt-1">Margin Drain</span>
+            </div>
+            <div class="w-full">
+              <h4 class="font-heading text-base sm:text-lg font-bold text-brand-ink mb-1">The Cost of Unconnected Operations in UAE</h4>
+              <p class="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
+                Industrial businesses across Dubai, JAFZA, and Abu Dhabi lose up to 14% operating margin every year due to this unbroken chain of disconnected spreadsheets.
+              </p>
+            </div>
           </div>
+          <a href="#chapter-audit" class="btn-primary w-full md:w-auto px-6 py-3.5 justify-center shrink-0">
+            <span>Break The Bottleneck Loop</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
         </div>
+
       </div>
     </section>
 
     <!-- Pipeline -->
-    <section id="chapter-pipeline" data-chapter="3" data-title="Connected Flow" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-start">
-          <div class="hidden lg:flex lg:col-span-5 items-center min-h-[420px] pt-8">
-            <div class="space-y-4 w-full max-w-xs relative z-10 rounded-2xl bg-transparent border border-brand-line p-5">
-              <div class="h-px w-16 bg-brand-blue"></div>
-              <p class="font-heading text-4xl font-extrabold text-brand-ink leading-tight">One live pipeline.<br/><span class="text-brand-blue">Zero silos.</span></p>
-              <p class="text-sm text-slate-500">From sales order to FTA e-invoice — every scan and decision stays connected.</p>
-            </div>
-          </div>
+    <section id="chapter-pipeline" data-chapter="3" data-title="Connected Flow" class="chapter-section relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <span class="eyebrow mb-3 inline-block">Unified Live Pipeline</span>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
+          One ERP. Your Entire <span class="text-brand-blue">Manufacturing Operation.</span>
+        </h2>
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Suvrin configures Odoo around your exact factory routing — connecting every barcode scan, machine log, and management decision into one live, end-to-end pipeline.
+        </p>
+      </div>
 
-          <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
-            <div class="mb-8">
-              <span class="eyebrow mb-2">Unified Flow</span>
-              <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
-                One ERP. Your Entire Manufacturing Operation.
-              </h2>
-              <p class="text-sm text-slate-500 leading-relaxed">
-                Suvrin configures Odoo around your production routing—connecting every scan and management decision into a live pipeline.
+      <!-- Connected Pipeline Flow Matrix -->
+      <div class="relative max-w-6xl mx-auto">
+
+        <!-- Visual Connecting Connector Line (Desktop) -->
+        <div class="hidden lg:block absolute left-4 right-4 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-brand-blue via-brand-blue-bright to-brand-blue opacity-25 pointer-events-none z-0"></div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 relative z-10">
+
+          <!-- Step 01 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">01</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">trending_up</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Sales &amp; Demand Forecast</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                AED sales orders convert automatically into manufacturing demand forecasts and delivery commitments.
               </p>
             </div>
-
-            <div class="space-y-4">
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">01</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">Sales &amp; Demand Forecast</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">AED sales orders convert automatically into manufacturing demand forecasts and delivery commitments.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">02</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">BOM &amp; MRP Engine</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Multi-level BOM breakdown verifies component availability, lead times, scrap allowance, and sub-assemblies.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">03</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">Automated Procurement</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Auto-generate RFQs and LPOs based on minimum stock rules and supplier lead times with multi-tier approvals.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">04</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">Goods Receipt &amp; QC Quarantine</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Barcode-scanned raw material intake with lot/batch tracking, test cert verification, and quarantine routing.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">05</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">Work Center Routing &amp; Tablets</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Shop floor tablets guide operators with digital work instructions, machine logging, and real-time scrap recording.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">06</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">In-Line Quality Checkpoints</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Quality gates trigger automated Non-Conformance Reports (NCR) immediately upon parameter deviation.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5 border-b border-brand-line pb-3.5">
-                <span class="font-heading text-xs font-bold text-brand-blue pt-1 tabular-nums">07</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-ink">Packaging &amp; UAE Dispatch</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Serialised finished goods packaging, automated packing lists, delivery notes, and transport dispatch.</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3.5">
-                <span class="font-heading text-xs font-bold text-brand-green-deep pt-1 tabular-nums">08</span>
-                <div>
-                  <h4 class="font-heading text-base font-bold text-brand-green-deep">Job Costing &amp; UAE VAT e-Invoicing</h4>
-                  <p class="text-sm text-slate-500 mt-0.5">Instant WIP-to-COGS entries, actual cost vs standard variance analysis, and FTA-compliant 5% e-invoicing.</p>
-                </div>
-              </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Feeds MRP engine</span>
             </div>
           </div>
+
+          <!-- Step 02 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">02</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">account_tree</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">BOM &amp; MRP Engine</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Multi-level BOM breakdown verifies component availability, lead times, scrap allowance, and sub-assemblies.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Triggers auto-procurement</span>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">03</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">shopping_cart</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Automated Procurement</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Auto-generate RFQs and LPOs based on minimum stock rules and supplier lead times with multi-tier approvals.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Routes to Goods Receipt</span>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">04</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">fact_check</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Goods Receipt &amp; QC Quarantine</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Barcode-scanned raw material intake with lot/batch tracking, test cert verification, and quarantine routing.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Releases raw stock to floor</span>
+            </div>
+          </div>
+
+          <!-- Step 05 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">05</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">precision_manufacturing</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Work Center Tablets</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Shop floor tablets guide operators with digital work instructions, machine logging, and real-time scrap recording.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Monitors live work center OEE</span>
+            </div>
+          </div>
+
+          <!-- Step 06 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">06</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">rule</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">In-Line Quality Checkpoints</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Quality gates trigger automated Non-Conformance Reports (NCR) immediately upon parameter deviation.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Validates finished quality</span>
+            </div>
+          </div>
+
+          <!-- Step 07 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">07</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">local_shipping</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Packaging &amp; UAE Dispatch</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Serialised finished goods packaging, automated packing lists, delivery notes, and transport dispatch.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>➔ Triggers customer delivery</span>
+            </div>
+          </div>
+
+          <!-- Step 08 -->
+          <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue font-heading font-extrabold text-xs flex items-center justify-center border border-brand-blue/20">08</span>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue transition-colors text-[20px]">receipt_long</span>
+              </div>
+              <h3 class="font-heading text-base font-bold text-brand-ink mb-2">Job Costing &amp; UAE VAT</h3>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
+                Instant WIP-to-COGS entries, actual cost vs standard variance analysis, and FTA-compliant 5% e-invoicing.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-brand-blue">
+              <span>✓ Live Financial Settlement</span>
+            </div>
+          </div>
+
         </div>
+
+        <!-- Integrated Pipeline Summary Callout -->
+        <div class="mt-12 surface-panel p-5 sm:p-8 rounded-2xl border border-brand-line bg-gradient-to-r from-brand-mist via-white to-blue-50/40 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 shadow-sm">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5 w-full md:w-auto">
+            <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center shrink-0 border border-brand-blue/20">
+              <span class="material-symbols-outlined text-[24px]">verified</span>
+            </div>
+            <div class="w-full">
+              <h4 class="font-heading text-base sm:text-lg font-bold text-brand-ink mb-1">Zero Silos. Total Operational Control.</h4>
+              <p class="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
+                Connect shop floor supervisors, warehouse managers, and UAE finance teams into one unified Odoo ERP workflow.
+              </p>
+            </div>
+          </div>
+          <a href="#chapter-audit" class="btn-primary w-full md:w-auto px-6 py-3.5 justify-center shrink-0">
+            <span>Book A Factory Workflow Audit</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+
       </div>
     </section>
 
     <!-- Modules -->
-    <section id="chapter-modules" data-chapter="4" data-title="10 Modules" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex items-center">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full items-center">
-        <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
-      <div class="mb-10 max-w-2xl">
-        <span class="eyebrow mb-2">Functional Architecture</span>
-        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
-          Odoo Manufacturing Suite Built Around Your Factory
+    <section id="chapter-modules" data-chapter="4" data-title="10 Modules" class="chapter-section relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <span class="eyebrow mb-3 inline-block">Functional Architecture</span>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
+          Odoo Manufacturing Suite <span class="text-brand-blue">Built Around Your Factory</span>
         </h2>
-        <p class="text-sm text-slate-500 leading-relaxed">
-          10 core modules tailored to discrete, process, and hybrid industrial Gulf manufacturing.
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          10 core enterprise modules engineered specifically for discrete, process, and hybrid industrial Gulf manufacturing.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-10">
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">01 / Manufacturing MRP</h4>
-          <p class="text-sm text-slate-500">Work center load planning, routing, and operator tablet apps.</p>
+      <div class="max-w-6xl mx-auto space-y-10">
+        <!-- 10 Modules Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">01</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Manufacturing MRP</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Work center load planning, routing, and operator tablet apps.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">02</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Multi-Level BOM</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Version control, sub-assemblies, scrap % and alternative RM rules.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">03</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Production MPS</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Master production schedules, bottleneck flags &amp; shift planning.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">04</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Multi-Warehouse</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">JAFZA, KIZAD &amp; Al Quoz transfers with live barcode lot tracking.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">05</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Auto Procurement</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Min-stock automated RFQ triggers and tiered LPO approvals.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">06</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Quality Control</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">In-line QC gates, raw material tests, NCR logs &amp; ISO 9001 audit.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">07</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Maintenance CMMS</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Preventive machine maintenance, MTBF/MTTR tracking &amp; spares.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">08</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Precise Job Costing</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">True cost breakdown per batch: RM, machine power, and labor.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">09</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">Sales &amp; MO Sync</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Auto-convert quotations directly into shop floor manufacturing orders.</p>
+            </div>
+          </div>
+          <div class="surface-panel p-5 rounded-2xl border border-brand-line bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-heading font-extrabold text-brand-blue block mb-1">10</span>
+              <h4 class="font-heading text-base font-bold text-brand-ink mb-1.5">UAE VAT Finance</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">FTA-compliant VAT returns, multi-currency ledger (AED/USD/SAR).</p>
+            </div>
+          </div>
         </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">02 / Multi-Level BOM</h4>
-          <p class="text-sm text-slate-500">Version control, sub-assemblies, scrap % and alternative RM rules.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">03 / Production MPS</h4>
-          <p class="text-sm text-slate-500">Master production schedules, bottleneck flags &amp; shift planning.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">04 / Multi-Warehouse</h4>
-          <p class="text-sm text-slate-500">JAFZA, KIZAD &amp; Al Quoz transfers with live barcode lot tracking.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">05 / Auto Procurement</h4>
-          <p class="text-sm text-slate-500">Min-stock automated RFQ triggers and tiered LPO approvals.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">06 / Quality Control</h4>
-          <p class="text-sm text-slate-500">In-line QC gates, raw material tests, NCR logs &amp; ISO 9001 audit.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">07 / Maintenance CMMS</h4>
-          <p class="text-sm text-slate-500">Preventive machine maintenance, MTBF/MTTR tracking &amp; spares.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">08 / Precise Job Costing</h4>
-          <p class="text-sm text-slate-500">True cost breakdown per batch: RM, machine power, and labor.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">09 / Sales &amp; MO Sync</h4>
-          <p class="text-sm text-slate-500">Auto-convert quotations directly into shop floor manufacturing orders.</p>
-        </div>
-        <div class="border-b border-brand-line pb-4">
-          <h4 class="font-heading text-sm font-bold text-brand-ink mb-1">10 / UAE VAT Finance</h4>
-          <p class="text-sm text-slate-500">FTA-compliant VAT returns, multi-currency ledger (AED/USD/SAR).</p>
-        </div>
-      </div>
 
-      <div class="pt-6 border-t border-brand-line">
-        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-4">Connected Ecosystem</span>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 text-sm">
-          <div class="border-l-2 border-brand-blue pl-3">
-            <strong class="text-brand-ink block font-heading text-sm">Tally Prime</strong>
-            <span class="text-xs text-slate-500">Bi-directional bridge</span>
-          </div>
-          <div class="border-l-2 border-brand-blue pl-3">
-            <strong class="text-brand-ink block font-heading text-sm">SCADA / PLCs</strong>
-            <span class="text-xs text-slate-500">Machine cycle sync</span>
-          </div>
-          <div class="border-l-2 border-brand-green pl-3">
-            <strong class="text-brand-ink block font-heading text-sm">UAE Banks</strong>
-            <span class="text-xs text-slate-500">ENBD, ADCB, FAB</span>
-          </div>
-          <div class="border-l-2 border-brand-green pl-3">
-            <strong class="text-brand-ink block font-heading text-sm">Weighbridges</strong>
-            <span class="text-xs text-slate-500">RS232 Serial sync</span>
+        <!-- Ecosystem Bar -->
+        <div class="surface-panel p-6 rounded-2xl border border-brand-line bg-white/80 backdrop-blur-md shadow-sm">
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-4 text-center">Connected Integrations &amp; Industrial Ecosystem</span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm text-center">
+            <div class="border-t-2 border-brand-blue pt-3">
+              <strong class="text-brand-ink block font-heading text-sm">Tally Prime</strong>
+              <span class="text-xs text-slate-500">Bi-directional bridge</span>
+            </div>
+            <div class="border-t-2 border-brand-blue pt-3">
+              <strong class="text-brand-ink block font-heading text-sm">SCADA / PLCs</strong>
+              <span class="text-xs text-slate-500">Machine cycle sync</span>
+            </div>
+            <div class="border-t-2 border-brand-blue pt-3">
+              <strong class="text-brand-ink block font-heading text-sm">UAE Banks</strong>
+              <span class="text-xs text-slate-500">ENBD, ADCB, FAB</span>
+            </div>
+            <div class="border-t-2 border-brand-blue pt-3">
+              <strong class="text-brand-ink block font-heading text-sm">Weighbridges</strong>
+              <span class="text-xs text-slate-500">RS232 Serial sync</span>
+            </div>
           </div>
         </div>
-      </div>
-        </div>
-        <div class="hidden lg:block lg:col-span-5 min-h-[360px] pointer-events-none" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- Compliance -->
-    <section id="chapter-compliance" data-chapter="5" data-title="UAE Compliance" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <section id="chapter-compliance" data-chapter="5" data-title="UAE Compliance" class="chapter-section section-band relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div class="lg:col-span-7 surface-panel p-6 sm:p-10">
             <div class="mb-8">
               <span class="eyebrow mb-2">Built for UAE Regulations</span>
@@ -958,11 +1147,11 @@
                 <span class="text-sm text-slate-600"><strong class="text-brand-ink">Multi-Warehouse Routing:</strong> Inter-warehouse transfers between Dubai, Abu Dhabi, and Sharjah depots.</span>
               </div>
               <div class="flex items-start gap-3 border-b border-brand-line pb-3">
-                <span class="material-symbols-outlined text-brand-green-deep text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
                 <span class="text-sm text-slate-600"><strong class="text-brand-ink">Bilingual System:</strong> Native Arabic and English documentation, reports, and UI toggles.</span>
               </div>
               <div class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-brand-green-deep text-[20px] shrink-0 mt-0.5">check_circle</span>
+                <span class="material-symbols-outlined text-brand-blue text-[20px] shrink-0 mt-0.5">check_circle</span>
                 <span class="text-sm text-slate-600"><strong class="text-brand-ink">On-Site Factory Audits:</strong> Suvrin engineers physically walk your production lines in JAFZA, DIC, or Al Quoz.</span>
               </div>
             </div>
@@ -1013,7 +1202,7 @@
               <p class="text-sm text-slate-500">Bilingual Arabic / English tax invoices and VAT 201 returns, configured for UAE manufacturing.</p>
             </div>
             <div class="rounded-2xl bg-transparent border border-brand-line p-6">
-              <span class="font-heading text-xs font-bold uppercase text-brand-green-deep tracking-wider">Free Zone Coverage</span>
+              <span class="font-heading text-xs font-bold uppercase text-brand-blue tracking-wider">Free Zone Coverage</span>
               <p class="font-heading text-2xl font-bold text-brand-ink mt-2 mb-1">JAFZA · DAFZA · KIZAD</p>
               <p class="text-sm text-slate-500">Multi-company consolidation across mainland and free-zone entities in one ledger.</p>
             </div>
@@ -1023,13 +1212,13 @@
     </section>
 
     <!-- Case study -->
-    <section id="chapter-case" data-chapter="6" data-title="Case Study &amp; KPIs" class="chapter-section relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-7xl mx-auto flex flex-col justify-center">
-      <div class="max-w-3xl mb-10">
-        <span class="eyebrow mb-2">Verified Implementation</span>
-        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-3">
-          Precision Industrial Manufacturing Implementation
+    <section id="chapter-case" data-chapter="6" data-title="Case Study &amp; KPIs" class="chapter-section relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto flex flex-col justify-center">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <span class="eyebrow mb-3 inline-block">Verified Implementation</span>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
+          Precision Industrial <span class="text-brand-blue">Manufacturing Case Study</span>
         </h2>
-        <p class="text-sm text-slate-500 leading-relaxed">
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
           A multi-facility precision manufacturing group in the UAE replaced disconnected spreadsheets with an end-to-end Odoo Enterprise solution connecting shop floor machines to VAT accounting.
         </p>
       </div>
@@ -1141,14 +1330,14 @@
     </section>
 
     <!-- Audit form -->
-    <section id="chapter-audit" data-chapter="7" data-title="Book Audit" class="chapter-section section-band relative min-h-[90svh] py-20 sm:py-28 px-4 sm:px-8 md:px-12 lg:pl-28 flex items-center">
-      <div class="max-w-4xl mx-auto">
-        <div class="mb-8">
-          <span class="eyebrow mb-2">Technical Assessment</span>
-          <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink mb-2">
-            Discuss Your Factory ERP Requirements
+    <section id="chapter-audit" data-chapter="7" data-title="Book Audit" class="chapter-section relative py-20 sm:py-28 px-4 sm:px-8 md:px-12 max-w-4xl mx-auto flex items-center">
+      <div class="w-full">
+        <div class="max-w-2xl mx-auto text-center mb-10">
+          <span class="eyebrow mb-3 inline-block">Technical Assessment</span>
+          <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-3 leading-tight">
+            Discuss Your Factory <span class="text-brand-blue">ERP Requirements</span>
           </h2>
-          <p class="text-sm text-slate-500 leading-relaxed max-w-2xl">
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
             Our senior Dubai-based ERP architects will walk you through a tailored roadmap showing how Odoo connects your production, inventory, and UAE VAT accounting workflows.
           </p>
         </div>
@@ -1279,7 +1468,9 @@
             <span class="text-[11px] text-slate-500">Direct technical chat with our Dubai ERP Principal</span>
           </div>
           <a href="https://wa.me/9811021616?text=Hello%20Suvrin,%20I'd%20like%20a%20manufacturing%20ERP%20consultation" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-brand-green-deep hover:bg-brand-green text-white font-bold text-xs flex items-center gap-2 transition-colors active:scale-95 shrink-0">
-            <span class="material-symbols-outlined text-[17px]">chat</span>
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
             <span>Chat on WhatsApp</span>
           </a>
         </div>
@@ -1287,10 +1478,11 @@
     </section>
 
     <!-- FAQ -->
-    <section class="py-20 sm:py-24 px-4 sm:px-8 md:px-12 lg:pl-28 max-w-4xl mx-auto">
-      <div class="mb-10">
-        <span class="eyebrow mb-2">Clear Answers</span>
-        <h2 class="font-heading text-3xl sm:text-4xl text-brand-ink">Frequently Asked Questions</h2>
+    <section class="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-4xl mx-auto">
+      <div class="max-w-2xl mx-auto text-center mb-12">
+        <span class="eyebrow mb-3 inline-block">Clear Answers</span>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-3">Frequently Asked Questions</h2>
+        <p class="text-base text-slate-600">Everything you need to know about Odoo ERP implementation for UAE factories.</p>
       </div>
 
       <div class="space-y-1" id="faqAccordion">
@@ -1408,7 +1600,9 @@
       <span class="material-symbols-outlined text-[20px]">call</span>
     </a>
     <a href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20ERP%20for%20my%20factory" target="_blank" rel="noopener noreferrer" class="flex-1 min-h-[44px] px-3 rounded-xl bg-brand-green-deep text-white font-bold text-xs flex items-center justify-center gap-1.5">
-      <span class="material-symbols-outlined text-[17px]">chat</span>
+      <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+      </svg>
       <span>WhatsApp</span>
     </a>
     <a href="#chapter-audit" class="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-brand-blue text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1 shadow-md">
@@ -1508,503 +1702,7 @@
       raf = requestAnimationFrame(draw);
     })();
 
-    /* =========================================================================
-       Three.js scroll stage — Manufacturing ERP themed chapters
-       ========================================================================= */
-    (function initErpScrollStage() {
-      const canvas = document.getElementById('webgl-canvas');
-      if (!canvas || typeof THREE === 'undefined') return;
 
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const mobileMQ = window.matchMedia('(max-width: 1024px)');
-      let isMobile = mobileMQ.matches;
-
-      if (reduceMotion) {
-        canvas.style.display = 'none';
-        return;
-      }
-
-      const BLUE = 0x002098;
-      const GREEN = 0x80B070;
-      const INK = 0x1a1a1a;
-
-      let scene, camera, renderer, stage;
-      let chapterGroups = {};
-      let currentChapter = 1;
-      let target = { x: 3.2, y: 0.1, z: 0, rotY: -0.35, rotX: 0.08, scale: 1 };
-      let mouseX = 0, mouseY = 0;
-      let running = true;
-      let raf;
-      const clock = new THREE.Clock();
-
-      // Shared materials (reused for performance)
-      const matBlue = new THREE.MeshStandardMaterial({
-        color: BLUE, metalness: 0.55, roughness: 0.28, transparent: true, opacity: 0.92
-      });
-      const matGreen = new THREE.MeshStandardMaterial({
-        color: GREEN, metalness: 0.4, roughness: 0.32, transparent: true, opacity: 0.9
-      });
-      const matInk = new THREE.MeshStandardMaterial({
-        color: INK, metalness: 0.65, roughness: 0.22, transparent: true, opacity: 0.85
-      });
-      const matBlueSoft = new THREE.MeshStandardMaterial({
-        color: BLUE, metalness: 0.3, roughness: 0.4, transparent: true, opacity: 0.35
-      });
-      const matWireBlue = new THREE.MeshBasicMaterial({
-        color: BLUE, transparent: true, opacity: 0.35, wireframe: true
-      });
-
-      function makeGroup(name) {
-        const g = new THREE.Group();
-        g.name = name;
-        g.visible = false;
-        g.userData.opacity = 0;
-        stage.add(g);
-        chapterGroups[name] = g;
-        return g;
-      }
-
-      function addGlowSphere(parent, radius, color, opacity) {
-        const geo = new THREE.SphereGeometry(radius, 24, 24);
-        const mat = new THREE.MeshBasicMaterial({
-          color, transparent: true, opacity: opacity || 0.12, depth: THREE.AdditiveBlending, depthWrite: false
-        });
-        const mesh = new THREE.Mesh(geo, mat);
-        parent.add(mesh);
-        return mesh;
-      }
-
-      /* Ch1 — Unified ERP hub (constellation) */
-      function buildHub() {
-        const g = makeGroup('1');
-        const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.05, 1), matBlue.clone());
-        g.add(core);
-        g.userData.core = core;
-        addGlowSphere(g, 1.8, BLUE, 0.1);
-
-        [2.2, 2.9, 3.6].forEach((r, i) => {
-          const ring = new THREE.Mesh(
-            new THREE.TorusGeometry(r, 0.035, 12, 96),
-            i === 1 ? matGreen.clone() : matBlueSoft.clone()
-          );
-          ring.rotation.x = Math.PI / 2.4 + i * 0.15;
-          ring.rotation.y = i * 0.4;
-          g.add(ring);
-          g.userData['ring' + i] = ring;
-        });
-
-        const orbiters = [];
-        for (let i = 0; i < 8; i++) {
-          const s = new THREE.Mesh(
-            new THREE.SphereGeometry(0.14, 12, 12),
-            i % 3 === 0 ? matGreen.clone() : matBlue.clone()
-          );
-          g.add(s);
-          orbiters.push({ mesh: s, angle: (i / 8) * Math.PI * 2, radius: 2.4 + (i % 3) * 0.45, speed: 0.35 + i * 0.04 });
-        }
-        g.userData.orbiters = orbiters;
-
-        // Link lines as thin cylinders between a few points
-        for (let i = 0; i < 6; i++) {
-          const link = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.015, 0.015, 1.8, 6),
-            matBlueSoft.clone()
-          );
-          link.position.set(Math.cos(i) * 1.2, Math.sin(i * 1.3) * 0.6, Math.sin(i) * 1.2);
-          link.rotation.z = i * 0.7;
-          g.add(link);
-        }
-      }
-
-      /* Ch2 — Fragmented silos / bottlenecks */
-      function buildFragments() {
-        const g = makeGroup('2');
-        const boxes = [];
-        for (let i = 0; i < (isMobile ? 8 : 14); i++) {
-          const box = new THREE.Mesh(
-            new THREE.BoxGeometry(0.45 + Math.random() * 0.35, 0.45 + Math.random() * 0.5, 0.35),
-            i % 4 === 0 ? matInk.clone() : matBlue.clone()
-          );
-          box.position.set(
-            (Math.random() - 0.5) * 5.5,
-            (Math.random() - 0.5) * 4.2,
-            (Math.random() - 0.5) * 3.2
-          );
-          box.rotation.set(Math.random(), Math.random(), Math.random());
-          g.add(box);
-          boxes.push(box);
-        }
-        g.userData.boxes = boxes;
-        // Broken ring
-        const broken = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.05, 8, 48, Math.PI * 1.4), matInk.clone());
-        broken.rotation.x = Math.PI / 2.5;
-        g.add(broken);
-      }
-
-      /* Ch3 — Connected manufacturing pipeline */
-      function buildPipeline() {
-        const g = makeGroup('3');
-        const path = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(0, 2.8, 0),
-          new THREE.Vector3(0.6, 1.6, 0.4),
-          new THREE.Vector3(-0.4, 0.4, -0.3),
-          new THREE.Vector3(0.5, -0.8, 0.5),
-          new THREE.Vector3(-0.2, -2.2, 0),
-          new THREE.Vector3(0.3, -3.2, -0.2)
-        ]);
-        const tube = new THREE.Mesh(
-          new THREE.TubeGeometry(path, 64, 0.08, 8, false),
-          matBlue.clone()
-        );
-        g.add(tube);
-        g.userData.path = path;
-
-        const nodes = [];
-        for (let i = 0; i < 8; i++) {
-          const t = i / 7;
-          const p = path.getPointAt(t);
-          const node = new THREE.Mesh(
-            new THREE.SphereGeometry(i === 7 ? 0.28 : 0.18, 14, 14),
-            i === 7 ? matGreen.clone() : matBlue.clone()
-          );
-          node.position.copy(p);
-          g.add(node);
-          nodes.push(node);
-          addGlowSphere(node, 0.45, i === 7 ? GREEN : BLUE, 0.15);
-        }
-        g.userData.nodes = nodes;
-
-        const beads = [];
-        for (let i = 0; i < 5; i++) {
-          const bead = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 10), matGreen.clone());
-          g.add(bead);
-          beads.push({ mesh: bead, t: i / 5 });
-        }
-        g.userData.beads = beads;
-      }
-
-      /* Ch4 — Odoo module grid */
-      function buildModules() {
-        const g = makeGroup('4');
-        const mods = [];
-        const cols = 5, rows = 2;
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const idx = r * cols + c;
-            const box = new THREE.Mesh(
-              new THREE.BoxGeometry(0.7, 0.7, 0.7),
-              idx % 3 === 0 ? matGreen.clone() : matBlue.clone()
-            );
-            box.position.set((c - 2) * 1.05, (0.5 - r) * 1.15, 0);
-            g.add(box);
-            mods.push(box);
-            const frame = new THREE.LineSegments(
-              new THREE.EdgesGeometry(new THREE.BoxGeometry(0.72, 0.72, 0.72)),
-              new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 })
-            );
-            box.add(frame);
-          }
-        }
-        g.userData.mods = mods;
-      }
-
-      /* Ch5 — UAE compliance shield */
-      function buildCompliance() {
-        const g = makeGroup('5');
-        const outer = new THREE.Mesh(
-          new THREE.CylinderGeometry(2.4, 2.4, 0.12, 6),
-          matBlueSoft.clone()
-        );
-        outer.rotation.x = Math.PI / 2;
-        g.add(outer);
-        const mid = new THREE.Mesh(
-          new THREE.CylinderGeometry(1.7, 1.7, 0.14, 6),
-          matBlue.clone()
-        );
-        mid.rotation.x = Math.PI / 2;
-        g.add(mid);
-        const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.85, 0), matGreen.clone());
-        g.add(core);
-        g.userData.core = core;
-        g.userData.outer = outer;
-        g.userData.mid = mid;
-        addGlowSphere(g, 2.8, BLUE, 0.08);
-        // Check-mark-ish bars
-        const bar1 = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.1, 0.18), matGreen.clone());
-        bar1.position.set(-0.25, -0.1, 0.9);
-        bar1.rotation.z = 0.5;
-        const bar2 = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.8, 0.18), matGreen.clone());
-        bar2.position.set(0.35, 0.15, 0.9);
-        bar2.rotation.z = -0.55;
-        g.add(bar1, bar2);
-      }
-
-      /* Ch6 — KPI bars + efficiency ring */
-      function buildKpis() {
-        const g = makeGroup('6');
-        const heights = [1.2, 1.8, 1.5, 2.3, 2.8];
-        const bars = [];
-        heights.forEach((h, i) => {
-          const bar = new THREE.Mesh(
-            new THREE.BoxGeometry(0.45, h, 0.45),
-            i === heights.length - 1 ? matGreen.clone() : matBlue.clone()
-          );
-          bar.position.set((i - 2) * 0.75, h / 2 - 1.2, 0);
-          g.add(bar);
-          bars.push(bar);
-        });
-        g.userData.bars = bars;
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.18, 16, 64), matBlue.clone());
-        ring.position.set(0, 0.2, -1.4);
-        g.add(ring);
-        g.userData.ring = ring;
-        const inner = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.08, 12, 64, Math.PI * 1.5), matGreen.clone());
-        inner.position.copy(ring.position);
-        g.add(inner);
-        g.userData.inner = inner;
-      }
-
-      /* Ch7 — Audit portal / focus */
-      function buildPortal() {
-        const g = makeGroup('7');
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.08, 16, 100), matBlue.clone());
-        g.add(ring);
-        g.userData.ring = ring;
-        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.7, 0.03, 12, 80), matGreen.clone());
-        ring2.rotation.x = 0.4;
-        g.add(ring2);
-        g.userData.ring2 = ring2;
-        const core = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 24), matBlueSoft.clone());
-        g.add(core);
-        addGlowSphere(g, 2.4, BLUE, 0.14);
-        addGlowSphere(g, 1.2, GREEN, 0.1);
-      }
-
-      function setGroupOpacity(group, opacity) {
-        group.traverse((obj) => {
-          if (obj.material) {
-            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
-            mats.forEach((m) => {
-              if (m.userData.baseOpacity == null) m.userData.baseOpacity = m.opacity != null ? m.opacity : 1;
-              m.transparent = true;
-              m.opacity = m.userData.baseOpacity * opacity;
-            });
-          }
-        });
-        group.visible = opacity > 0.02;
-        group.userData.opacity = opacity;
-      }
-
-      const chapterTargets = {
-        1: { x: 3.4, y: 0.15, z: 0, rotY: -0.4, rotX: 0.1, scale: 1 },
-        2: { x: 4.0, y: 0.2, z: -0.4, rotY: -0.55, rotX: 0.05, scale: 0.95 },
-        3: { x: -4.0, y: 0.25, z: -0.3, rotY: 0.5, rotX: 0.08, scale: 1 },
-        4: { x: 3.6, y: 0.1, z: -0.5, rotY: -0.35, rotX: 0.12, scale: 1.05 },
-        5: { x: 3.8, y: 0.2, z: -0.4, rotY: -0.4, rotX: 0.05, scale: 1 },
-        6: { x: 3.2, y: 0.4, z: -1.2, rotY: -0.25, rotX: 0.15, scale: 0.95 },
-        7: { x: 0, y: 0.3, z: -2.5, rotY: 0, rotX: 0.2, scale: 0.85 }
-      };
-
-      function applyChapterTarget(ch) {
-        const t = chapterTargets[ch] || chapterTargets[1];
-        if (isMobile) {
-          target.x = 0;
-          target.y = 0.9;
-          target.z = -3.2;
-          target.rotY = t.rotY * 0.4;
-          target.rotX = 0.15;
-          target.scale = 0.72;
-        } else {
-          Object.assign(target, t);
-        }
-      }
-
-      function init() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.set(0, 0, 14);
-
-        renderer = new THREE.WebGLRenderer({
-          canvas,
-          antialias: !isMobile,
-          alpha: true,
-          powerPreference: 'high-performance'
-        });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.75));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0);
-
-        const ambient = new THREE.AmbientLight(0xffffff, 0.85);
-        scene.add(ambient);
-        const key = new THREE.DirectionalLight(0xffffff, 1.15);
-        key.position.set(8, 12, 10);
-        scene.add(key);
-        const fill = new THREE.DirectionalLight(0x80B070, 0.45);
-        fill.position.set(-8, 4, -4);
-        scene.add(fill);
-        const bluePoint = new THREE.PointLight(BLUE, 1.2, 40);
-        bluePoint.position.set(4, -2, 6);
-        scene.add(bluePoint);
-        const greenPoint = new THREE.PointLight(GREEN, 0.9, 35);
-        greenPoint.position.set(-5, 3, 4);
-        scene.add(greenPoint);
-
-        stage = new THREE.Group();
-        scene.add(stage);
-
-        buildHub();
-        buildFragments();
-        buildPipeline();
-        buildModules();
-        buildCompliance();
-        buildKpis();
-        buildPortal();
-
-        setGroupOpacity(chapterGroups['1'], 1);
-        chapterGroups['1'].visible = true;
-        applyChapterTarget(1);
-
-        window.addEventListener('resize', onResize, { passive: true });
-        window.addEventListener('mousemove', (e) => {
-          mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-          mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        }, { passive: true });
-        mobileMQ.addEventListener('change', (e) => {
-          isMobile = e.matches;
-          onResize();
-          applyChapterTarget(currentChapter);
-        });
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) { running = false; cancelAnimationFrame(raf); }
-          else { running = true; clock.start(); animate(); }
-        });
-      }
-
-      function onResize() {
-        if (!camera || !renderer) return;
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.75));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      }
-
-      // Called from progress / scroll system
-      window.__suvrinSetChapter = function (ch) {
-        if (ch === currentChapter) return;
-        currentChapter = ch;
-        applyChapterTarget(ch);
-      };
-
-      function updateChapterFades(dt) {
-        Object.keys(chapterGroups).forEach((key) => {
-          const g = chapterGroups[key];
-          const want = Number(key) === currentChapter ? 1 : 0;
-          const next = g.userData.opacity + (want - g.userData.opacity) * Math.min(1, dt * 3.2);
-          setGroupOpacity(g, next);
-          // Soft scale punch when active
-          const s = 0.92 + next * 0.08;
-          g.scale.setScalar(g.scale.x + (s - g.scale.x) * 0.08);
-        });
-      }
-
-      function animateChapterMotion(t) {
-        const hub = chapterGroups['1'];
-        if (hub && hub.userData.opacity > 0.05) {
-          if (hub.userData.core) hub.userData.core.rotation.y = t * 0.35;
-          [0, 1, 2].forEach((i) => {
-            const ring = hub.userData['ring' + i];
-            if (ring) ring.rotation.z = t * (0.15 + i * 0.05);
-          });
-          (hub.userData.orbiters || []).forEach((o) => {
-            o.angle += o.speed * 0.01;
-            o.mesh.position.set(
-              Math.cos(o.angle) * o.radius,
-              Math.sin(o.angle * 0.7) * 0.55,
-              Math.sin(o.angle) * o.radius
-            );
-          });
-        }
-
-        const frag = chapterGroups['2'];
-        if (frag && frag.userData.opacity > 0.05) {
-          (frag.userData.boxes || []).forEach((b, i) => {
-            b.rotation.x += 0.003 + i * 0.0002;
-            b.rotation.y += 0.004;
-            b.position.y += Math.sin(t * 0.8 + i) * 0.002;
-          });
-        }
-
-        const pipe = chapterGroups['3'];
-        if (pipe && pipe.userData.opacity > 0.05 && pipe.userData.path) {
-          (pipe.userData.beads || []).forEach((b) => {
-            b.t = (b.t + 0.003) % 1;
-            b.mesh.position.copy(pipe.userData.path.getPointAt(b.t));
-          });
-        }
-
-        const mods = chapterGroups['4'];
-        if (mods && mods.userData.opacity > 0.05) {
-          (mods.userData.mods || []).forEach((m, i) => {
-            m.position.y += Math.sin(t * 1.2 + i * 0.7) * 0.003;
-            m.rotation.y = Math.sin(t * 0.5 + i) * 0.15;
-          });
-        }
-
-        const comp = chapterGroups['5'];
-        if (comp && comp.userData.opacity > 0.05) {
-          if (comp.userData.outer) comp.userData.outer.rotation.z = t * 0.2;
-          if (comp.userData.mid) comp.userData.mid.rotation.z = -t * 0.28;
-          if (comp.userData.core) comp.userData.core.rotation.y = t * 0.45;
-        }
-
-        const kpi = chapterGroups['6'];
-        if (kpi && kpi.userData.opacity > 0.05) {
-          (kpi.userData.bars || []).forEach((b, i) => {
-            b.scale.y = 0.85 + Math.sin(t * 1.5 + i) * 0.08;
-          });
-          if (kpi.userData.ring) kpi.userData.ring.rotation.z = t * 0.25;
-          if (kpi.userData.inner) kpi.userData.inner.rotation.z = -t * 0.4;
-        }
-
-        const portal = chapterGroups['7'];
-        if (portal && portal.userData.opacity > 0.05) {
-          if (portal.userData.ring) portal.userData.ring.rotation.z = t * 0.35;
-          if (portal.userData.ring2) {
-            portal.userData.ring2.rotation.z = -t * 0.25;
-            portal.userData.ring2.rotation.x = 0.4 + Math.sin(t) * 0.1;
-          }
-        }
-      }
-
-      function animate() {
-        if (!running) return;
-        raf = requestAnimationFrame(animate);
-        const dt = Math.min(0.05, clock.getDelta());
-        const t = clock.elapsedTime;
-
-        updateChapterFades(dt);
-        animateChapterMotion(t);
-
-        stage.position.x += (target.x - stage.position.x) * 0.055;
-        stage.position.y += (target.y - stage.position.y) * 0.055;
-        stage.position.z += (target.z - stage.position.z) * 0.055;
-        stage.rotation.y += (target.rotY + Math.sin(t * 0.4) * 0.04 - stage.rotation.y) * 0.045;
-        stage.rotation.x += (target.rotX - stage.rotation.x) * 0.045;
-        const sc = target.scale;
-        stage.scale.x += (sc - stage.scale.x) * 0.05;
-        stage.scale.y = stage.scale.x;
-        stage.scale.z = stage.scale.x;
-
-        camera.position.x += (mouseX * 0.7 - camera.position.x) * 0.03;
-        camera.position.y += (mouseY * 0.45 - camera.position.y) * 0.03;
-        camera.lookAt(0, 0, 0);
-
-        renderer.render(scene, camera);
-      }
-
-      init();
-      animate();
-    })();
 
     /* Header scroll state */
     (function () {
