@@ -56,7 +56,8 @@
     html, body {
       margin: 0;
       padding: 0;
-      background-color: transparent;
+      background-color: #ffffff;
+      background: #ffffff;
       color: var(--ink);
       overflow-x: hidden;
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -75,93 +76,13 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Ambient background layers */
-    #ambient-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 1;
-    }
-
-    .bg-atmosphere {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 65% 45% at 82% 12%, rgba(0, 32, 152, 0.11) 0%, transparent 58%),
-        radial-gradient(ellipse 55% 42% at 12% 72%, rgba(128, 176, 112, 0.12) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 55% 95%, rgba(0, 32, 152, 0.06) 0%, transparent 50%),
-        linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 45%, #FFFFFF 100%);
-      animation: atmosphereShift 22s ease-in-out infinite alternate;
-    }
-
-    .bg-orbs {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .bg-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(48px);
-      will-change: transform, opacity;
-      mix-blend-mode: multiply;
-    }
-    .bg-orb-a {
-      width: min(42vw, 480px);
-      height: min(42vw, 480px);
-      top: -8%;
-      right: -4%;
-      background: radial-gradient(circle, rgba(0, 32, 152, 0.22) 0%, rgba(0, 32, 152, 0.06) 45%, transparent 70%);
-      animation: orbDriftA 18s ease-in-out infinite;
-    }
-    .bg-orb-b {
-      width: min(38vw, 420px);
-      height: min(38vw, 420px);
-      bottom: 8%;
-      left: -6%;
-      background: radial-gradient(circle, rgba(128, 176, 112, 0.28) 0%, rgba(128, 176, 112, 0.08) 45%, transparent 72%);
-      animation: orbDriftB 22s ease-in-out infinite;
-    }
-    .bg-orb-c {
-      width: min(28vw, 320px);
-      height: min(28vw, 320px);
-      top: 42%;
-      left: 38%;
-      background: radial-gradient(circle, rgba(26, 63, 212, 0.14) 0%, rgba(128, 176, 112, 0.08) 40%, transparent 70%);
-      animation: orbDriftC 26s ease-in-out infinite;
-    }
-    .bg-orb-d {
-      width: min(24vw, 260px);
-      height: min(24vw, 260px);
-      bottom: 18%;
-      right: 12%;
-      background: radial-gradient(circle, rgba(128, 176, 112, 0.18) 0%, transparent 68%);
-      animation: orbDriftD 20s ease-in-out infinite;
-    }
-
-    .bg-light-sweep {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        115deg,
-        transparent 0%,
-        transparent 40%,
-        rgba(0, 32, 152, 0.035) 48%,
-        rgba(128, 176, 112, 0.04) 52%,
-        transparent 60%,
-        transparent 100%
-      );
-      background-size: 220% 220%;
-      animation: lightSweep 16s ease-in-out infinite;
+    /* Solid clean white background without background animations */
+    #ambient-canvas,
+    .bg-atmosphere,
+    .bg-orbs,
+    .bg-light-sweep,
+    .hero-orb {
+      display: none !important;
     }
 
     @keyframes atmosphereShift {
@@ -298,12 +219,12 @@
       text-transform: uppercase;
       border-radius: 9999px;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0, 32, 152, 0.22);
+      box-shadow: none;
     }
     .btn-primary:hover {
       background: var(--blue-bright);
       transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(0, 32, 152, 0.28);
+      box-shadow: none;
     }
 
     .btn-secondary {
@@ -1223,23 +1144,23 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-brand-line py-8">
-        <div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-brand-line py-8 text-center">
+        <div class="text-center">
           <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-blue block mb-1">95%</span>
           <span class="font-heading text-xs font-bold text-brand-ink uppercase block">Excel Reduction</span>
           <span class="text-[11px] text-slate-500">Live Odoo work orders</span>
         </div>
-        <div>
+        <div class="text-center">
           <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-green-deep block mb-1">&lt; 24h</span>
           <span class="font-heading text-xs font-bold text-brand-ink uppercase block">Cost Reconciliation</span>
           <span class="text-[11px] text-slate-500">Down from 21 days</span>
         </div>
-        <div>
+        <div class="text-center">
           <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-ink block mb-1">99.4%</span>
           <span class="font-heading text-xs font-bold text-brand-ink uppercase block">On-Time Dispatch</span>
           <span class="text-[11px] text-slate-500">Across Emirates fleet</span>
         </div>
-        <div>
+        <div class="text-center">
           <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-blue block mb-1">4.8x</span>
           <span class="font-heading text-xs font-bold text-brand-ink uppercase block">ROI in 6 Months</span>
           <span class="text-[11px] text-slate-500">Via scrap &amp; admin savings</span>
@@ -1616,6 +1537,7 @@
        Ambient 2D particles (lightweight underlay)
        ========================================================================= */
     (function initAmbientCanvas() {
+      return;
       const canvas = document.getElementById('ambient-canvas');
       if (!canvas) return;
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
