@@ -1,17 +1,18 @@
 import React from "react";
+import { COMPANY_INFO } from "@/data";
 
 export default function MobileStickyBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-brand-line px-4 py-2.5 flex sm:hidden items-center gap-3 shadow-[0_-8px_24px_rgba(20,20,20,0.06)]">
       <a
-        href="tel:+971551120975"
+        href={`tel:${COMPANY_INFO.phoneTel}`}
         className="w-11 h-11 rounded-xl border border-brand-line text-brand-blue flex items-center justify-center shrink-0 bg-white"
         aria-label="Call Dubai Desk"
       >
         <span className="material-symbols-outlined text-[20px]">call</span>
       </a>
       <a
-        href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20ERP%20for%20my%20factory"
+        href={COMPANY_INFO.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="flex-1 min-h-[44px] px-3 rounded-xl bg-brand-green-deep text-white font-bold text-xs flex items-center justify-center gap-1.5"

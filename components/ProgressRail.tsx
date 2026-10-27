@@ -1,19 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
-interface ChapterInfo {
-  id: string;
-  number: string;
-  title: string;
-}
-
-const CHAPTERS: ChapterInfo[] = [
-  { id: "chapter-hero", number: "01", title: "Overview" },
-  { id: "chapter-pipeline", number: "02", title: "Connected Flow" },
-  { id: "chapter-compliance", number: "03", title: "UAE Compliance" },
-  { id: "chapter-faq", number: "04", title: "FAQs" },
-];
+import { CHAPTERS } from "@/data";
 
 export default function ProgressRail() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -69,7 +57,7 @@ export default function ProgressRail() {
 
   return (
     <aside
-      className="fixed left-3 sm:left-5 xl:left-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-start select-none"
+      className="fixed left-3 sm:left-4 xl:left-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-start select-none w-36 xl:w-40"
       aria-label="Page Sections Navigation"
     >
       {/* Chapter Counter Badge */}
@@ -81,7 +69,7 @@ export default function ProgressRail() {
       </div>
 
       {/* Chapters Vertical Navigation List */}
-      <nav className="relative flex flex-col gap-1 py-1">
+      <div className="relative flex flex-col gap-1 py-1 w-full">
         {/* Continuous background guide line */}
         <div className="absolute left-[9px] top-3 bottom-3 w-[1.5px] bg-slate-200 -z-10 rounded-full" />
 
@@ -92,7 +80,7 @@ export default function ProgressRail() {
               key={ch.id}
               type="button"
               onClick={() => scrollToChapter(ch.id)}
-              className={`group flex items-center gap-3 text-left py-2 px-1 rounded-xl transition-all duration-300 pointer-events-auto cursor-pointer ${
+              className={`group flex items-center gap-2.5 text-left py-2 px-1 rounded-xl transition-all duration-300 pointer-events-auto cursor-pointer w-full ${
                 isActive
                   ? "opacity-100"
                   : "opacity-40 hover:opacity-85"
@@ -102,18 +90,18 @@ export default function ProgressRail() {
               {/* Dot / Pill Indicator */}
               <div className="relative flex items-center justify-center w-5 shrink-0">
                 <span
-                  className={`rounded-full transition-all duration-300 ${
+                  className={`transition-all duration-300 ${
                     isActive
                       ? "w-2.5 h-6 bg-brand-blue rounded-full shadow-sm shadow-brand-blue/30"
-                      : "w-2 h-2 bg-slate-300 group-hover:bg-brand-blue/70 group-hover:scale-125"
+                      : "w-2 h-2 rounded-full bg-slate-300 group-hover:bg-brand-blue/70 group-hover:scale-125"
                   }`}
                 />
               </div>
 
               {/* Step Number & Section Title */}
-              <div className="flex items-center gap-2 transition-all duration-200">
+              <div className="flex items-center gap-1.5 transition-all duration-200 whitespace-nowrap">
                 <span
-                  className={`font-mono text-[10px] font-bold ${
+                  className={`font-mono text-[10.5px] font-bold ${
                     isActive ? "text-brand-blue" : "text-slate-400 group-hover:text-slate-600"
                   }`}
                 >
@@ -132,10 +120,10 @@ export default function ProgressRail() {
             </button>
           );
         })}
-      </nav>
+      </div>
 
       {/* Brand Subtitle Footer */}
-      <div className="mt-3 px-1 text-[9px] font-heading font-bold uppercase tracking-widest text-slate-400">
+      <div className="mt-3 px-1 text-[9px] font-heading font-bold uppercase tracking-widest text-slate-400 whitespace-nowrap">
         Suvrin ERP UAE
       </div>
     </aside>

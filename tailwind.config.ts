@@ -20,8 +20,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ["'Outfit'", "sans-serif"],
-        body: ["'Plus Jakarta Sans'", "sans-serif"],
+        heading: ["var(--font-inter)", "'Inter'", "sans-serif"],
+        body: ["var(--font-inter)", "'Inter'", "sans-serif"],
+        sans: ["var(--font-inter)", "'Inter'", "sans-serif"],
       },
       boxShadow: {
         soft: "0 1px 2px rgba(20,20,20,0.04), 0 8px 24px rgba(20,20,20,0.06)",

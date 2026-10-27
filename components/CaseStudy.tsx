@@ -1,32 +1,8 @@
 import React from "react";
+import { CASE_STUDY_KPIS } from "@/data";
 
 export default function CaseStudy() {
-  const kpis = [
-    {
-      stat: "95%",
-      label: "Excel Reduction",
-      sub: "Live Odoo work orders",
-      color: "text-brand-blue",
-    },
-    {
-      stat: "< 24h",
-      label: "Cost Reconciliation",
-      sub: "Down from 21 days",
-      color: "text-brand-green-deep",
-    },
-    {
-      stat: "99.4%",
-      label: "On-Time Dispatch",
-      sub: "Across Emirates fleet",
-      color: "text-brand-ink",
-    },
-    {
-      stat: "4.8x",
-      label: "ROI in 6 Months",
-      sub: "Via scrap & admin savings",
-      color: "text-brand-blue",
-    },
-  ];
+  const kpis = CASE_STUDY_KPIS;
 
   return (
     <section
@@ -38,7 +14,7 @@ export default function CaseStudy() {
       <div className="max-w-3xl mx-auto text-center mb-12">
         <span className="eyebrow mb-3 inline-block">Verified Implementation</span>
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
-          Precision Industrial <span className="text-brand-blue">Business Case Study</span>
+          Precision Industrial Business Case Study
         </h2>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
           A multi-facility precision business group in the UAE replaced disconnected spreadsheets with an end-to-end Odoo Enterprise solution connecting shop floor machines to VAT accounting.
