@@ -1,62 +1,8 @@
 import React from "react";
+import { BOTTLENECK_STEPS } from "@/data";
 
 export default function Bottlenecks() {
-  const steps = [
-    {
-      num: "01",
-      badge: "Data Friction",
-      icon: "table_chart",
-      title: "Excel Spreadsheet Dependency",
-      desc: "Production schedules, inventory valuation, and job costing spreadsheets diverge across teams. Planners and accountants operate on conflicting numbers.",
-      impact: "Triggers zero shop-floor visibility & blindspots",
-      impactIcon: "arrow_downward",
-    },
-    {
-      num: "02",
-      badge: "Blindspots",
-      icon: "visibility_off",
-      title: "Zero Shop Floor Visibility",
-      desc: "Leadership cannot determine machine utilization, live downtime, or bottleneck work centers until the month ends.",
-      impact: "Causes unmonitored material drift & stockouts",
-      impactIcon: "arrow_downward",
-    },
-    {
-      num: "03",
-      badge: "Capital Lockup",
-      icon: "inventory_2",
-      title: "Inventory Drift & Stockouts",
-      desc: "Raw materials, WIP buffers, and finished stock numbers do not align. High-value stock remains tied up while critical components stock out.",
-      impact: "Forces reactive emergency purchasing via chat",
-      impactIcon: "arrow_downward",
-    },
-    {
-      num: "04",
-      badge: "Lead Times",
-      icon: "local_shipping",
-      title: "Procurement Lag & Manual POs",
-      desc: "Purchasing teams place orders reactively via WhatsApp instead of relying on dynamic MRP reordering rules driven by real production demand.",
-      impact: "Distorts true business & labor cost metrics",
-      impactIcon: "arrow_downward",
-    },
-    {
-      num: "05",
-      badge: "Margin Erosion",
-      icon: "request_quote",
-      title: "Inaccurate Job Costing",
-      desc: "True business costs—combining direct materials, machine electricity, and labor hours—are calculated weeks too late.",
-      impact: "Creates accounting silos & tax filing delays",
-      impactIcon: "arrow_downward",
-    },
-    {
-      num: "06",
-      badge: "Accounting Silos",
-      icon: "account_balance_wallet",
-      title: "Isolated Accounting (Tally Silos)",
-      desc: "Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed UAE FTA VAT filings.",
-      impact: "Culminates in direct annual profit margin drain",
-      impactIcon: "warning",
-    },
-  ];
+  const steps = BOTTLENECK_STEPS;
 
   return (
     <section

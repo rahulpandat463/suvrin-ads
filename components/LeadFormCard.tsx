@@ -58,22 +58,16 @@ export default function LeadFormCard() {
   return (
     <div
       id="chapter-audit"
-      className="bg-white border border-brand-line rounded-2xl p-5 sm:p-7 shadow-lift transition-all"
+      className="bg-white border border-brand-line rounded-2xl p-5 sm:p-7 shadow-sm transition-all scroll-mt-24"
     >
       {/* Form Card Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 border-b border-brand-line">
-        <div>
-          <h3 className="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">
-            Business ERP Audit
-          </h3>
-          <p className="text-[11px] text-slate-500">
-            Confidential assessment &amp; preliminary roadmap.
-          </p>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs font-bold text-brand-blue font-heading shrink-0">
-          <span className="pulse-dot"></span>
-          <span>DUBAI MARINA DESK</span>
-        </div>
+      <div className="pb-4 mb-4 border-b border-brand-line">
+        <h3 className="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">
+          Business ERP Audit
+        </h3>
+        <p className="text-[11px] text-slate-500">
+          Confidential assessment &amp; preliminary roadmap.
+        </p>
       </div>
 
       {!isSubmitted ? (
@@ -162,9 +156,7 @@ export default function LeadFormCard() {
                 className="field-input !h-10 !pl-16 text-xs sm:text-sm"
               />
             </div>
-            <p className="text-[10px] text-slate-400 mt-1">
-              Our Dubai team sends preliminary notes via WhatsApp / SMS.
-            </p>
+
             {phoneError && (
               <p className="text-[11px] text-red-500 mt-1">Please enter a valid phone number</p>
             )}

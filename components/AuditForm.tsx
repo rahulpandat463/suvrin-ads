@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { SECTOR_OPTIONS, SOFTWARE_OPTIONS } from "@/data";
 
 export default function AuditForm() {
   const [step, setStep] = useState<1 | 2>(1);
@@ -86,7 +87,7 @@ export default function AuditForm() {
         <div className="max-w-2xl mx-auto text-center mb-10">
           <span className="eyebrow mb-3 inline-block">Technical Assessment</span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-3 leading-tight">
-            Discuss Your Factory <span className="text-brand-blue">ERP Requirements</span>
+            Discuss Your Factory ERP Requirements
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             Our senior Dubai-based ERP architects will walk you through a tailored roadmap showing how Odoo connects your production, inventory, and UAE VAT accounting workflows.
@@ -95,19 +96,13 @@ export default function AuditForm() {
 
         {/* Lead Capture Form Card */}
         <div className="bg-transparent border border-brand-line rounded-2xl p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-brand-line">
-            <div>
-              <h3 className="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">
-                Business ERP Audit
-              </h3>
-              <p className="text-[11px] text-slate-500">
-                Confidential assessment &amp; preliminary BOM roadmap.
-              </p>
-            </div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-brand-blue font-heading">
-              <span className="pulse-dot"></span>
-              <span>DUBAI MARINA DESK</span>
-            </div>
+          <div className="pb-4 mb-5 border-b border-brand-line">
+            <h3 className="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">
+              Business ERP Audit
+            </h3>
+            <p className="text-[11px] text-slate-500">
+              Confidential assessment &amp; preliminary BOM roadmap.
+            </p>
           </div>
 
           {!isSubmitted && (
@@ -257,14 +252,11 @@ export default function AuditForm() {
                       <option value="" disabled>
                         Select Industry Sector
                       </option>
-                      <option value="metal">Metal &amp; Steel Fabrication</option>
-                      <option value="plastics">Plastics, Polymers &amp; Extrusion</option>
-                      <option value="packaging">Packaging, Paper &amp; Corrugated</option>
-                      <option value="equipment">Engineering, Machinery &amp; ETO</option>
-                      <option value="food">Food, Beverage &amp; Halal Processing</option>
-                      <option value="chemical">Industrial Chemicals &amp; Coatings</option>
-                      <option value="joinery">Joinery, Fitout &amp; Woodworking</option>
-                      <option value="other">Other Discrete / Process Business</option>
+                      {SECTOR_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
                     </select>
                     {sectorError && (
                       <p className="text-[11px] text-red-500 mt-1">Please select your sector</p>
@@ -284,12 +276,11 @@ export default function AuditForm() {
                       onChange={(e) => setCurrentSoftware(e.target.value)}
                       className="field-input"
                     >
-                      <option value="excel">Excel Spreadsheets &amp; WhatsApp</option>
-                      <option value="tally">Tally Prime / ERP 9</option>
-                      <option value="legacy">Legacy Custom ERP</option>
-                      <option value="quickbooks">QuickBooks / Zoho Books</option>
-                      <option value="sap_oracle">SAP / Oracle / Dynamics</option>
-                      <option value="greenfield">Greenfield Factory Buildout</option>
+                      {SOFTWARE_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
 

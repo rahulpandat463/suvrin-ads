@@ -1,65 +1,9 @@
 import React from "react";
+import { ODOO_MODULES, INTEGRATIONS } from "@/data";
 
 export default function ModulesSuite() {
-  const modules = [
-    {
-      num: "01",
-      title: "Business MRP",
-      desc: "Work center load planning, routing, and operator tablet apps.",
-    },
-    {
-      num: "02",
-      title: "Multi-Level BOM",
-      desc: "Version control, sub-assemblies, scrap % and alternative RM rules.",
-    },
-    {
-      num: "03",
-      title: "Production MPS",
-      desc: "Master production schedules, bottleneck flags & shift planning.",
-    },
-    {
-      num: "04",
-      title: "Multi-Warehouse",
-      desc: "JAFZA, KIZAD & Al Quoz transfers with live barcode lot tracking.",
-    },
-    {
-      num: "05",
-      title: "Auto Procurement",
-      desc: "Min-stock automated RFQ triggers and tiered LPO approvals.",
-    },
-    {
-      num: "06",
-      title: "Quality Control",
-      desc: "In-line QC gates, raw material tests, NCR logs & ISO 9001 audit.",
-    },
-    {
-      num: "07",
-      title: "Maintenance CMMS",
-      desc: "Preventive machine maintenance, MTBF/MTTR tracking & spares.",
-    },
-    {
-      num: "08",
-      title: "Precise Job Costing",
-      desc: "True cost breakdown per batch: RM, machine power, and labor.",
-    },
-    {
-      num: "09",
-      title: "Sales & MO Sync",
-      desc: "Auto-convert quotations directly into shop floor business orders.",
-    },
-    {
-      num: "10",
-      title: "UAE VAT Finance",
-      desc: "FTA-compliant VAT returns, multi-currency ledger (AED/USD/SAR).",
-    },
-  ];
-
-  const integrations = [
-    { title: "Tally Prime", desc: "Bi-directional bridge" },
-    { title: "SCADA / PLCs", desc: "Machine cycle sync" },
-    { title: "UAE Banks", desc: "ENBD, ADCB, FAB" },
-    { title: "Weighbridges", desc: "RS232 Serial sync" },
-  ];
+  const modules = ODOO_MODULES;
+  const integrations = INTEGRATIONS;
 
   return (
     <section
@@ -72,7 +16,7 @@ export default function ModulesSuite() {
       <div className="max-w-3xl mx-auto text-center mb-14">
         <span className="eyebrow mb-3 inline-block">Functional Architecture</span>
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-ink mb-4 leading-tight">
-          Odoo Business Suite <span className="text-brand-blue">Built Around Your Factory</span>
+          Odoo Business Suite Built Around Your Factory
         </h2>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
           10 core enterprise modules engineered specifically for discrete, process, and hybrid industrial Gulf businesses.

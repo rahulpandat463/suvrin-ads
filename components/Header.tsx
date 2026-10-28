@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { COMPANY_INFO } from "@/data";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,6 +11,7 @@ export default function Header() {
     const onScroll = () => {
       setIsScrolled(window.scrollY > 12);
     };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -32,12 +34,12 @@ export default function Header() {
 
         {/* Desktop Navigation & Actions */}
         <div className="hidden md:flex items-center gap-3 lg:gap-3.5">
-          <a href="tel:+971551120975" className="btn-secondary h-10 px-4 text-xs">
+          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="btn-secondary h-10 px-4 text-xs">
             <span className="material-symbols-outlined text-[17px] text-brand-blue">call</span>
-            <span>+971 501 359 238</span>
+            <span>{COMPANY_INFO.phoneDisplay}</span>
           </a>
           <a
-            href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Dubai"
+            href={COMPANY_INFO.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-whatsapp h-10 px-4"
@@ -59,14 +61,14 @@ export default function Header() {
         {/* Mobile Header Actions */}
         <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
           <a
-            href="tel:+971551120975"
+            href={`tel:${COMPANY_INFO.phoneTel}`}
             className="btn-secondary w-9 h-9 p-0 rounded-full flex items-center justify-center shrink-0 active:scale-95"
             aria-label="Call Us"
           >
             <span className="material-symbols-outlined text-[18px] text-brand-blue">call</span>
           </a>
           <a
-            href="https://wa.me/9811021616?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Dubai"
+            href={COMPANY_INFO.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-whatsapp w-9 h-9 p-0 rounded-full flex items-center justify-center shrink-0 active:scale-95"

@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import { COMPANY_INFO } from "@/data";
 
 export default function Footer() {
   return (
-    <footer className="py-14 px-4 sm:px-8 md:px-12 lg:pl-28 border-t border-brand-line bg-transparent">
-      <div className="max-w-7xl mx-auto text-sm">
+    <footer className="py-12 border-t border-brand-line bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 text-sm">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
           <div className="md:col-span-6 space-y-4">
             <a href="#chapter-hero" className="logo-link inline-block">
@@ -22,12 +23,12 @@ export default function Footer() {
           </div>
           <div className="md:col-span-6 space-y-1.5 text-slate-500">
             <p className="text-brand-ink font-heading font-bold text-base mb-2">
-              Suvrin Technologies / Maxcode Solutions LLC
+              {COMPANY_INFO.legalName}
             </p>
-            <p>Living Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, UAE</p>
-            <p className="text-brand-blue font-bold">Direct GCC Desk: +971 501 359 238</p>
+            <p>{COMPANY_INFO.address}</p>
+            <p className="text-brand-blue font-bold">Direct GCC Desk: {COMPANY_INFO.phoneDisplay}</p>
             <p className="text-xs text-slate-400">
-              Email: sudeep@suvrin.com • Global: India (Delhi NCR) • USA (Delaware)
+              Email: {COMPANY_INFO.email} • Global: {COMPANY_INFO.globalPresence}
             </p>
           </div>
         </div>
