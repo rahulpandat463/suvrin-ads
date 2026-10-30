@@ -43,11 +43,13 @@ export interface ChapterInfo {
 
 export const CHAPTERS: ChapterInfo[] = [
   { id: "chapter-hero", number: "01", title: "Overview" },
-  { id: "chapter-pipeline", number: "02", title: "Connected Flow" },
-  { id: "chapter-compliance", number: "03", title: "UAE Compliance" },
-  { id: "chapter-included", number: "04", title: "What's Included" },
-  { id: "chapter-ownership", number: "05", title: "Ownership" },
-  { id: "chapter-faq", number: "06", title: "FAQs" },
+  { id: "chapter-transformation", number: "02", title: "Transformation" },
+  { id: "chapter-pipeline", number: "03", title: "Connected Flow" },
+  { id: "chapter-compliance", number: "04", title: "UAE Compliance" },
+  { id: "chapter-included", number: "05", title: "What's Included" },
+  { id: "chapter-ownership", number: "06", title: "Ownership" },
+  { id: "chapter-pricing", number: "07", title: "Pricing Levers" },
+  { id: "chapter-faq", number: "08", title: "FAQs" },
 ];
 
 // ------------------------------------------------------------------------------
@@ -434,7 +436,241 @@ export const TIMELINE_TIERS: TimelineTier[] = [
 ];
 
 // ------------------------------------------------------------------------------
-// 10. FREQUENTLY ASKED QUESTIONS (FAQS)
+// ------------------------------------------------------------------------------
+// 10. WHAT AFFECTS THE PRICE (PRICING & IMPLEMENTATION LEVERS)
+// ------------------------------------------------------------------------------
+export interface PricingLever {
+  id: string;
+  number: string;
+  title: string;
+  category: string;
+  badge: string;
+  badgeType: "savings" | "timeline" | "variable" | "integration" | "data" | "compliance" | "training";
+  icon: string;
+  summary: string;
+  keyPoints: string[];
+  impactCallout: {
+    label: string;
+    value: string;
+    subtext: string;
+  };
+  comparison: {
+    leanTitle: string;
+    leanDesc: string;
+    scaleTitle: string;
+    scaleDesc: string;
+  };
+  discoveryAdvantage: string;
+}
+
+export const PRICING_LEVERS: PricingLever[] = [
+  {
+    id: "lever-licence-mix",
+    number: "01",
+    title: "Licence Mix: Full Users vs. Light Users",
+    category: "License Mix & Users",
+    badge: "Largest Ongoing Budget Factor (Up to 70% Savings)",
+    badgeType: "savings",
+    icon: "badge",
+    summary:
+      "Not our implementation fee, but usually the biggest number in the overall ERP budget. Since Odoo 20, staff who only need time off, expenses, attendance, shop-floor kiosks, barcode scanning, or field-service screens can be configured as Light Users instead of full users. Our discovery models the split before you order.",
+    keyPoints: [
+      "Odoo 20 Light User Pricing: Staff who only access shop-floor apps, barcode scanners, time off, attendance, or expenses qualify as Light Users (₹195 per user per month in India on Odoo's price list, 22 October 2026; approx. AED 9–25 / $2.50–$7/user/mo in UAE/GCC) instead of standard Full Users (AED 80–120 / $24–$35/mo).",
+      "Shop-Floor Reality: In a 100-person factory or warehouse, typically 65–80 floor workers only need barcode scanning or tablet clocking. Placing them on Light User seats saves 60–75% annually on subscription fees.",
+      "Discovery Seat Modeling: During our 1-Week Discovery, we audit your organizational chart and model the precise split before you order licenses from Odoo, preventing multi-year license overspend.",
+    ],
+    impactCallout: {
+      label: "Annual License Savings",
+      value: "Up to 70%",
+      subtext: "via precise Light vs. Full seat modeling",
+    },
+    comparison: {
+      leanTitle: "Unoptimized (100% Full Users)",
+      leanDesc: "Paying full license fees for shop floor operators who only clock in or scan barcodes.",
+      scaleTitle: "Optimized Hybrid Model",
+      scaleDesc: "Floor workers on Light seats (₹195 / ~AED 15/mo); managers on Full seats.",
+    },
+    discoveryAdvantage:
+      "Discovery models your exact seat split before contract signing so you never overpay Odoo for unneeded full seats.",
+  },
+  {
+    id: "lever-module-count",
+    number: "02",
+    title: "Number of Modules & Functional Footprint",
+    category: "Functional Scope",
+    badge: "Scope & Timeline Driver (6–8w vs 12–20w)",
+    badgeType: "timeline",
+    icon: "view_quilt",
+    summary:
+      "Each module adds configuration time, data models, workflow rules, security roles, and user testing. A 3-module starter (Sales + Inventory + Accounting) is faster to scope and deploy than a 12-module ERP-wide rollout.",
+    keyPoints: [
+      "Starter Baseline (3–4 Modules): Sales, Purchase, Inventory, and Accounting — rapid configuration, minimal change resistance, and fast go-live in 6–8 weeks with immediate inventory clarity.",
+      "Operations Suite (8–14 Modules): Adds Manufacturing MRP, Multi-level BOM, Quality Control, Maintenance CMMS, Barcode routing, and Subcontracting — requires deeper process engineering.",
+      "Phased Strategy Advantage: Deploying core operational modules in Phase 1 and scheduling HR, Payroll, CRM, or Project Accounting in Phase 2 guarantees seamless user adoption without production pauses.",
+    ],
+    impactCallout: {
+      label: "Starter Deployment",
+      value: "6 – 8 Wks",
+      subtext: "3-module core vs 12-module ERP",
+    },
+    comparison: {
+      leanTitle: "Starter Suite (3–4 Modules)",
+      leanDesc: "Sales, Inventory, Purchase & Accounting for rapid time-to-value and low operational friction.",
+      scaleTitle: "Full Plant MRP (8–14 Modules)",
+      scaleDesc: "End-to-end discrete production, automated work centers, QA gates & live job costing.",
+    },
+    discoveryAdvantage:
+      "We build a modular roadmap in Week 1 so you launch high-value operational fixes first without ERP bloat.",
+  },
+  {
+    id: "lever-custom-dev",
+    number: "03",
+    title: "Custom Development Scope vs. Standard Odoo",
+    category: "Custom Development",
+    badge: "Variable Cost Driver (~80% Standard / ~20% Custom)",
+    badgeType: "variable",
+    icon: "terminal",
+    summary:
+      "Standard Odoo handles ~80% of common requirements out of the box. The remaining 20% — custom workflows, vertical-specific reports, and unusual approval chains — drives most of the variable project cost.",
+    keyPoints: [
+      "Standard-First Discipline: We rigorously map your operational requirements against standard Odoo features and automated actions first before writing custom code, keeping your budget lean.",
+      "Targeted Custom Python: Reserved strictly for proprietary competitive edges (specialized cutting algorithms, non-standard yield formulas, or complex multi-tier approval matrices).",
+      "100% Upgrade-Safe: Every custom module is written by certified senior Python engineers using Odoo's official modular inheritance, ensuring painless upgrades to future Odoo versions.",
+    ],
+    impactCallout: {
+      label: "Out-of-the-Box Coverage",
+      value: "~80%",
+      subtext: "Standard Odoo core with 0 custom code",
+    },
+    comparison: {
+      leanTitle: "Standard Configuration (~80%)",
+      leanDesc: "Native workflows, automated triggers, and standard views with lowest maintenance overhead.",
+      scaleTitle: "Bespoke Extensions (~20%)",
+      scaleDesc: "Custom Python modules built for proprietary shop-floor algorithms and custom approval logic.",
+    },
+    discoveryAdvantage:
+      "Our gap analysis eliminates redundant custom code, cutting up to 35% off variable development quotes.",
+  },
+  {
+    id: "lever-integrations",
+    number: "04",
+    title: "Third-Party Integrations & Connectors",
+    category: "External Integrations",
+    badge: "1–3 Weeks Engineering per Connector",
+    badgeType: "integration",
+    icon: "hub",
+    summary:
+      "Each connector to a third-party system (CRM, e-commerce, payment, shipping, vertical SaaS, or plant hardware) is roughly 1–3 weeks of work depending on complexity and the third party's API quality.",
+    keyPoints: [
+      "Modern REST/GraphQL APIs: E-commerce platforms (Shopify, WooCommerce, Amazon UAE) and payment gateways (Stripe, Telr) typically take 1–2 weeks for bi-directional order and stock sync.",
+      "Legacy ERP & Finance Bridges: Bi-directional sync with Tally Prime or legacy custom software requires reconciliation rules and data transformation (~2 weeks).",
+      "Factory Floor Hardware: Weighbridges (RS-232 serial), machine cycle PLCs/SCADA, and thermal barcode printers require 2–3 weeks including on-site factory floor calibration.",
+    ],
+    impactCallout: {
+      label: "Connector Timeline",
+      value: "1 – 3 Wks",
+      subtext: "per third-party system or hardware",
+    },
+    comparison: {
+      leanTitle: "Modern REST / Webhook APIs",
+      leanDesc: "Standard JSON payloads, webhooks, and documented developer sandbox environments.",
+      scaleTitle: "Legacy & Hardware Protocols",
+      scaleDesc: "Serial COM ports, custom SOAP endpoints, batch flat files, or banking host-to-host.",
+    },
+    discoveryAdvantage:
+      "We test third-party API credentials, rate limits, and schemas in Week 1 to prevent mid-project blockers.",
+  },
+  {
+    id: "lever-data-migration",
+    number: "05",
+    title: "Data Migration Complexity & Hygiene",
+    category: "Data Readiness",
+    badge: "Effort Factor: 1–4 Weeks Data Prep",
+    badgeType: "data",
+    icon: "database",
+    summary:
+      "Migrating from a clean modern system is fast. Migrating from a legacy ERP with inconsistent data, duplicate item masters, custom fields, or no API costs more — usually 2–4 weeks of additional cleanup.",
+    keyPoints: [
+      "Master Data Deduplication: Cleaning up raw material codes, standardizing units of measure (UoMs), and organizing supplier pricing matrices.",
+      "Transactional History Depth: Migrating clean opening balance sheets and active open orders (fast, recommended) vs. reconstructing 3–5 years of closed journal entries.",
+      "Parallel Reconciliation Dry-Run: We run pre-cutover reconciliation tests comparing trial balance and inventory valuation down to the exact Dirham/fils.",
+    ],
+    impactCallout: {
+      label: "Data Cleanup Window",
+      value: "2 – 4 Wks",
+      subtext: "for complex or unnormalized legacy data",
+    },
+    comparison: {
+      leanTitle: "Clean Structured Master Data",
+      leanDesc: "Normalized CSV templates, verified opening balances, and deduplicated item catalogs.",
+      scaleTitle: "Fragmented Legacy Archives",
+      scaleDesc: "Multi-year spreadsheets, duplicate SKUs, and missing audit trails requiring deep scrubbing.",
+    },
+    discoveryAdvantage:
+      "We provide structured migration templates in Week 1 to streamline your team's cleanup effort and avoid delays.",
+  },
+  {
+    id: "lever-entities-countries",
+    number: "06",
+    title: "Number of Countries & Legal Entities",
+    category: "Multi-Entity Compliance",
+    badge: "+1–2 Weeks per Additional Legal Entity",
+    badgeType: "compliance",
+    icon: "domain",
+    summary:
+      "Multi-country rollouts add localization (statutory tax, e-invoicing, statutory reports, regional payroll) and consolidated reporting. Each additional legal entity adds roughly 1–2 weeks.",
+    keyPoints: [
+      "GCC & Statutory Localization: UAE FTA 5% VAT (with bilingual Arabic/English tax invoices and VAT 201), Saudi ZATCA Phase 2 e-invoicing, and local labor statutory rules.",
+      "Free Zones vs. Mainland: Handling inter-entity transfers between free zones (JAFZA, DAFZA, KIZAD) and mainland UAE with customs duty and customs bill tracking.",
+      "Inter-Company Automation: Automated SO-to-PO mirroring between subsidiaries, central purchasing, and consolidated multi-currency financial balance sheets (AED, SAR, USD, EUR, INR).",
+    ],
+    impactCallout: {
+      label: "Per Entity Addition",
+      value: "+1–2 Wks",
+      subtext: "for localized tax & inter-company setup",
+    },
+    comparison: {
+      leanTitle: "Single Domestic Entity",
+      leanDesc: "Unified chart of accounts, single VAT registration, and standard local warehouse rules.",
+      scaleTitle: "Multi-Company Holding Group",
+      scaleDesc: "Multi-entity consolidation, automated inter-company invoicing, and multi-tax zones.",
+    },
+    discoveryAdvantage:
+      "Our modular entity architecture lets you add future subsidiaries with zero financial restructuring.",
+  },
+  {
+    id: "lever-training-depth",
+    number: "07",
+    title: "Training Depth & Change Management",
+    category: "Change Management",
+    badge: "Role-Based Included • Advanced Scoped Separately",
+    badgeType: "training",
+    icon: "school",
+    summary:
+      "Standard role-based training is included in every Suvrin proposal. Train-the-trainer programs, recorded course libraries, and ongoing onboarding kits are scoped separately as modular add-ons.",
+    keyPoints: [
+      "Included Role-Based Training: Interactive hands-on training for department heads, warehouse workers, machine operators, and finance administrators.",
+      "Train-the-Trainer Programs: Specialized coaching for internal champions so your team can onboard future factory workers independently.",
+      "Custom Video Learning Library: Dedicated screen recordings covering your customized Odoo workflows, shop-floor tablet steps, and approval chains.",
+    ],
+    impactCallout: {
+      label: "Standard Training Included",
+      value: "100%",
+      subtext: "Role-based training in every quote",
+    },
+    comparison: {
+      leanTitle: "Role-Based Training (Included)",
+      leanDesc: "Hands-on live training sessions, SOP cheat sheets, and super-admin handover documentation.",
+      scaleTitle: "Enterprise Academy (Optional)",
+      scaleDesc: "Bilingual video LMS library, laminated shop-floor SOP cards, and ongoing onboarding playbooks.",
+    },
+    discoveryAdvantage:
+      "We run training in real operational sprints during UAT so users build muscle memory before cutover.",
+  },
+];
+
+// ------------------------------------------------------------------------------
+// 11. FREQUENTLY ASKED QUESTIONS (FAQS)
 // ------------------------------------------------------------------------------
 export interface FAQItem {
   q: string;
@@ -473,6 +709,10 @@ export const FAQS: FAQItem[] = [
   {
     q: "8. Do you offer physical on-site audits in Dubai?",
     a: "Yes. Our team is stationed at Living Marina Gate, Dubai Marina. We conduct physical walkthroughs and scoping sessions in DIC, JAFZA, KIZAD, Al Quoz, Sharjah, and across the Emirates.",
+  },
+  {
+    q: "9. How does fixed-scope pricing work and what affects our quote?",
+    a: "Every Suvrin implementation is 100% fixed-scope following our 1-week discovery. Your quote is determined by 7 objective levers: user license mix (Full vs. Odoo 20 Light Users), module footprint, custom Python scope (aiming for 80% standard), third-party integrations (1–3 weeks each), legacy data hygiene, number of legal entities, and training depth. Once scoped, your price is guaranteed with zero hourly billing overruns.",
   },
 ];
 

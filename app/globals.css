@@ -14,7 +14,8 @@
   --muted: #5B6575;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: #ffffff;
@@ -30,13 +31,28 @@ html {
   scroll-padding-top: 96px;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
   font-family: var(--font-inter), 'Inter', sans-serif;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
 
-p, span, div, li, a, button, label, input, select, textarea {
+p,
+span,
+div,
+li,
+a,
+button,
+label,
+input,
+select,
+textarea {
   font-family: var(--font-inter), 'Inter', sans-serif;
 }
 
@@ -49,7 +65,8 @@ p, span, div, li, a, button, label, input, select, textarea {
   grid-template-columns: repeat(4, 1fr);
   opacity: 0.5;
 }
-.grid-lines-overlay > div {
+
+.grid-lines-overlay>div {
   border-right: 1px solid rgba(0, 32, 152, 0.06);
 }
 
@@ -60,6 +77,7 @@ p, span, div, li, a, button, label, input, select, textarea {
   position: relative;
   border-radius: 2px;
 }
+
 .progress-thumb {
   position: absolute;
   width: 3px;
@@ -98,6 +116,7 @@ p, span, div, li, a, button, label, input, select, textarea {
   text-transform: uppercase;
   color: var(--blue);
 }
+
 .eyebrow.eyebrow-alert {
   color: #DC2626;
 }
@@ -117,6 +136,7 @@ p, span, div, li, a, button, label, input, select, textarea {
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: none;
 }
+
 .btn-primary:hover {
   background: var(--blue-bright);
   transform: translateY(-1px);
@@ -136,6 +156,7 @@ p, span, div, li, a, button, label, input, select, textarea {
   border-radius: 9999px;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
+
 .btn-secondary:hover {
   border-color: rgba(0, 32, 152, 0.35);
   background: transparent;
@@ -155,6 +176,7 @@ p, span, div, li, a, button, label, input, select, textarea {
   border-radius: 9999px;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
+
 .btn-whatsapp:hover {
   background: rgba(128, 176, 112, 0.2);
   border-color: var(--green-deep);
@@ -172,13 +194,16 @@ p, span, div, li, a, button, label, input, select, textarea {
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
 .field-input:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(0, 32, 152, 0.1);
 }
+
 .field-input::placeholder {
   color: #94A3B8;
 }
+
 select.field-input {
   background-color: #fff;
 }
@@ -192,13 +217,47 @@ select.field-input {
 }
 
 @keyframes softPulse {
-  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 32, 152, 0.35); }
-  50% { opacity: 0.75; transform: scale(0.92); box-shadow: 0 0 0 6px rgba(0, 32, 152, 0); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 32, 152, 0.35);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: scale(0.92);
+    box-shadow: 0 0 0 6px rgba(0, 32, 152, 0);
+  }
 }
 
 @keyframes floatOrb {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-12px) scale(1.03); }
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.03);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
 }
 
 .hero-orb {
@@ -215,6 +274,7 @@ select.field-input {
   line-height: 0;
   background: transparent !important;
 }
+
 .logo-link img {
   height: 40px;
   width: auto;
@@ -225,15 +285,28 @@ select.field-input {
   mix-blend-mode: normal;
   transition: opacity 0.2s ease;
 }
+
 @media (min-width: 480px) {
-  .logo-link img { height: 46px; max-width: min(220px, 45vw); }
+  .logo-link img {
+    height: 46px;
+    max-width: min(220px, 45vw);
+  }
 }
+
 @media (min-width: 640px) {
-  .logo-link img { height: 56px; max-width: 280px; }
+  .logo-link img {
+    height: 56px;
+    max-width: 280px;
+  }
 }
+
 @media (min-width: 768px) {
-  .logo-link img { height: 62px; max-width: 320px; }
+  .logo-link img {
+    height: 62px;
+    max-width: 320px;
+  }
 }
+
 .logo-link:hover img {
   opacity: 0.88;
 }
@@ -249,6 +322,7 @@ select.field-input {
   box-shadow: 0 1px 0 rgba(228, 233, 240, 0.9), 0 8px 24px rgba(20, 20, 20, 0.04);
   transition: box-shadow 0.25s ease;
 }
+
 #siteHeader.scrolled {
   box-shadow: 0 1px 0 var(--line), 0 12px 28px rgba(20, 20, 20, 0.07);
 }

@@ -13,14 +13,14 @@ export default function FAQ() {
   return (
     <section
       id="chapter-faq"
-      data-chapter="6"
+      data-chapter="7"
       data-title="FAQs"
       className="chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
         {/* Section Header (Left-aligned matching site flow) */}
         <div className="max-w-3xl mb-8 sm:mb-10 text-left">
-          <span className="eyebrow mb-2.5 inline-block">Clear Answers</span>
+          {/* <span className="eyebrow mb-2.5 inline-block">Clear Answers</span> */}
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink mb-3 leading-tight">
             Frequently Asked Questions
           </h2>
@@ -46,17 +46,15 @@ export default function FAQ() {
                 >
                   <span>{item.q}</span>
                   <span
-                    className={`material-symbols-outlined text-[20px] text-brand-blue transition-transform duration-300 shrink-0 ${
-                      isOpen ? "rotate-180" : "rotate-0"
-                    }`}
+                    className={`material-symbols-outlined text-[20px] text-brand-blue transition-transform duration-300 shrink-0 ${isOpen ? "rotate-180" : "rotate-0"
+                      }`}
                   >
                     expand_more
                   </span>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-350 ease-in-out ${
-                    isOpen ? "max-h-[500px] opacity-100 pt-2.5 sm:pt-3" : "max-h-0 opacity-0 pt-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-350 ease-in-out ${isOpen ? "max-h-[500px] opacity-100 pt-2.5 sm:pt-3" : "max-h-0 opacity-0 pt-0"
+                    }`}
                 >
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-4xl">{item.a}</p>
                 </div>

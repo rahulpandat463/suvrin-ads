@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { BookingProvider } from "@/components/booking/BookingProvider";
+import ConsultantBookingModal from "@/components/booking/ConsultantBookingModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,7 +47,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`relative min-h-screen text-brand-ink bg-white selection:bg-brand-blue selection:text-white font-body ${inter.className}`}>
-        {children}
+        <BookingProvider>
+          <ConsultantBookingModal />
+          {children}
+        </BookingProvider>
       </body>
     </html>
   );

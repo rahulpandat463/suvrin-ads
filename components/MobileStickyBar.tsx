@@ -1,12 +1,30 @@
+"use client";
+
 import React from "react";
 import { COMPANY_INFO } from "@/data";
+import { useBooking } from "@/components/booking/BookingProvider";
 
-export default function MobileStickyBar() {
+interface MobileStickyBarProps {
+  onOpenBooking?: () => void;
+}
+
+export default function MobileStickyBar({ onOpenBooking }: MobileStickyBarProps) {
+  const { openBooking } = useBooking();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onOpenBooking) {
+      onOpenBooking();
+    } else {
+      openBooking({ source: "mobile_bar" });
+    }
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-brand-line px-4 py-2.5 flex sm:hidden items-center gap-3 shadow-[0_-8px_24px_rgba(20,20,20,0.06)]">
       <a
         href={`tel:${COMPANY_INFO.phoneTel}`}
-        className="w-11 h-11 rounded-xl border border-brand-line text-brand-blue flex items-center justify-center shrink-0 bg-white"
+        className="w-11 h-11 rounded-xl border border-brand-line text-brand-blue flex items-center justify-center shrink-0 bg-white active:scale-95"
         aria-label="Call Dubai Desk"
       >
         <span className="material-symbols-outlined text-[20px]">call</span>
@@ -15,7 +33,7 @@ export default function MobileStickyBar() {
         href={COMPANY_INFO.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 min-h-[44px] px-3 rounded-xl bg-brand-green-deep text-white font-bold text-xs flex items-center justify-center gap-1.5"
+        className="flex-1 min-h-[44px] px-3 rounded-xl bg-brand-green-deep text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95"
       >
         <svg
           width="16"
@@ -29,13 +47,14 @@ export default function MobileStickyBar() {
         </svg>
         <span>WhatsApp</span>
       </a>
-      <a
-        href="#chapter-audit"
-        className="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-brand-blue text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1 shadow-md"
+      <button
+        type="button"
+        onClick={handleClick}
+        className="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-brand-blue text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
       >
-        <span>Book a Free Consultation</span>
-        <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
-      </a>
+        <span className="material-symbols-outlined text-[16px]">calendar_today</span>
+        <span>Book a Consultant</span>
+      </button>
     </div>
   );
 }

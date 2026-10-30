@@ -3,11 +3,13 @@ import Header from "@/components/Header";
 import ProgressRail from "@/components/ProgressRail";
 import Hero from "@/components/Hero";
 import AdvisoryPillars from "@/components/AdvisoryPillars";
+import TransformationComparison from "@/components/TransformationComparison";
 import PipelineFlow from "@/components/PipelineFlow";
 import Compliance from "@/components/Compliance";
 import WhatsIncluded from "@/components/WhatsIncluded";
 import StageOwnership from "@/components/StageOwnership";
 import TypicalTimeline from "@/components/TypicalTimeline";
+import PricingLevers from "@/components/PricingLevers";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import MobileStickyBar from "@/components/MobileStickyBar";
@@ -29,6 +31,9 @@ export default function Home() {
         {/* Foundation Pillars */}
         <AdvisoryPillars />
 
+        {/* Before vs After Transformation Comparison */}
+        <TransformationComparison />
+
         {/* Chapter 2: Connected Pipeline Flow */}
         <PipelineFlow />
 
@@ -44,7 +49,10 @@ export default function Home() {
         {/* Typical Implementation Timeline */}
         <TypicalTimeline />
 
-        {/* Chapter 6: FAQ Accordion */}
+        {/* Chapter 6: What Affects The Price (Pricing Levers) */}
+        <PricingLevers />
+
+        {/* Chapter 7: FAQ Accordion */}
         <FAQ />
       </main>
 
