@@ -8,7 +8,7 @@ export default function AdvisoryPillars() {
     <section className="py-10 sm:py-14 border-t border-b border-brand-line scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
         <div className="mb-8 max-w-2xl">
-          <span className="eyebrow mb-2">Gulf Advisory Foundation</span>
+          {/* <span className="eyebrow mb-2">Gulf Advisory Foundation</span> */}
           <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-brand-ink">
             ERP Implementation That Goes Beyond Installing Software
           </h2>

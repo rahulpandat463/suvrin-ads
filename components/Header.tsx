@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { COMPANY_INFO } from "@/data";
 
-export default function Header() {
+interface HeaderProps {
+  onOpenBooking?: () => void;
+}
+
+export default function Header({ onOpenBooking }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ export default function Header() {
 
         {/* Desktop Navigation & Actions */}
         <div className="hidden md:flex items-center gap-3 lg:gap-3.5">
-          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="btn-secondary h-10 px-4 text-xs">
+          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="btn-secondary h-10 px-4 text-xs font-semibold">
             <span className="material-symbols-outlined text-[17px] text-brand-blue">call</span>
             <span>{COMPANY_INFO.phoneDisplay}</span>
           </a>
@@ -42,7 +46,7 @@ export default function Header() {
             href={COMPANY_INFO.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-whatsapp h-10 px-4"
+            className="btn-whatsapp h-10 px-4 font-semibold"
           >
             <svg
               width="16"

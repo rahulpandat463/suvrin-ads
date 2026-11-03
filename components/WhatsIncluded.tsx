@@ -13,7 +13,7 @@ export default function WhatsIncluded() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-10 text-left">
-          <span className="eyebrow mb-2.5 inline-block">Fixed-Scope Delivery</span>
+          {/* <span className="eyebrow mb-2.5 inline-block">Fixed-Scope Delivery</span> */}
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink mb-3 leading-tight">
             What&apos;s Included in Your Implementation
           </h2>
@@ -66,7 +66,7 @@ export default function WhatsIncluded() {
           <div className="relative z-10">
             {/* Architecture Banner Header */}
             <div className="max-w-3xl mb-6">
-              <span className="eyebrow mb-2 inline-block">Module Map Architecture</span>
+              {/* <span className="eyebrow mb-2 inline-block">Module Map Architecture</span> */}
               <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-brand-ink mb-2">
                 One Database, Every Department
               </h3>
@@ -76,18 +76,18 @@ export default function WhatsIncluded() {
             </div>
 
             {/* Architecture Module Map Infographic Image */}
-            <div className="relative mt-6 rounded-2xl overflow-hidden border border-brand-line bg-white shadow-xs p-2 sm:p-4 group">
-              <Image
-                src="/what-include.png?v=2"
-                alt="Odoo Implementation Module Map - One Database, Every Department"
-                width={1600}
-                height={1080}
-                className="w-full h-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.005]"
-              />
+              <div className="relative mt-6 rounded-2xl overflow-hidden border border-brand-line bg-white shadow-xs group">
+                <Image
+                  src="/what-include.png?v=5"
+                  alt="Odoo Implementation Module Map - One Database, Every Department"
+                  width={1600}
+                  height={1080}
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.005]"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
