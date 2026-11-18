@@ -12,7 +12,7 @@ export default function Compliance() {
       data-title="UAE Compliance"
       className="chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           <div className="lg:col-span-7 surface-panel p-6 sm:p-8">
             <div className="mb-6">

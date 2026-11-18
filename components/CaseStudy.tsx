@@ -69,13 +69,13 @@ export default function CaseStudy() {
               <line stroke="#E4E9F0" strokeDasharray="3,3" strokeWidth="1" x1="0" x2="350" y1="130" y2="130"></line>
               <line stroke="#CBD5E1" strokeWidth="1" x1="0" x2="350" y1="160" y2="160"></line>
               <rect fill="#94A3B8" height="80" width="18" x="20" y="80" rx="2"></rect>
-              <rect fill="#002098" height="92" width="18" x="42" y="68" rx="2"></rect>
+              <rect fill="#0062fb" height="92" width="18" x="42" y="68" rx="2"></rect>
               <rect fill="#94A3B8" height="88" width="18" x="78" y="72" rx="2"></rect>
-              <rect fill="#002098" height="102" width="18" x="100" y="58" rx="2"></rect>
+              <rect fill="#0062fb" height="102" width="18" x="100" y="58" rx="2"></rect>
               <rect fill="#94A3B8" height="95" width="18" x="136" y="65" rx="2"></rect>
-              <rect fill="#002098" height="110" width="18" x="158" y="50" rx="2"></rect>
+              <rect fill="#0062fb" height="110" width="18" x="158" y="50" rx="2"></rect>
               <rect fill="#94A3B8" height="100" width="18" x="194" y="60" rx="2"></rect>
-              <rect fill="#002098" height="116" width="18" x="216" y="44" rx="2"></rect>
+              <rect fill="#0062fb" height="116" width="18" x="216" y="44" rx="2"></rect>
               <rect fill="#94A3B8" height="105" width="18" x="252" y="55" rx="2"></rect>
               <rect fill="#80B070" height="128" width="18" x="274" y="32" rx="2"></rect>
             </svg>
@@ -111,7 +111,7 @@ export default function CaseStudy() {
                     cy="50"
                     fill="none"
                     r="38"
-                    stroke="#002098"
+                    stroke="#0062fb"
                     strokeDasharray="238.7"
                     strokeDashoffset="65"
                     strokeLinecap="round"

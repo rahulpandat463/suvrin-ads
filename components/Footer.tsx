@@ -5,7 +5,7 @@ import { COMPANY_INFO } from "@/data";
 export default function Footer() {
   return (
     <footer className="py-12 border-t border-brand-line bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 text-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 text-sm">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
           <div className="md:col-span-6 space-y-4">
             <a href="#chapter-hero" className="logo-link inline-block">

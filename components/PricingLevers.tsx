@@ -20,7 +20,7 @@ export default function PricingLevers() {
       aria-labelledby="pricing-title"
       className="chapter-section relative py-8 sm:py-10 border-t border-brand-line scroll-mt-24 bg-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Header */}
         <div className="max-w-2xl mb-5 text-left">
           <h2

@@ -128,7 +128,7 @@ export default function TransformationComparison() {
       data-title="Transformation"
       className="chapter-section relative py-12 sm:py-16 lg:py-20 bg-slate-50/60 border-t border-brand-line scroll-mt-24"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-10 text-left">
           {/* <span className="eyebrow inline-block mb-1.5">Operational Benchmark</span> */}

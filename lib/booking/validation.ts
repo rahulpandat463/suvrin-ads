@@ -39,33 +39,32 @@ export function validateBookingPayload(data: Partial<BookingPayload>): Validatio
     return { valid: false, errors };
   }
 
-  // 2. Topic check
+  // 2. Topic check (defaults to "scoping" if omitted)
   const allowedTopics = BOOKING_CONFIG.topics.map((t) => t.id);
   if (!data.topic || !allowedTopics.includes(data.topic)) {
-    errors.topic = "Please select a consultation topic.";
+    data.topic = "scoping";
   }
 
-  // 3. Format check
+  // 3. Format check (defaults to "meet" if omitted)
   const allowedFormats = BOOKING_CONFIG.formats.map((f) => f.id);
   if (!data.format || !allowedFormats.includes(data.format)) {
-    errors.format = "Please select a meeting format.";
+    data.format = "meet";
   }
 
-  // 4. Slots check (between 1 and maxPreferredSlots)
+  // 4. Slots check (defaults to current date if omitted)
   if (!data.slots || !Array.isArray(data.slots) || data.slots.length === 0) {
-    errors.slots = "Please select at least 1 preferred date and time.";
+    const today = new Date().toISOString().split("T")[0];
+    data.slots = [{ date: today, time: "10:00" }];
   } else if (data.slots.length > BOOKING_CONFIG.maxPreferredSlots) {
     errors.slots = `You can select up to ${BOOKING_CONFIG.maxPreferredSlots} preferred slots.`;
   } else {
     // Validate each slot structure
     for (const s of data.slots) {
       if (!s.date || !/^\d{4}-\d{2}-\d{2}$/.test(s.date)) {
-        errors.slots = "Invalid date format.";
-        break;
+        s.date = new Date().toISOString().split("T")[0];
       }
       if (!s.time || !/^\d{1,2}:\d{2}$/.test(s.time)) {
-        errors.slots = "Invalid time format.";
-        break;
+        s.time = "10:00";
       }
     }
   }
