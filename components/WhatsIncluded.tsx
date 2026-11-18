@@ -1,72 +1,248 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import { DELIVERABLES } from "@/data";
+import { DELIVERABLES, COMPANY_INFO } from "@/data";
+import { useBooking } from "@/components/booking/BookingProvider";
+
+// Clean display titles matching the reference aesthetic
+const TAB_TITLES: Record<string, string> = {
+  "01": "One-Week Discovery",
+  "02": "Fixed-Scope Blueprint",
+  "03": "Module Configuration",
+  "04": "Custom Modules & Workflows",
+  "05": "Data Migration",
+  "06": "Third-Party Integrations",
+  "07": "Role-Based Training",
+  "08": "90-Day Hypercare",
+};
+
+// Elaborated second paragraphs for enterprise depth
+const PHASE_DESCRIPTIONS: Record<string, string> = {
+  "01": "Our certified ERP architects examine your actual shop floor routing, multi-warehouse movements, and accounting practices on-site in Dubai, Sharjah, or Abu Dhabi. We uncover hidden operational bottlenecks and legacy spreadsheet dependencies before a single line of code is configured.",
+  "02": "Every deliverable, milestone, integration boundary, and testing gate is locked into a fixed-scope contract. We eliminate unpredictable hourly billing so your leadership team has 100% budget certainty and guaranteed go-live deadlines from day one.",
+  "03": "We configure standard Odoo Enterprise apps to match your real-world factory flows — from multi-level Bills of Materials and work center run rates to automated minimum stock reordering rules and UAE FTA-compliant 5% VAT invoicing.",
+  "04": "When your industrial workflow requires specialized logic, our UAE engineering team writes clean Python modules adhering strictly to Odoo's official upgrade-safe guidelines, ensuring future version migrations are completely friction-free.",
+  "05": "We clean, deduplicate, and reconcile your legacy master data — vendors, item masters, opening inventory balances, and chart of accounts. Rigorous parallel runs ensure your Monday morning cutover happens with zero operational interruption.",
+  "06": "Connect Odoo directly with UAE bank feeds, shipping couriers, e-commerce storefronts, and factory hardware such as barcode scanners and weighing scales for real-time bidirectional data flow across your operations.",
+  "07": "Hands-on, department-specific training sessions conducted on-site or remotely in English and Arabic. We provide recorded video walkthroughs and standard operating procedures (SOPs) for continuous onboarding of new team members.",
+  "08": "Direct access to our Dubai Marina engineering desk with an 18-minute average first-response time. We sit with your finance team through the crucial first month-end closing, guaranteeing total system and operational stability.",
+};
+
+// Scope highlights matching the existing deliverables
+const SCOPE_DETAILS: Record<string, string[]> = {
+  "01": [
+    "Full operational process mapping across sales, inventory & production",
+    "Current ERP / spreadsheet audit and architecture gap analysis",
+    "Pre-emptive risk register and legacy data complexity assessment",
+    "Standalone written diagnostic report — yours to keep regardless of next steps",
+  ],
+  "02": [
+    "Comprehensive module architecture map tailored to UAE regulations",
+    "Third-party integration roadmap and API connector list",
+    "Custom Python development scope and technical specification document",
+    "100% fixed-scope, fixed-price quote with zero hourly overruns",
+  ],
+  "03": [
+    "Core Odoo Enterprise configuration (Sales, Purchase, Inventory, MRP)",
+    "Shop floor routing, work centers, and multi-level Bills of Materials (BOM)",
+    "Automated min/max procurement rules and approval hierarchies",
+    "Multi-currency UAE accounting with standard financial charts",
+  ],
+  "04": [
+    "Bespoke Python modules written to official Odoo upgrade-safe patterns",
+    "Automated workflow triggers, notifications, and custom status pipelines",
+    "Custom bilingual PDF reports (tax invoices, packing slips, job cards)",
+    "Shop floor touchscreen tablet interfaces for machine operators",
+  ],
+  "05": [
+    "Master data extraction, cleansing, and deduplication (vendors, items, customers)",
+    "Multi-warehouse opening inventory reconciliation with batch/lot tracking",
+    "Opening trial balance and general ledger balance sheet cutover",
+    "Parallel dry-run testing ensuring zero Monday morning downtime",
+  ],
+  "06": [
+    "Two-way REST / JSON-RPC connectors to UAE bank feeds and payment gateways",
+    "Automated shipping and courier API integrations with live AWB generation",
+    "E-commerce bi-directional stock synchronization (Shopify, Amazon, WooCommerce)",
+    "Factory floor digital scale and hardware barcode scanner integration",
+  ],
+  "07": [
+    "Role-based hands-on training for operators, super-admins, and finance teams",
+    "Recorded video walkthroughs and step-by-step Standard Operating Procedures (SOPs)",
+    "Live UAT sandbox dry-runs with your actual transaction data",
+    "Permanent onboarding documentation playbook for your future hires",
+  ],
+  "08": [
+    "18-minute average first-response time during GCC business hours",
+    "Hands-on technical presence for your finance team's critical first month-end closing",
+    "Direct Dubai Marina engineering desk with rapid on-site factory visits",
+    "Seamless handoff to optional SLA retainer or on-demand support",
+  ],
+};
 
 export default function WhatsIncluded() {
+  const [activeNumber, setActiveNumber] = useState<string>("01");
+  const { openBooking } = useBooking();
+
+  const currentItem =
+    DELIVERABLES.find((item) => item.number === activeNumber) || DELIVERABLES[0];
+
+  const displayTitle = TAB_TITLES[currentItem.number] || currentItem.title;
+  const secondParagraph = PHASE_DESCRIPTIONS[currentItem.number] || "";
+  const highlights = SCOPE_DETAILS[currentItem.number] || [];
+
   return (
     <section
       id="chapter-included"
-      data-chapter="4"
-      data-title="What's Included"
-      className="chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
+      className="relative py-12 sm:py-16 md:py-20 bg-white border-t border-brand-line scroll-mt-24"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header */}
-        <div className="max-w-3xl mb-8 sm:mb-10 text-left">
-          {/* <span className="eyebrow mb-2.5 inline-block">Fixed-Scope Delivery</span> */}
-          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink mb-3 leading-tight">
-            What&apos;s Included in Your Implementation
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            Everything your business needs for a seamless Odoo ERP go-live — from initial plant discovery to 90-day post-launch hypercare, with zero hourly billing surprises.
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-10 sm:mb-12">
+          <div className="lg:col-span-7 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-blue font-heading text-[11px] font-extrabold uppercase tracking-wider mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse"></span>
+              Fixed-Scope Delivery
+            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink leading-tight">
+              What&apos;s Included in Your Implementation
+            </h2>
+          </div>
+          <div className="lg:col-span-5 text-left lg:text-right">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              Everything your business needs for a seamless Odoo ERP go-live — from initial plant discovery to 90-day post-launch hypercare, with zero hourly billing surprises.
+            </p>
+          </div>
         </div>
 
-        {/* 8 Deliverable Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-8 sm:mb-10">
-          {DELIVERABLES.map((item) => (
-            <div
-              key={item.number}
-              className="surface-panel p-5 sm:p-6 rounded-2xl border border-brand-line hover:border-brand-blue/40 transition-all duration-300 flex flex-col justify-between group hover:shadow-md"
-            >
-              <div>
-                {/* Number & Icon Header */}
-                <div className="flex items-center justify-between gap-2 mb-3.5">
-                  <span className="font-mono text-xs font-bold text-brand-blue bg-blue-50/80 px-2.5 py-1 rounded-md border border-blue-100">
-                    Phase {item.number}
+        {/* 2-Column Split: Clean Left Vertical Nav + Elegant Right Card (Mirrors Reference Exactly) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-12">
+          {/* Left Column: Clean Tab List without bulky wrapper box */}
+          <div className="lg:col-span-5 flex flex-col gap-1">
+            {DELIVERABLES.map((item) => {
+              const isActive = activeNumber === item.number;
+              const title = TAB_TITLES[item.number] || item.title;
+              return (
+                <button
+                  key={item.number}
+                  type="button"
+                  onClick={() => setActiveNumber(item.number)}
+                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${
+                    isActive
+                      ? "bg-brand-blue !text-white shadow-sm font-bold"
+                      : "text-slate-800 hover:bg-brand-blue hover:!text-white font-medium"
+                  }`}
+                  style={isActive ? { color: "#ffffff" } : undefined}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  <span
+                    className={`truncate transition-colors ${
+                      isActive ? "!text-white" : "group-hover:!text-white"
+                    }`}
+                    style={isActive ? { color: "#ffffff" } : undefined}
+                  >
+                    {title}
                   </span>
-                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-brand-line flex items-center justify-center text-slate-700 group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue transition-all duration-300">
-                    <span className="material-symbols-outlined text-[19px]">{item.icon}</span>
-                  </div>
-                </div>
+                  <span
+                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${
+                      isActive
+                        ? "!text-white translate-x-0.5"
+                        : "text-slate-400 group-hover:!text-white group-hover:translate-x-0.5"
+                    }`}
+                    style={isActive ? { color: "#ffffff" } : undefined}
+                  >
+                    chevron_right
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-                {/* Title & Desc */}
-                <h3 className="font-heading text-sm sm:text-base font-bold text-brand-ink group-hover:text-brand-blue transition-colors mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                  {item.desc}
+          {/* Right Column: Sleek Card with Clean Typography & Proportions */}
+          <div className="lg:col-span-7">
+            <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 sm:p-8 md:p-9 text-left relative overflow-hidden shadow-xs">
+              {/* Subtle Decorative Curve in Bottom Right (matching reference style) */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full border-[16px] border-blue-50/80 opacity-70"
+              />
+
+              {/* Title */}
+              <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-brand-ink mb-4 leading-tight">
+                {displayTitle}
+              </h3>
+
+              {/* Core Description Paragraph 1 */}
+              <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed mb-4">
+                {currentItem.desc}
+              </p>
+
+              {/* Strategic Context Paragraph 2 */}
+              {secondParagraph && (
+                <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed mb-6">
+                  {secondParagraph}
                 </p>
+              )}
+
+              {/* Scope Checklist in Compact Clean 2-Column Grid */}
+              <div className="pt-4 border-t border-slate-100 mb-6">
+                <div className="text-[11px] font-heading font-extrabold uppercase tracking-wider text-slate-400 mb-3">
+                  Scope Highlights
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {highlights.map((point, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <span className="material-symbols-outlined text-brand-blue text-[17px] shrink-0 mt-0.5">
+                        check_circle
+                      </span>
+                      <span className="text-xs sm:text-[13px] text-slate-600 leading-snug">
+                        {point}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Bottom Deliverable Tag */}
-              <div className="pt-3.5 mt-4 border-t border-brand-line/60 flex items-center gap-1.5 text-[11px] font-semibold text-slate-600">
-                <span className="material-symbols-outlined text-[14px] text-emerald-600">check_circle</span>
-                <span>{item.highlight}</span>
+              {/* Bottom Actions matching Reference (Primary Button + Secondary Chat) */}
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-4 relative z-10">
+                <button
+                  type="button"
+                  onClick={() =>
+                    openBooking({
+                      source: "whats_included_tab",
+                      topic: displayTitle,
+                    })
+                  }
+                  className="bg-brand-blue hover:bg-blue-900 text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-lg shadow-xs hover:shadow transition-all cursor-pointer"
+                >
+                  Schedule Scoping Review
+                </button>
+
+                <a
+                  href={COMPANY_INFO.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-brand-blue flex items-center gap-1.5 transition-colors py-2"
+                >
+                  <span className="material-symbols-outlined text-[17px] text-emerald-600">
+                    chat
+                  </span>
+                  <span>Ask an ERP Architect</span>
+                </a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Single Database Architecture Panel */}
         <div className="surface-panel rounded-2xl p-6 sm:p-8 border border-brand-line/80 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-100/40 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
-
           <div className="relative z-10">
             {/* Architecture Banner Header */}
-            <div className="max-w-3xl mb-6">
-              {/* <span className="eyebrow mb-2 inline-block">Module Map Architecture</span> */}
+            <div className="max-w-3xl mb-6 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-blue font-heading text-[11px] font-extrabold uppercase tracking-wider mb-2.5">
+                Module Map Architecture
+              </div>
               <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-brand-ink mb-2">
                 One Database, Every Department
               </h3>
@@ -76,18 +252,18 @@ export default function WhatsIncluded() {
             </div>
 
             {/* Architecture Module Map Infographic Image */}
-              <div className="relative mt-6 rounded-2xl overflow-hidden border border-brand-line bg-white shadow-xs group">
-                <Image
-                  src="/what-include.png?v=5"
-                  alt="Odoo Implementation Module Map - One Database, Every Department"
-                  width={1600}
-                  height={1080}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.005]"
-                />
-              </div>
+            <div className="relative mt-6 rounded-2xl overflow-hidden border border-brand-line bg-white shadow-xs group">
+              <Image
+                src="/what-include.png?v=5"
+                alt="Odoo Implementation Module Map - One Database, Every Department"
+                width={1600}
+                height={1080}
+                className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.005]"
+              />
             </div>
           </div>
         </div>
+      </div>
     </section>
   );
 }

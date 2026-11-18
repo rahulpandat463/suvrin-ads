@@ -1,33 +1,204 @@
-import React from "react";
-import { ADVISORY_PILLARS } from "@/data";
+"use client";
+
+import React, { useState } from "react";
+import { ADVISORY_PILLARS, COMPANY_INFO } from "@/data";
+import { useBooking } from "@/components/booking/BookingProvider";
+
+const PILLAR_DETAILS: Record<
+  string,
+  {
+    extended: string;
+    highlights: string[];
+  }
+> = {
+  "01 / CONSULTING": {
+    extended:
+      "We walk your production lines and examine operational bottlenecks across Dubai, Sharjah, and Abu Dhabi plants before writing any code. Every workflow is audited against your physical materials, machine cycle times, scrap percentages, and multi-currency supply chain constraints.",
+    highlights: [
+      "Shop floor routing audit",
+      "Scrap & wastage reduction",
+      "Multi-warehouse analysis",
+      "Risk & bottleneck assessment",
+    ],
+  },
+  "02 / MASTERY": {
+    extended:
+      "Engineered strictly to Odoo upgrade-safe standards with custom Python automation that preserves full compatibility for future versions. We build clean modular extensions without modifying core Odoo code, ensuring security and seamless upgrades.",
+    highlights: [
+      "Upgrade-safe Python architecture",
+      "Automated PO trigger rules",
+      "Bilingual Arabic/English reports",
+      "Custom approval matrices",
+    ],
+  },
+  "03 / DEPTH": {
+    extended:
+      "Designed for multi-level Bills of Materials, shop floor touchscreen operator tablets, and end-to-end heat number/lot traceability. Empower machine operators with intuitive interfaces that log real-time machine run-times, downtime causes, and scrap on the fly.",
+    highlights: [
+      "Multi-level BOM routing",
+      "Shop floor operator tablets",
+      "Batch & serial traceability",
+      "Live WIP-to-COGS valuation",
+    ],
+  },
+  "04 / PRESENCE": {
+    extended:
+      "Direct Dubai Marina engineering team providing physical on-site presence across JAFZA, Dubai Industrial City, KIZAD, and Al Quoz for discovery, hands-on staff training, and first month-end closing support.",
+    highlights: [
+      "Dubai Marina based team",
+      "Rapid on-site factory visits",
+      "First month-end closing support",
+      "Strict UAE NDA & confidentiality",
+    ],
+  },
+};
 
 export default function AdvisoryPillars() {
-  const pillars = ADVISORY_PILLARS;
+  const [activeNum, setActiveNum] = useState<string>(ADVISORY_PILLARS[0].num);
+  const { openBooking } = useBooking();
+
+  const currentPillar =
+    ADVISORY_PILLARS.find((p) => p.num === activeNum) || ADVISORY_PILLARS[0];
+
+  const details =
+    PILLAR_DETAILS[currentPillar.num] || PILLAR_DETAILS["01 / CONSULTING"];
 
   return (
-    <section className="py-10 sm:py-14 border-t border-b border-brand-line scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
-        <div className="mb-8 max-w-2xl">
-          {/* <span className="eyebrow mb-2">Gulf Advisory Foundation</span> */}
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-brand-ink">
-            ERP Implementation That Goes Beyond Installing Software
-          </h2>
+    <section className="py-14 sm:py-18 lg:py-22 bg-white border-t border-slate-100 scroll-mt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
+        
+        {/* Section Header: Perfectly Balanced Alignment */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12 text-left">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-blue font-heading text-[11px] font-bold uppercase tracking-wider mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse"></span>
+              Gulf Advisory Foundation
+            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-slate-900 leading-[1.22] tracking-tight">
+              ERP Implementation That Goes Beyond Installing Software
+            </h2>
+          </div>
+          <p className="max-w-md text-sm sm:text-base text-slate-600 leading-relaxed lg:text-right pb-1">
+            We audit your real-world factory routing, scrap rates, and multi-currency supply chain before configuring Odoo.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {pillars.map((item, idx) => (
-            <div key={idx} className={`border-t-2 ${item.borderColor} pt-4`}>
-              <span className={`font-heading text-[11px] ${item.numColor} font-bold block mb-1.5 tracking-wider`}>
-                {item.num}
-              </span>
-              <h3 className="font-heading text-base font-bold text-brand-ink mb-2">
-                {item.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                {item.desc}
-              </p>
+        {/* 2-Column Split: Symmetrical Height & Balanced Padding */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch">
+          
+          {/* Left Column: 4 Clean Tabs Balanced Vertically to Match Right Card */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-3 w-full">
+            {ADVISORY_PILLARS.map((item, idx) => {
+              const isActive = activeNum === item.num;
+              const stepNumber = String(idx + 1).padStart(2, "0");
+
+              return (
+                <button
+                  key={item.num}
+                  type="button"
+                  onClick={() => setActiveNum(item.num)}
+                  className={`w-full p-4 sm:p-5 rounded-xl text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 border flex-1 ${
+                    isActive
+                      ? "bg-brand-blue border-brand-blue text-white shadow-sm font-semibold"
+                      : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-slate-300"
+                  }`}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <span
+                      className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {stepNumber}
+                    </span>
+                    <span className="truncate text-sm sm:text-[15px]">{item.title}</span>
+                  </div>
+
+                  <span
+                    className={`material-symbols-outlined text-[18px] shrink-0 transition-transform ${
+                      isActive
+                        ? "text-white translate-x-0.5"
+                        : "text-slate-400 group-hover:text-brand-blue group-hover:translate-x-0.5"
+                    }`}
+                  >
+                    chevron_right
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Clean, Spacious Detail Card */}
+          <div className="lg:col-span-7 flex flex-col w-full">
+            <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 md:p-9 text-left relative overflow-hidden shadow-xs flex flex-col justify-between h-full">
+              
+              {/* Subtle ambient glow in bottom-right corner */}
+              <div className="absolute -bottom-14 -right-14 w-56 h-56 bg-blue-50/50 rounded-full blur-3xl pointer-events-none"></div>
+
+              <div className="relative z-10">
+                {/* Title */}
+                <h3 className="font-heading text-2xl sm:text-[26px] font-bold text-slate-900 mb-3 leading-tight">
+                  {currentPillar.title}
+                </h3>
+
+                {/* Primary Description */}
+                <p className="text-sm sm:text-[15px] text-slate-800 leading-relaxed mb-3 font-medium">
+                  {currentPillar.desc}
+                </p>
+
+                {/* Extended Details */}
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  {details.extended}
+                </p>
+
+                {/* Scope Highlights (Clean 2-Column Badges) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
+                  {details.highlights.map((point, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 text-xs sm:text-[13px] text-slate-800 font-medium"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-blue shrink-0"></span>
+                      <span className="truncate">{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Button Row */}
+              <div className="relative z-10 pt-2 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    openBooking({
+                      source: "advisory_pillar_tab",
+                      topic: currentPillar.title,
+                    })
+                  }
+                  className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow transition-all cursor-pointer inline-flex items-center justify-center"
+                >
+                  Schedule a Consultation
+                </button>
+
+                <a
+                  href={COMPANY_INFO.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-brand-blue flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[16px] text-emerald-600">
+                    chat
+                  </span>
+                  <span>Ask an Architect</span>
+                </a>
+              </div>
+
             </div>
-          ))}
+          </div>
+
         </div>
       </div>
     </section>

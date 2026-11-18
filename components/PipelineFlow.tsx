@@ -103,7 +103,7 @@ export default function PipelineFlow() {
         className="pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-brand-blue/5 blur-3xl"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl text-left mb-10">
           <h2

@@ -104,7 +104,7 @@ export default function TypicalTimeline() {
         className="pointer-events-none absolute -bottom-24 left-0 h-72 w-72 rounded-full bg-brand-blue/5 blur-3xl"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-10 text-left">
           <h2

@@ -9,7 +9,7 @@ export default function StageOwnership() {
       data-title="Ownership"
       className="chapter-section relative py-10 sm:py-14 md:py-16 border-t border-brand-line scroll-mt-24 bg-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:pl-24 xl:pl-24 lg:pr-8 xl:pr-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-10 text-left">
           {/* <span className="eyebrow mb-2 inline-block">Clear Mutual Accountability</span> */}
