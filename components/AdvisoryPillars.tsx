@@ -55,7 +55,6 @@ const PILLAR_DETAILS: Record<
 
 export default function AdvisoryPillars() {
   const [activeNum, setActiveNum] = useState<string>(ADVISORY_PILLARS[0].num);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { openBooking } = useBooking();
 
   const currentPillar =
@@ -80,90 +79,127 @@ export default function AdvisoryPillars() {
           </p>
         </div>
 
-        {/* 2-Column Split: Clean Compact Tabs / Dropdown + Detailed Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-start">
+        {/* --------------------------------------------------------------------- */}
+        {/* MOBILE VIEW (< lg): Accordion ("People Also Ask" Style)              */}
+        {/* All 4 points visible, tapping any expands its content directly below  */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="lg:hidden flex flex-col gap-3 w-full">
+          {ADVISORY_PILLARS.map((item, idx) => {
+            const isOpen = activeNum === item.num;
+            const stepNumber = String(idx + 1).padStart(2, "0");
+            const itemDetails = PILLAR_DETAILS[item.num] || PILLAR_DETAILS["01 / CONSULTING"];
 
-          {/* Mobile View: Clean Interactive Dropdown Selector */}
-          <div className="lg:hidden w-full relative">
-            <label className="block text-xs font-heading font-bold text-slate-500 uppercase tracking-wider mb-2">
-              Select Advisory Pillar:
-            </label>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#83B773] text-slate-900 font-heading font-bold flex items-center justify-between gap-3 shadow-xs text-left cursor-pointer hover:border-[#72a363] transition-all"
-                aria-expanded={isDropdownOpen}
+            return (
+              <div
+                key={item.num}
+                className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? "border-[#83B773] shadow-sm bg-white"
+                    : "border-slate-200 bg-white hover:border-slate-300"
+                }`}
               >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#83B773] text-white shrink-0">
-                    {String(ADVISORY_PILLARS.findIndex((p) => p.num === activeNum) + 1).padStart(2, "0")}
-                  </span>
-                  <span className="truncate text-sm sm:text-base text-slate-900 font-bold">
-                    {currentPillar.title}
-                  </span>
-                </div>
-                <span
-                  className={`material-symbols-outlined text-[24px] text-[#83B773] transition-transform duration-200 shrink-0 ${isDropdownOpen ? "rotate-180" : ""
-                    }`}
+                {/* Accordion Header / Trigger Button */}
+                <button
+                  type="button"
+                  onClick={() => setActiveNum(isOpen ? "" : item.num)}
+                  className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${
+                    isOpen
+                      ? "bg-[#83B773] text-white font-bold"
+                      : "bg-white hover:bg-slate-50 text-slate-800 font-medium"
+                  }`}
+                  aria-expanded={isOpen}
                 >
-                  expand_more
-                </span>
-              </button>
-
-              {/* Dropdown Options List */}
-              {isDropdownOpen && (
-                <>
-                  <div
-                    className="fixed inset-0 z-30"
-                    onClick={() => setIsDropdownOpen(false)}
-                    aria-hidden="true"
-                  />
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden z-40 py-1 divide-y divide-slate-100">
-                    {ADVISORY_PILLARS.map((item, idx) => {
-                      const isActive = activeNum === item.num;
-                      const stepNumber = String(idx + 1).padStart(2, "0");
-
-                      return (
-                        <button
-                          key={item.num}
-                          type="button"
-                          onClick={() => {
-                            setActiveNum(item.num);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${isActive
-                            ? "bg-[#83B773]/15 text-[#2e5225] font-bold"
-                            : "text-slate-800 hover:bg-slate-50 font-medium"
-                            }`}
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <span
-                              className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${isActive
-                                ? "bg-[#83B773] text-white"
-                                : "bg-slate-100 text-slate-600"
-                                }`}
-                            >
-                              {stepNumber}
-                            </span>
-                            <span className="truncate text-sm">{item.title}</span>
-                          </div>
-                          {isActive && (
-                            <span className="material-symbols-outlined text-[20px] text-[#83B773] shrink-0 font-bold">
-                              check
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span
+                      className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                        isOpen
+                          ? "bg-white/25 text-white"
+                          : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {stepNumber}
+                    </span>
+                    <span className="truncate text-sm sm:text-base font-heading">
+                      {item.title}
+                    </span>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
 
-          {/* Desktop Left Column: 4 Sleek, Compact Tabs with Controlled Height */}
-          <div className="hidden lg:flex lg:col-span-5 flex-col gap-3 w-full">
+                  <span
+                    className={`material-symbols-outlined text-[22px] shrink-0 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-white" : "text-slate-400"
+                    }`}
+                  >
+                    keyboard_arrow_down
+                  </span>
+                </button>
+
+                {/* Accordion Body: Content opens directly underneath */}
+                {isOpen && (
+                  <div className="p-4 sm:p-5 bg-white border-t border-slate-100 text-left animate-in fade-in duration-200">
+                    {/* Primary Description */}
+                    <p className="text-xs sm:text-sm text-slate-800 leading-relaxed mb-2.5 font-medium">
+                      {item.desc}
+                    </p>
+
+                    {/* Extended Details */}
+                    <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                      {itemDetails.extended}
+                    </p>
+
+                    {/* Scope Highlights Badges */}
+                    <div className="grid grid-cols-1 gap-2 mb-5">
+                      {itemDetails.highlights.map((point, hIdx) => (
+                        <div
+                          key={hIdx}
+                          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-100 text-xs text-slate-800 font-medium"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] shrink-0"></span>
+                          <span className="truncate">{point}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action Row */}
+                    <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-100">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openBooking({
+                            source: "advisory_pillar_accordion",
+                            topic: item.title,
+                          })
+                        }
+                        className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-xs px-4 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer"
+                      >
+                        Schedule a Consultation
+                      </button>
+
+                      <a
+                        href={COMPANY_INFO.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-semibold text-slate-600 hover:text-[#3b6630] flex items-center gap-1 py-1"
+                      >
+                        <span className="material-symbols-outlined text-[15px] text-emerald-600">
+                          chat
+                        </span>
+                        <span>Ask an Architect</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* DESKTOP VIEW (lg+): 100% UNTOUCHED (Tabs on left, Card on right)      */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-10 items-start">
+
+          {/* Left Column: All 4 Menu Items Shown on Desktop */}
+          <div className="col-span-5 flex flex-col gap-2.5 sm:gap-3 w-full">
             {ADVISORY_PILLARS.map((item, idx) => {
               const isActive = activeNum === item.num;
               const stepNumber = String(idx + 1).padStart(2, "0");
@@ -205,7 +241,7 @@ export default function AdvisoryPillars() {
           </div>
 
           {/* Right Column: Clean, Spacious Detail Card */}
-          <div className="lg:col-span-7 flex flex-col w-full">
+          <div className="col-span-7 flex flex-col w-full">
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 md:p-9 text-left relative overflow-hidden shadow-xs flex flex-col justify-between">
 
               {/* Subtle ambient glow in bottom-right corner */}
