@@ -24,8 +24,8 @@ export default function OdooSaaSToolkit() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
 
-          {/* Left Column: UI Mockup matching Ksolves reference layout */}
-          <div className="lg:col-span-6 w-full">
+          {/* Left Column: UI Mockup (Hidden on mobile, visible on desktop lg+) */}
+          <div className="hidden lg:block lg:col-span-6 w-full">
             <div className="relative rounded-3xl bg-gradient-to-br from-[#f2f8f0] via-[#f7faf5] to-[#eef4fc] p-4 sm:p-6 md:p-8 pt-8 sm:pt-9 border border-[#80B070]/30 shadow-sm flex flex-col justify-center min-h-[420px]">
 
               {/* Ambient blur glows in Suvrin Green & Blue */}

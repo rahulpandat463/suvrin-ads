@@ -15,7 +15,7 @@ export default function FAQ() {
       id="chapter-faq"
       data-chapter="7"
       data-title="FAQs"
-      className="chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
+      className="hidden md:block chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         {/* Section Header (Left-aligned matching site flow) */}

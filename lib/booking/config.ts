@@ -25,7 +25,7 @@ export const BOOKING_CONFIG = {
   slots: ["10:00", "11:00", "11:30", "14:00", "15:00", "16:00", "17:00"],
   maxPreferredSlots: 3,
   confirmWithinText: "2 business hours",
-  whatsappNumber: COMPANY_INFO.whatsappNumber || "919911083904",
+  whatsappNumber: COMPANY_INFO.whatsappNumber || "919560455637",
   holidays: [
     // UAE Public Holidays (YYYY-MM-DD format)
   ] as string[],

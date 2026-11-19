@@ -55,6 +55,7 @@ const PILLAR_DETAILS: Record<
 
 export default function AdvisoryPillars() {
   const [activeNum, setActiveNum] = useState<string>(ADVISORY_PILLARS[0].num);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { openBooking } = useBooking();
 
   const currentPillar =
@@ -70,10 +71,6 @@ export default function AdvisoryPillars() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12 text-left">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#83B773]/10 border border-[#83B773]/30 text-[#3b6630] font-heading text-[11px] font-bold uppercase tracking-wider mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] animate-pulse"></span>
-              Gulf Advisory Foundation
-            </div>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-slate-900 leading-[1.22] tracking-tight">
               ERP Implementation That Goes Beyond Installing Software
             </h2>
@@ -83,11 +80,90 @@ export default function AdvisoryPillars() {
           </p>
         </div>
 
-        {/* 2-Column Split: Clean Compact Tabs + Detailed Card */}
+        {/* 2-Column Split: Clean Compact Tabs / Dropdown + Detailed Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-start">
 
-          {/* Left Column: 4 Sleek, Compact Tabs with Controlled Height */}
-          <div className="lg:col-span-5 flex flex-col gap-3 w-full">
+          {/* Mobile View: Clean Interactive Dropdown Selector */}
+          <div className="lg:hidden w-full relative">
+            <label className="block text-xs font-heading font-bold text-slate-500 uppercase tracking-wider mb-2">
+              Select Advisory Pillar:
+            </label>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#83B773] text-slate-900 font-heading font-bold flex items-center justify-between gap-3 shadow-xs text-left cursor-pointer hover:border-[#72a363] transition-all"
+                aria-expanded={isDropdownOpen}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#83B773] text-white shrink-0">
+                    {String(ADVISORY_PILLARS.findIndex((p) => p.num === activeNum) + 1).padStart(2, "0")}
+                  </span>
+                  <span className="truncate text-sm sm:text-base text-slate-900 font-bold">
+                    {currentPillar.title}
+                  </span>
+                </div>
+                <span
+                  className={`material-symbols-outlined text-[24px] text-[#83B773] transition-transform duration-200 shrink-0 ${isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                >
+                  expand_more
+                </span>
+              </button>
+
+              {/* Dropdown Options List */}
+              {isDropdownOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-30"
+                    onClick={() => setIsDropdownOpen(false)}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden z-40 py-1 divide-y divide-slate-100">
+                    {ADVISORY_PILLARS.map((item, idx) => {
+                      const isActive = activeNum === item.num;
+                      const stepNumber = String(idx + 1).padStart(2, "0");
+
+                      return (
+                        <button
+                          key={item.num}
+                          type="button"
+                          onClick={() => {
+                            setActiveNum(item.num);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${isActive
+                            ? "bg-[#83B773]/15 text-[#2e5225] font-bold"
+                            : "text-slate-800 hover:bg-slate-50 font-medium"
+                            }`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span
+                              className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${isActive
+                                ? "bg-[#83B773] text-white"
+                                : "bg-slate-100 text-slate-600"
+                                }`}
+                            >
+                              {stepNumber}
+                            </span>
+                            <span className="truncate text-sm">{item.title}</span>
+                          </div>
+                          {isActive && (
+                            <span className="material-symbols-outlined text-[20px] text-[#83B773] shrink-0 font-bold">
+                              check
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Left Column: 4 Sleek, Compact Tabs with Controlled Height */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col gap-3 w-full">
             {ADVISORY_PILLARS.map((item, idx) => {
               const isActive = activeNum === item.num;
               const stepNumber = String(idx + 1).padStart(2, "0");
@@ -98,16 +174,16 @@ export default function AdvisoryPillars() {
                   type="button"
                   onClick={() => setActiveNum(item.num)}
                   className={`w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 border group ${isActive
-                      ? "bg-[#83B773] border-[#83B773] text-white shadow-sm font-semibold"
-                      : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#83B773]/40"
+                    ? "bg-[#83B773] border-[#83B773] text-white shadow-sm font-semibold"
+                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#83B773]/40"
                     }`}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <span
                       className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${isActive
-                          ? "bg-white/25 text-white"
-                          : "bg-slate-100 text-slate-500"
+                        ? "bg-white/25 text-white"
+                        : "bg-slate-100 text-slate-500"
                         }`}
                     >
                       {stepNumber}
@@ -117,8 +193,8 @@ export default function AdvisoryPillars() {
 
                   <span
                     className={`material-symbols-outlined text-[18px] shrink-0 transition-transform ${isActive
-                        ? "text-white translate-x-0.5"
-                        : "text-slate-400 group-hover:text-[#83B773] group-hover:translate-x-0.5"
+                      ? "text-white translate-x-0.5"
+                      : "text-slate-400 group-hover:text-[#83B773] group-hover:translate-x-0.5"
                       }`}
                   >
                     chevron_right

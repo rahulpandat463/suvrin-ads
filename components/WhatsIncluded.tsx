@@ -83,6 +83,7 @@ const SCOPE_DETAILS: Record<string, string[]> = {
 
 export default function WhatsIncluded() {
   const [activeNumber, setActiveNumber] = useState<string>("01");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { openBooking } = useBooking();
 
   const currentItem =
@@ -116,10 +117,92 @@ export default function WhatsIncluded() {
           </div>
         </div>
 
-        {/* 2-Column Split: Clean Left Vertical Nav + Elegant Right Card (Mirrors Reference Exactly) */}
+        {/* 2-Column Split: Clean Left Vertical Nav / Mobile Dropdown + Elegant Right Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-12">
-          {/* Left Column: Clean Tab List without bulky wrapper box */}
-          <div className="lg:col-span-5 flex flex-col gap-1">
+          {/* Mobile View: Interactive Dropdown Selector */}
+          <div className="lg:hidden w-full relative">
+            <label className="block text-xs font-heading font-bold text-slate-500 uppercase tracking-wider mb-2">
+              Select Implementation Phase:
+            </label>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#83B773] text-slate-900 font-heading font-bold flex items-center justify-between gap-3 shadow-xs text-left cursor-pointer hover:border-[#72a363] transition-all"
+                aria-expanded={isDropdownOpen}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#83B773] text-white shrink-0">
+                    {currentItem.number}
+                  </span>
+                  <span className="truncate text-sm sm:text-base text-slate-900 font-bold">
+                    {displayTitle}
+                  </span>
+                </div>
+                <span
+                  className={`material-symbols-outlined text-[24px] text-[#83B773] transition-transform duration-200 shrink-0 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                >
+                  expand_more
+                </span>
+              </button>
+
+              {/* Dropdown Options List */}
+              {isDropdownOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-30"
+                    onClick={() => setIsDropdownOpen(false)}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden z-40 py-1 divide-y divide-slate-100 max-h-80 overflow-y-auto">
+                    {DELIVERABLES.map((item) => {
+                      const isActive = activeNumber === item.number;
+                      const title = TAB_TITLES[item.number] || item.title;
+
+                      return (
+                        <button
+                          key={item.number}
+                          type="button"
+                          onClick={() => {
+                            setActiveNumber(item.number);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${
+                            isActive
+                              ? "bg-[#83B773]/15 text-[#2e5225] font-bold"
+                              : "text-slate-800 hover:bg-slate-50 font-medium"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span
+                              className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                                isActive
+                                  ? "bg-[#83B773] text-white"
+                                  : "bg-slate-100 text-slate-600"
+                              }`}
+                            >
+                              {item.number}
+                            </span>
+                            <span className="truncate text-sm">{title}</span>
+                          </div>
+                          {isActive && (
+                            <span className="material-symbols-outlined text-[20px] text-[#83B773] shrink-0 font-bold">
+                              check
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Left Column: Clean Tab List without bulky wrapper box */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col gap-1">
             {DELIVERABLES.map((item) => {
               const isActive = activeNumber === item.number;
               const title = TAB_TITLES[item.number] || item.title;
@@ -128,25 +211,28 @@ export default function WhatsIncluded() {
                   key={item.number}
                   type="button"
                   onClick={() => setActiveNumber(item.number)}
-                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${isActive
+                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${
+                    isActive
                       ? "bg-[#83B773] !text-white shadow-sm font-bold"
                       : "text-slate-800 hover:bg-[#83B773] hover:!text-white font-medium"
-                    }`}
+                  }`}
                   style={isActive ? { color: "#ffffff" } : undefined}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <span
-                    className={`truncate transition-colors ${isActive ? "!text-white" : "group-hover:!text-white"
-                      }`}
+                    className={`truncate transition-colors ${
+                      isActive ? "!text-white" : "group-hover:!text-white"
+                    }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     {title}
                   </span>
                   <span
-                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${isActive
+                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${
+                      isActive
                         ? "!text-white translate-x-0.5"
                         : "text-slate-400 group-hover:!text-white group-hover:translate-x-0.5"
-                      }`}
+                    }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     chevron_right

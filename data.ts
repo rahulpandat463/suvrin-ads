@@ -24,8 +24,8 @@ export const COMPANY_INFO: CompanyContact = {
   phoneDisplay: "+971 501 359 238",
   phoneTel: "+971551120975",
   whatsappUrl:
-    "https://wa.me/919911083904?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Dubai",
-  whatsappNumber: "919911083904",
+    "https://wa.me/919560455637?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Dubai",
+  whatsappNumber: "919560455637",
   email: "sudeep@suvrin.com",
   address: "Living Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, UAE",
   legalName: "Suvrin Technologies / Maxcode Solutions LLC",

@@ -89,7 +89,7 @@ export default function ConsultantBookingModal() {
 
   if (!isOpen) return null;
 
-  const targetWhatsAppNumber = "919911083904";
+  const targetWhatsAppNumber = "919560455637";
 
   // Build WhatsApp message
   const getWhatsAppUrl = (data: {
@@ -255,11 +255,10 @@ export default function ConsultantBookingModal() {
                       message: "Full name must be at least 2 characters.",
                     },
                   })}
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
-                    errors.fullName
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${errors.fullName
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
-                  }`}
+                    }`}
                 />
                 {errors.fullName && (
                   <p className="text-xs text-rose-600 mt-1">
@@ -287,11 +286,10 @@ export default function ConsultantBookingModal() {
                       message: "Company name must be at least 2 characters.",
                     },
                   })}
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
-                    errors.companyName
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${errors.companyName
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
-                  }`}
+                    }`}
                 />
                 {errors.companyName && (
                   <p className="text-xs text-rose-600 mt-1">
@@ -319,11 +317,10 @@ export default function ConsultantBookingModal() {
                       message: "Please enter a valid email address.",
                     },
                   })}
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
-                    errors.businessEmail
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${errors.businessEmail
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
-                  }`}
+                    }`}
                 />
                 {errors.businessEmail && (
                   <p className="text-xs text-rose-600 mt-1">
@@ -341,11 +338,10 @@ export default function ConsultantBookingModal() {
                   WhatsApp / Mobile Number *
                 </label>
                 <div
-                  className={`flex rounded-lg border bg-white overflow-hidden transition-all ${
-                    errors.phoneRaw
+                  className={`flex rounded-lg border bg-white overflow-hidden transition-all ${errors.phoneRaw
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400 focus-within:border-[#2140A6] focus-within:ring-2 focus-within:ring-[#2140A6]/30"
-                  }`}
+                    }`}
                 >
                   <div className="bg-slate-50 border-r border-slate-200 px-3.5 py-2.5 flex items-center gap-1.5 shrink-0 text-slate-700 font-semibold text-sm select-none">
                     <span>🇦🇪</span>
