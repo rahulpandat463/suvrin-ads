@@ -4,10 +4,10 @@
 
 :root {
   --ink: #141414;
-  --blue: #0062fb;
-  --blue-bright: #1a75ff;
-  --blue-hover: #0052d6;
-  --green: #80B070;
+  --blue: #83B773;
+  --blue-bright: #a6d198;
+  --blue-hover: #7da970;
+  --green: #83B773;
   --green-deep: #5F9450;
   --mist: #F5F7FA;
   --line: #E4E9F0;
@@ -52,6 +52,7 @@ h6 {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -61,6 +62,7 @@ h6 {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0%);
   }

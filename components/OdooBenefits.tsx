@@ -20,7 +20,7 @@ export default function OdooBenefits() {
     <section className="py-16 sm:py-20 lg:py-24 bg-white border-t border-slate-100 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 items-stretch">
-          
+
           {/* Left Column: Clean Left Column with Perfectly Aligned Line Endings */}
           <div className="flex flex-col justify-between h-full text-left w-full">
             <div>
@@ -44,7 +44,7 @@ export default function OdooBenefits() {
               <button
                 type="button"
                 onClick={() => openBooking({ source: "odoo_benefits_cta" })}
-                className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm transition-colors cursor-pointer"
+                className="bg-[#83B773] hover:bg-[#7da970] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm transition-colors cursor-pointer"
               >
                 Get a Free Odoo Consultation
               </button>

@@ -1,10 +1,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { useBooking } from "./BookingProvider";
 import { BookingPayload } from "@/lib/booking/validation";
-import { BOOKING_CONFIG } from "@/lib/booking/config";
-import SuccessStep from "./steps/SuccessStep";
+
+interface BookingFormData {
+  fullName: string;
+  companyName: string;
+  businessEmail: string;
+  phoneRaw: string;
+}
 
 export default function ConsultantBookingModal() {
   const { isOpen, closeBooking, source } = useBooking();
@@ -12,21 +18,29 @@ export default function ConsultantBookingModal() {
   // Mode: "form" or "success"
   const [isSuccess, setIsSuccess] = useState(false);
   const [reference, setReference] = useState("");
-
-  // Form Fields (Fixed to UAE +971)
-  const countryPrefix = "+971";
-  const [fullName, setFullName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [businessEmail, setBusinessEmail] = useState("");
-  const [phoneRaw, setPhoneRaw] = useState("");
-
-  // Validation & Submission States
-  const [nameError, setNameError] = useState(false);
-  const [companyError, setCompanyError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{
+    fullName: string;
+    companyName: string;
+    businessEmail: string;
+    phone: string;
+  } | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Form setup using react-hook-form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<BookingFormData>({
+    mode: "onBlur",
+    defaultValues: {
+      fullName: "",
+      companyName: "",
+      businessEmail: "",
+      phoneRaw: "",
+    },
+  });
 
   // Measure time spent on form
   const mountTimeRef = useRef<number>(Date.now());
@@ -36,18 +50,12 @@ export default function ConsultantBookingModal() {
     if (isOpen) {
       setIsSuccess(false);
       setReference("");
-      setFullName("");
-      setCompanyName("");
-      setBusinessEmail("");
-      setPhoneRaw("");
-      setNameError(false);
-      setCompanyError(false);
-      setEmailError(false);
-      setPhoneError(false);
+      setSubmittedData(null);
       setSubmitError(null);
+      reset();
       mountTimeRef.current = Date.now();
     }
-  }, [isOpen]);
+  }, [isOpen, reset]);
 
   // Handle ESC key to close
   useEffect(() => {
@@ -81,58 +89,49 @@ export default function ConsultantBookingModal() {
 
   if (!isOpen) return null;
 
-  // Validation
-  const validateForm = () => {
-    let valid = true;
+  const targetWhatsAppNumber = "919911083904";
 
-    if (!fullName.trim() || fullName.trim().length < 2) {
-      setNameError(true);
-      valid = false;
-    } else {
-      setNameError(false);
-    }
+  // Build WhatsApp message
+  const getWhatsAppUrl = (data: {
+    fullName: string;
+    companyName: string;
+    businessEmail: string;
+    phone: string;
+    ref?: string;
+  }) => {
+    const waMessage =
+      `*New Discovery Call Request - Suvrin ERP*\n\n` +
+      `👤 *Name:* ${data.fullName.trim()}\n` +
+      `🏢 *Company:* ${data.companyName.trim()}\n` +
+      `✉️ *Email:* ${data.businessEmail.trim().toLowerCase()}\n` +
+      `📱 *Phone:* ${data.phone}\n` +
+      `🔖 *Reference:* ${data.ref || reference || "PENDING"}\n` +
+      `📍 *Source:* Schedule Discovery Call\n\n` +
+      `Please connect with this client for consultation.`;
 
-    if (!companyName.trim()) {
-      setCompanyError(true);
-      valid = false;
-    } else {
-      setCompanyError(false);
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!businessEmail.trim() || !emailRegex.test(businessEmail.trim())) {
-      setEmailError(true);
-      valid = false;
-    } else {
-      setEmailError(false);
-    }
-
-    const digits = phoneRaw.replace(/\D/g, "");
-    if (!digits || digits.length < 7) {
-      setPhoneError(true);
-      valid = false;
-    } else {
-      setPhoneError(false);
-    }
-
-    return valid;
+    return `https://api.whatsapp.com/send?phone=${targetWhatsAppNumber}&text=${encodeURIComponent(waMessage)}`;
   };
 
-  // Submit Handler
-  const handleSubmitForm = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Submit Handler using react-hook-form
+  const onSubmit = async (data: BookingFormData) => {
     setSubmitError(null);
 
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    const cleanedPhone = phoneRaw.replace(/[^\d\s-]/g, "").trim();
+    const countryPrefix = "+971";
+    const cleanedPhone = data.phoneRaw.replace(/[^\d\s-]/g, "").trim();
     const fullPhone = `${countryPrefix} ${cleanedPhone}`;
     const elapsedSeconds = Math.max(3, (Date.now() - mountTimeRef.current) / 1000);
+    const generatedRef = `BK-${Date.now().toString(36).toUpperCase()}`;
 
+    // Save to state and show confirmation
+    setSubmittedData({
+      fullName: data.fullName,
+      companyName: data.companyName,
+      businessEmail: data.businessEmail,
+      phone: fullPhone,
+    });
+    setReference(generatedRef);
+
+    // Simultaneously save to backend API
     const payload: BookingPayload = {
       topic: "scoping",
       format: "meet",
@@ -142,10 +141,10 @@ export default function ConsultantBookingModal() {
           time: "10:00",
         },
       ],
-      name: fullName.trim(),
-      email: businessEmail.trim().toLowerCase(),
+      name: data.fullName.trim(),
+      email: data.businessEmail.trim().toLowerCase(),
       phone: fullPhone,
-      company: companyName.trim(),
+      company: data.companyName.trim(),
       source: source || "hero_modal",
       visitorTz:
         typeof Intl !== "undefined"
@@ -161,25 +160,16 @@ export default function ConsultantBookingModal() {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const resData = await res.json().catch(() => null);
 
-      if (res.ok && data.ok) {
-        setReference(data.reference || `BK-${Date.now().toString(36).toUpperCase()}`);
-        setIsSuccess(true);
-      } else {
-        setSubmitError(
-          data.error ||
-            "Unable to submit request right now. Please try again or contact us via WhatsApp."
-        );
+      if (res.ok && resData?.ok && resData.reference) {
+        setReference(resData.reference);
       }
     } catch (err) {
       console.error("[Booking Submission Error]", err);
-      setSubmitError(
-        "Network connection issue. Please retry or message our team directly via WhatsApp."
-      );
-    } finally {
-      setIsSubmitting(false);
     }
+
+    setIsSuccess(true);
   };
 
   return (
@@ -201,7 +191,7 @@ export default function ConsultantBookingModal() {
         {/* Modal Header */}
         <div className="px-5 py-4 border-b border-brand-line flex items-center justify-between bg-slate-50/80 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 text-brand-blue flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#2140A6]/10 border border-[#2140A6]/20 text-[#2140A6] flex items-center justify-center">
               <span className="material-symbols-outlined text-[19px]">
                 calendar_month
               </span>
@@ -232,7 +222,7 @@ export default function ConsultantBookingModal() {
         {/* Modal Scrollable Body */}
         <div className="p-5 sm:p-6 overflow-y-auto flex-1">
           {!isSuccess ? (
-            <form onSubmit={handleSubmitForm} noValidate className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
               {/* Full Name */}
               <div>
                 <label
@@ -244,21 +234,24 @@ export default function ConsultantBookingModal() {
                 <input
                   type="text"
                   id="modalFullName"
-                  value={fullName}
-                  onChange={(e) => {
-                    setFullName(e.target.value);
-                    if (nameError) setNameError(false);
-                  }}
-                  required
                   placeholder="e.g. Tariq Mansoor"
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                    nameError
+                  {...register("fullName", {
+                    required: "Please enter your full name.",
+                    minLength: {
+                      value: 2,
+                      message: "Full name must be at least 2 characters.",
+                    },
+                  })}
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
+                    errors.fullName
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
                   }`}
                 />
-                {nameError && (
-                  <p className="text-xs text-rose-600 mt-1">Please enter your full name.</p>
+                {errors.fullName && (
+                  <p className="text-xs text-rose-600 mt-1">
+                    {errors.fullName.message}
+                  </p>
                 )}
               </div>
 
@@ -273,21 +266,24 @@ export default function ConsultantBookingModal() {
                 <input
                   type="text"
                   id="modalCompanyName"
-                  value={companyName}
-                  onChange={(e) => {
-                    setCompanyName(e.target.value);
-                    if (companyError) setCompanyError(false);
-                  }}
-                  required
                   placeholder="e.g. Al Khaleej Precision Metal LLC"
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                    companyError
+                  {...register("companyName", {
+                    required: "Please enter your company name.",
+                    minLength: {
+                      value: 2,
+                      message: "Company name must be at least 2 characters.",
+                    },
+                  })}
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
+                    errors.companyName
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
                   }`}
                 />
-                {companyError && (
-                  <p className="text-xs text-rose-600 mt-1">Please enter your company name.</p>
+                {errors.companyName && (
+                  <p className="text-xs text-rose-600 mt-1">
+                    {errors.companyName.message}
+                  </p>
                 )}
               </div>
 
@@ -302,21 +298,24 @@ export default function ConsultantBookingModal() {
                 <input
                   type="email"
                   id="modalEmail"
-                  value={businessEmail}
-                  onChange={(e) => {
-                    setBusinessEmail(e.target.value);
-                    if (emailError) setEmailError(false);
-                  }}
-                  required
                   placeholder="tariq@alkhaleejmetal.ae"
-                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                    emailError
+                  {...register("businessEmail", {
+                    required: "Please enter your work email.",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Please enter a valid email address.",
+                    },
+                  })}
+                  className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2140A6]/30 focus:border-[#2140A6] transition-all ${
+                    errors.businessEmail
                       ? "border-rose-400 bg-rose-50/20"
                       : "border-slate-300 hover:border-slate-400"
                   }`}
                 />
-                {emailError && (
-                  <p className="text-xs text-rose-600 mt-1">Please enter a valid work email.</p>
+                {errors.businessEmail && (
+                  <p className="text-xs text-rose-600 mt-1">
+                    {errors.businessEmail.message}
+                  </p>
                 )}
               </div>
 
@@ -330,9 +329,9 @@ export default function ConsultantBookingModal() {
                 </label>
                 <div
                   className={`flex rounded-lg border bg-white overflow-hidden transition-all ${
-                    phoneError
+                    errors.phoneRaw
                       ? "border-rose-400 bg-rose-50/20"
-                      : "border-slate-300 hover:border-slate-400 focus-within:border-brand-blue focus-within:ring-2 focus-within:ring-brand-blue/30"
+                      : "border-slate-300 hover:border-slate-400 focus-within:border-[#2140A6] focus-within:ring-2 focus-within:ring-[#2140A6]/30"
                   }`}
                 >
                   <div className="bg-slate-50 border-r border-slate-200 px-3.5 py-2.5 flex items-center gap-1.5 shrink-0 text-slate-700 font-semibold text-sm select-none">
@@ -343,18 +342,24 @@ export default function ConsultantBookingModal() {
                   <input
                     type="tel"
                     id="modalPhone"
-                    value={phoneRaw}
-                    onChange={(e) => {
-                      setPhoneRaw(e.target.value);
-                      if (phoneError) setPhoneError(false);
-                    }}
-                    required
                     placeholder="50 123 4567"
+                    {...register("phoneRaw", {
+                      required: "Please enter your UAE mobile number.",
+                      validate: (val) => {
+                        const digits = val.replace(/\D/g, "");
+                        return (
+                          digits.length >= 7 ||
+                          "Please enter a valid mobile number (min 7 digits)."
+                        );
+                      },
+                    })}
                     className="flex-1 px-3.5 py-2.5 text-sm text-slate-900 bg-transparent placeholder-slate-400 focus:outline-none"
                   />
                 </div>
-                {phoneError && (
-                  <p className="text-xs text-rose-600 mt-1">Please enter your UAE mobile number (e.g. 50 123 4567).</p>
+                {errors.phoneRaw && (
+                  <p className="text-xs text-rose-600 mt-1">
+                    {errors.phoneRaw.message}
+                  </p>
                 )}
               </div>
 
@@ -370,7 +375,7 @@ export default function ConsultantBookingModal() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-12 bg-brand-blue hover:bg-[#001770] disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base"
+                  className="w-full h-12 bg-[#83B773] hover:bg-[#72A363] disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base active:scale-[0.99]"
                 >
                   {isSubmitting ? (
                     <span className="inline-flex items-center gap-2">
@@ -390,15 +395,54 @@ export default function ConsultantBookingModal() {
               </div>
             </form>
           ) : (
-            /* Success Mode */
-            <SuccessStep
-              reference={reference}
-              topicId="odoo_scoping"
-              formatId="meet"
-              selectedSlots={[]}
-              contactName={fullName}
-              onClose={closeBooking}
-            />
+            /* Dedicated Discovery Call Success Screen */
+            <div className="space-y-5 text-center py-2">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 mx-auto">
+                <span className="material-symbols-outlined text-[32px]">verified</span>
+              </div>
+
+              <div>
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono text-[11px] font-bold mb-1.5">
+                  Ref: {reference}
+                </span>
+                <h3 className="font-heading text-lg sm:text-xl font-extrabold text-brand-ink">
+                  Discovery Request Received!
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mt-1 leading-relaxed">
+                  Thank you, <strong>{submittedData?.fullName}</strong>. Your request is registered.
+                </p>
+              </div>
+
+              {/* Recap Box with Submitted Data */}
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-brand-line text-left max-w-md mx-auto space-y-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Name:</span>
+                  <span className="font-bold text-slate-800">{submittedData?.fullName}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Company:</span>
+                  <span className="font-bold text-slate-800">{submittedData?.companyName}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Email:</span>
+                  <span className="font-bold text-slate-800">{submittedData?.businessEmail}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">WhatsApp / Phone:</span>
+                  <span className="font-bold text-[#2140A6]">{submittedData?.phone}</span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-brand-line">
+                <button
+                  type="button"
+                  onClick={closeBooking}
+                  className="w-full h-11 bg-[#83B773] hover:bg-[#72A363] text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

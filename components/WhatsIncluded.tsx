@@ -101,8 +101,8 @@ export default function WhatsIncluded() {
         {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-10 sm:mb-12">
           <div className="lg:col-span-7 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-blue font-heading text-[11px] font-extrabold uppercase tracking-wider mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#83B773]/10 border border-[#83B773]/30 text-[#3b6630] font-heading text-[11px] font-extrabold uppercase tracking-wider mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] animate-pulse"></span>
               Fixed-Scope Delivery
             </div>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink leading-tight">
@@ -128,28 +128,25 @@ export default function WhatsIncluded() {
                   key={item.number}
                   type="button"
                   onClick={() => setActiveNumber(item.number)}
-                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${
-                    isActive
-                      ? "bg-brand-blue !text-white shadow-sm font-bold"
-                      : "text-slate-800 hover:bg-brand-blue hover:!text-white font-medium"
-                  }`}
+                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${isActive
+                      ? "bg-[#83B773] !text-white shadow-sm font-bold"
+                      : "text-slate-800 hover:bg-[#83B773] hover:!text-white font-medium"
+                    }`}
                   style={isActive ? { color: "#ffffff" } : undefined}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <span
-                    className={`truncate transition-colors ${
-                      isActive ? "!text-white" : "group-hover:!text-white"
-                    }`}
+                    className={`truncate transition-colors ${isActive ? "!text-white" : "group-hover:!text-white"
+                      }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     {title}
                   </span>
                   <span
-                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${
-                      isActive
+                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${isActive
                         ? "!text-white translate-x-0.5"
                         : "text-slate-400 group-hover:!text-white group-hover:translate-x-0.5"
-                    }`}
+                      }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     chevron_right
@@ -165,7 +162,7 @@ export default function WhatsIncluded() {
               {/* Subtle Decorative Curve in Bottom Right (matching reference style) */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full border-[16px] border-blue-50/80 opacity-70"
+                className="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full border-[16px] border-[#83B773]/20 opacity-70"
               />
 
               {/* Title */}
@@ -193,7 +190,7 @@ export default function WhatsIncluded() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {highlights.map((point, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <span className="material-symbols-outlined text-brand-blue text-[17px] shrink-0 mt-0.5">
+                      <span className="material-symbols-outlined text-[#83B773] text-[17px] shrink-0 mt-0.5">
                         check_circle
                       </span>
                       <span className="text-xs sm:text-[13px] text-slate-600 leading-snug">
@@ -214,7 +211,7 @@ export default function WhatsIncluded() {
                       topic: displayTitle,
                     })
                   }
-                  className="bg-brand-blue hover:bg-blue-900 text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-lg shadow-xs hover:shadow transition-all cursor-pointer"
+                  className="bg-[#83B773] hover:bg-[#72a363] text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-lg shadow-xs hover:shadow transition-all cursor-pointer"
                 >
                   Schedule Scoping Review
                 </button>
@@ -223,7 +220,7 @@ export default function WhatsIncluded() {
                   href={COMPANY_INFO.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-brand-blue flex items-center gap-1.5 transition-colors py-2"
+                  className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#3b6630] flex items-center gap-1.5 transition-colors py-2"
                 >
                   <span className="material-symbols-outlined text-[17px] text-emerald-600">
                     chat
@@ -236,11 +233,11 @@ export default function WhatsIncluded() {
         </div>
 
         {/* Single Database Architecture Panel */}
-        <div className="surface-panel rounded-2xl p-6 sm:p-8 border border-brand-line/80 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30">
+        <div className="surface-panel rounded-2xl p-6 sm:p-8 border border-brand-line/80 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/50 to-[#83B773]/10">
           <div className="relative z-10">
             {/* Architecture Banner Header */}
             <div className="max-w-3xl mb-6 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-brand-blue font-heading text-[11px] font-extrabold uppercase tracking-wider mb-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#83B773]/10 border border-[#83B773]/30 text-[#3b6630] font-heading text-[11px] font-extrabold uppercase tracking-wider mb-2.5">
                 Module Map Architecture
               </div>
               <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-brand-ink mb-2">

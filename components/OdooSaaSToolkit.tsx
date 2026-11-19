@@ -246,22 +246,17 @@ export default function OdooSaaSToolkit() {
               ))}
             </div>
 
-            {/* Action Buttons in Suvrin Blue (#002098) and Suvrin Green (#80B070) */}
-            <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 w-full">
+            {/* Primary Action Button */}
+            <div className="flex items-center w-full">
               <button
                 type="button"
                 onClick={() => openBooking({ source: "odoo_saas_trial_cta" })}
-                className="bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center"
+                className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
-                Get your 30-day Free Trial
-              </button>
-
-              <button
-                type="button"
-                onClick={() => openBooking({ source: "odoo_saas_try_now_cta" })}
-                className="bg-white hover:bg-[#80B070]/10 text-[#446b39] border-2 border-[#80B070] font-semibold text-sm sm:text-base px-6 py-3.5 rounded-lg transition-all cursor-pointer inline-flex items-center justify-center shadow-xs"
-              >
-                Try Now
+                <span>Connect with Us for 30-Day Free Trial</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </button>
             </div>
 

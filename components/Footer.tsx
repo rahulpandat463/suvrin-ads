@@ -26,7 +26,7 @@ export default function Footer() {
               {COMPANY_INFO.legalName}
             </p>
             <p>{COMPANY_INFO.address}</p>
-            <p className="text-brand-blue font-bold">Direct GCC Desk: {COMPANY_INFO.phoneDisplay}</p>
+            <p className="text-[#83B773] font-bold">Direct GCC Desk: {COMPANY_INFO.phoneDisplay}</p>
             <p className="text-xs text-slate-400">
               Email: {COMPANY_INFO.email} • Global: {COMPANY_INFO.globalPresence}
             </p>
