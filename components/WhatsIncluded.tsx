@@ -83,7 +83,6 @@ const SCOPE_DETAILS: Record<string, string[]> = {
 
 export default function WhatsIncluded() {
   const [activeNumber, setActiveNumber] = useState<string>("01");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { openBooking } = useBooking();
 
   const currentItem =
@@ -117,92 +116,129 @@ export default function WhatsIncluded() {
           </div>
         </div>
 
-        {/* 2-Column Split: Clean Left Vertical Nav / Mobile Dropdown + Elegant Right Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-12">
-          {/* Mobile View: Interactive Dropdown Selector */}
-          <div className="lg:hidden w-full relative">
-            <label className="block text-xs font-heading font-bold text-slate-500 uppercase tracking-wider mb-2">
-              Select Implementation Phase:
-            </label>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#83B773] text-slate-900 font-heading font-bold flex items-center justify-between gap-3 shadow-xs text-left cursor-pointer hover:border-[#72a363] transition-all"
-                aria-expanded={isDropdownOpen}
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#83B773] text-white shrink-0">
-                    {currentItem.number}
-                  </span>
-                  <span className="truncate text-sm sm:text-base text-slate-900 font-bold">
-                    {displayTitle}
-                  </span>
-                </div>
-                <span
-                  className={`material-symbols-outlined text-[24px] text-[#83B773] transition-transform duration-200 shrink-0 ${
-                    isDropdownOpen ? "rotate-180" : ""
+        {/* --------------------------------------------------------------------- */}
+        {/* MOBILE VIEW (< lg): Accordion (Google 'People Also Ask' Style)       */}
+        {/* All 8 deliverables visible, tapping any expands its content beneath   */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="lg:hidden flex flex-col gap-2.5 w-full mb-10">
+          {DELIVERABLES.map((item) => {
+            const isOpen = activeNumber === item.number;
+            const title = TAB_TITLES[item.number] || item.title;
+            const secParagraph = PHASE_DESCRIPTIONS[item.number] || "";
+            const itemHighlights = SCOPE_DETAILS[item.number] || [];
+
+            return (
+              <div
+                key={item.number}
+                className={`rounded-xl border transition-all duration-200 overflow-hidden ${isOpen
+                    ? "border-[#83B773] shadow-sm bg-white"
+                    : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
+              >
+                {/* Accordion Trigger Header */}
+                <button
+                  type="button"
+                  onClick={() => setActiveNumber(isOpen ? "" : item.number)}
+                  className={`w-full py-3.5 px-4 text-left transition-colors cursor-pointer flex items-center justify-between gap-3 text-sm font-heading ${isOpen
+                      ? "bg-[#83B773] text-white font-bold"
+                      : "text-slate-800 hover:bg-slate-50 font-medium"
+                    }`}
+                  aria-expanded={isOpen}
                 >
-                  expand_more
-                </span>
-              </button>
-
-              {/* Dropdown Options List */}
-              {isDropdownOpen && (
-                <>
-                  <div
-                    className="fixed inset-0 z-30"
-                    onClick={() => setIsDropdownOpen(false)}
-                    aria-hidden="true"
-                  />
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-slate-200 shadow-2xl overflow-hidden z-40 py-1 divide-y divide-slate-100 max-h-80 overflow-y-auto">
-                    {DELIVERABLES.map((item) => {
-                      const isActive = activeNumber === item.number;
-                      const title = TAB_TITLES[item.number] || item.title;
-
-                      return (
-                        <button
-                          key={item.number}
-                          type="button"
-                          onClick={() => {
-                            setActiveNumber(item.number);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${
-                            isActive
-                              ? "bg-[#83B773]/15 text-[#2e5225] font-bold"
-                              : "text-slate-800 hover:bg-slate-50 font-medium"
-                          }`}
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <span
-                              className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
-                                isActive
-                                  ? "bg-[#83B773] text-white"
-                                  : "bg-slate-100 text-slate-600"
-                              }`}
-                            >
-                              {item.number}
-                            </span>
-                            <span className="truncate text-sm">{title}</span>
-                          </div>
-                          {isActive && (
-                            <span className="material-symbols-outlined text-[20px] text-[#83B773] shrink-0 font-bold">
-                              check
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span
+                      className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${isOpen
+                          ? "bg-white/25 text-white"
+                          : "bg-slate-100 text-slate-500"
+                        }`}
+                    >
+                      {item.number}
+                    </span>
+                    <span className="truncate">{title}</span>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
 
-          {/* Desktop Left Column: Clean Tab List without bulky wrapper box */}
-          <div className="hidden lg:flex lg:col-span-5 flex-col gap-1">
+                  <span
+                    className={`material-symbols-outlined text-[22px] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-white" : "text-slate-400"
+                      }`}
+                  >
+                    keyboard_arrow_down
+                  </span>
+                </button>
+
+                {/* Accordion Body: Expands directly beneath the tapped deliverable */}
+                {isOpen && (
+                  <div className="p-4 sm:p-5 bg-white border-t border-slate-100 text-left animate-in fade-in duration-200">
+                    {/* Core Description Paragraph 1 */}
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-3">
+                      {item.desc}
+                    </p>
+
+                    {/* Strategic Context Paragraph 2 */}
+                    {secParagraph && (
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        {secParagraph}
+                      </p>
+                    )}
+
+                    {/* Scope Checklist in Compact Grid */}
+                    <div className="pt-3 border-t border-slate-100 mb-4">
+                      <div className="text-[10px] font-heading font-extrabold uppercase tracking-wider text-slate-400 mb-2.5">
+                        Scope Highlights
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        {itemHighlights.map((point, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <span className="material-symbols-outlined text-[#83B773] text-[16px] shrink-0 mt-0.5">
+                              check_circle
+                            </span>
+                            <span className="text-xs text-slate-700 leading-snug">
+                              {point}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Bottom Actions */}
+                    <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openBooking({
+                            source: "whats_included_accordion",
+                            topic: title,
+                          })
+                        }
+                        className="bg-[#83B773] hover:bg-[#72a363] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-xs transition-all cursor-pointer"
+                      >
+                        Schedule Scoping Review
+                      </button>
+
+                      <a
+                        href={COMPANY_INFO.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-semibold text-slate-600 hover:text-[#3b6630] flex items-center gap-1 transition-colors py-1"
+                      >
+                        <span className="material-symbols-outlined text-[15px] text-emerald-600">
+                          chat
+                        </span>
+                        <span>Ask an ERP Architect</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* DESKTOP VIEW (lg+): 100% UNTOUCHED (Tabs on left, Card on right)      */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="hidden lg:grid grid-cols-12 gap-6 lg:gap-8 items-start mb-12">
+          {/* Left Column: Clean Tab List without bulky wrapper box */}
+          <div className="col-span-5 flex flex-col gap-1">
             {DELIVERABLES.map((item) => {
               const isActive = activeNumber === item.number;
               const title = TAB_TITLES[item.number] || item.title;
@@ -211,28 +247,25 @@ export default function WhatsIncluded() {
                   key={item.number}
                   type="button"
                   onClick={() => setActiveNumber(item.number)}
-                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${
-                    isActive
+                  className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${isActive
                       ? "bg-[#83B773] !text-white shadow-sm font-bold"
                       : "text-slate-800 hover:bg-[#83B773] hover:!text-white font-medium"
-                  }`}
+                    }`}
                   style={isActive ? { color: "#ffffff" } : undefined}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <span
-                    className={`truncate transition-colors ${
-                      isActive ? "!text-white" : "group-hover:!text-white"
-                    }`}
+                    className={`truncate transition-colors ${isActive ? "!text-white" : "group-hover:!text-white"
+                      }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     {title}
                   </span>
                   <span
-                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${
-                      isActive
+                    className={`material-symbols-outlined text-[19px] shrink-0 transition-all ${isActive
                         ? "!text-white translate-x-0.5"
                         : "text-slate-400 group-hover:!text-white group-hover:translate-x-0.5"
-                    }`}
+                      }`}
                     style={isActive ? { color: "#ffffff" } : undefined}
                   >
                     chevron_right
@@ -243,7 +276,7 @@ export default function WhatsIncluded() {
           </div>
 
           {/* Right Column: Sleek Card with Clean Typography & Proportions */}
-          <div className="lg:col-span-7">
+          <div className="col-span-7">
             <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 sm:p-8 md:p-9 text-left relative overflow-hidden shadow-xs">
               {/* Subtle Decorative Curve in Bottom Right (matching reference style) */}
               <div
