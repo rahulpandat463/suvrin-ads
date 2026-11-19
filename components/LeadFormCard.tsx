@@ -68,6 +68,11 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
 
     const waUrl = `https://wa.me/${targetWhatsAppNumber}?text=${encodeURIComponent(waMessage)}`;
 
+    // Open WhatsApp in a new tab with pre-filled lead details
+    if (typeof window !== "undefined") {
+      window.open(waUrl, "_blank");
+    }
+
     // Simultaneously save to backend API
     try {
       await fetch("/api/booking", {
@@ -303,10 +308,32 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
             Thank you, <strong>{submittedData?.fullName}</strong>. A Senior UAE Business ERP Principal from our Dubai Marina office will contact you within 2 business hours with your preliminary roadmap outline for <strong>{submittedData?.companyName}</strong>.
           </p>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-semibold">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mb-3">
             <span className="material-symbols-outlined text-[16px]">phone_iphone</span>
             <span>Confirmation details sent to +971 {submittedData?.phone}</span>
           </div>
+
+          <a
+            href={
+              submittedData
+                ? `https://wa.me/919911083904?text=${encodeURIComponent(
+                    `*New ERP Callback Request - Suvrin ERP*\n\n` +
+                      `👤 *Name:* ${submittedData.fullName}\n` +
+                      `🏢 *Company:* ${submittedData.companyName}\n` +
+                      `✉️ *Email:* ${submittedData.businessEmail}\n` +
+                      `📱 *Phone:* +971 ${submittedData.phone}\n` +
+                      `📍 *Source:* Quick Callback Form\n\n` +
+                      `Please connect with this client for consultation.`
+                  )}`
+                : `https://wa.me/919911083904`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full h-10 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-xs"
+          >
+            <span className="material-symbols-outlined text-[16px]">chat</span>
+            <span>Open WhatsApp &amp; Click Send</span>
+          </a>
         </div>
       )}
     </div>
