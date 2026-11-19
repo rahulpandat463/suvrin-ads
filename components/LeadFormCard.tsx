@@ -1,28 +1,39 @@
 "use client";
 
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useBooking } from "@/components/booking/BookingProvider";
 
 interface LeadFormCardProps {
   onOpenBooking?: () => void;
 }
 
+interface LeadFormData {
+  fullName: string;
+  companyName: string;
+  businessEmail: string;
+  phone: string;
+}
+
 export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
   const { openBooking } = useBooking();
   const [activeTab, setActiveTab] = useState<"callback" | "schedule">("callback");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<LeadFormData | null>(null);
 
-  // Form states for Quick Callback
-  const [fullName, setFullName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [businessEmail, setBusinessEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
-  // Validation errors
-  const [nameError, setNameError] = useState(false);
-  const [compError, setCompError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LeadFormData>({
+    mode: "onBlur",
+    defaultValues: {
+      fullName: "",
+      companyName: "",
+      businessEmail: "",
+      phone: "",
+    },
+  });
 
   const handleOpenBookingModal = () => {
     if (onOpenBooking) {
@@ -39,42 +50,51 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    let valid = true;
+  const onSubmit = async (data: LeadFormData) => {
+    setSubmittedData(data);
 
-    if (!fullName.trim()) {
-      setNameError(true);
-      valid = false;
-    } else {
-      setNameError(false);
+    const cleanedPhone = data.phone.replace(/[^\d\s-]/g, "").trim();
+    const fullPhone = `+971 ${cleanedPhone}`;
+    const targetWhatsAppNumber = "919911083904";
+
+    const waMessage =
+      `*New ERP Callback Request - Suvrin ERP*\n\n` +
+      `*Name:* ${data.fullName.trim()}\n` +
+      `*Company:* ${data.companyName.trim()}\n` +
+      `*Email:* ${data.businessEmail.trim().toLowerCase()}\n` +
+      `*Phone:* ${fullPhone}\n` +
+      `*Source:* Quick Callback Form\n\n` +
+      `Please connect with this client for an initial ERP consultation.`;
+
+    const waUrl = `https://wa.me/${targetWhatsAppNumber}?text=${encodeURIComponent(waMessage)}`;
+
+    // Simultaneously save to backend API
+    try {
+      await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topic: "scoping",
+          format: "phone",
+          slots: [
+            {
+              date: new Date().toISOString().split("T")[0],
+              time: "10:00",
+            },
+          ],
+          name: data.fullName.trim(),
+          email: data.businessEmail.trim().toLowerCase(),
+          phone: fullPhone,
+          company: data.companyName.trim(),
+          source: "quick_callback_card",
+          elapsedSeconds: 5,
+        }),
+      });
+    } catch (e) {
+      console.warn("API submission background error:", e);
     }
 
-    if (!companyName.trim()) {
-      setCompError(true);
-      valid = false;
-    } else {
-      setCompError(false);
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(businessEmail.trim())) {
-      setEmailError(true);
-      valid = false;
-    } else {
-      setEmailError(false);
-    }
-
-    if (!phone.trim() || phone.trim().length < 7) {
-      setPhoneError(true);
-      valid = false;
-    } else {
-      setPhoneError(false);
-    }
-
-    if (valid) {
-      setIsSubmitted(true);
-    }
+    setIsSubmitted(true);
   };
 
   return (
@@ -102,8 +122,8 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
           onClick={() => handleTabSwitch("schedule")}
           className={`py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
             activeTab === "schedule"
-              ? "bg-white text-brand-blue shadow-xs"
-              : "text-slate-500 hover:text-brand-blue"
+              ? "bg-white text-[#2140A6] shadow-xs"
+              : "text-slate-500 hover:text-[#2140A6]"
           }`}
         >
           <span className="material-symbols-outlined text-[16px]">calendar_today</span>
@@ -117,7 +137,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
           <h3 className="font-heading text-sm font-bold text-brand-ink uppercase tracking-wide">
             Business ERP Audit
           </h3>
-          <span className="text-[10px] font-mono font-bold text-brand-blue bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+          <span className="text-[10px] font-mono font-bold text-[#2140A6] bg-[#2140A6]/10 px-2 py-0.5 rounded border border-[#2140A6]/20">
             UAE Desk
           </span>
         </div>
@@ -127,15 +147,15 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
       </div>
 
       {/* Prompt banner to Pick Slot */}
-      <div className="mb-4 p-2.5 rounded-xl bg-blue-50/80 border border-blue-100/90 flex items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-1.5 text-brand-blue font-bold">
+      <div className="mb-4 p-2.5 rounded-xl bg-[#2140A6]/5 border border-[#2140A6]/15 flex items-center justify-between gap-2 text-xs">
+        <div className="flex items-center gap-1.5 text-[#2140A6] font-bold">
           <span className="material-symbols-outlined text-[17px]">event_available</span>
           <span className="text-[11.5px]">Prefer a scheduled meeting?</span>
         </div>
         <button
           type="button"
           onClick={handleOpenBookingModal}
-          className="text-xs font-bold text-white bg-brand-blue hover:bg-brand-blue-bright px-3 py-1 rounded-lg transition-colors cursor-pointer shrink-0 shadow-xs flex items-center gap-1"
+          className="text-xs font-bold text-white bg-[#2140A6] hover:bg-[#1a3385] px-3 py-1 rounded-lg transition-colors cursor-pointer shrink-0 shadow-xs flex items-center gap-1"
         >
           <span>Pick Slot</span>
           <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
@@ -143,7 +163,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
       </div>
 
       {!isSubmitted ? (
-        <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-3.5">
           <div>
             <label
               className="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1"
@@ -154,14 +174,17 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="text"
               id="heroFullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
               placeholder="e.g. Tariq Mansoor"
-              className="field-input !h-10 text-xs sm:text-sm"
+              {...register("fullName", {
+                required: "Please enter your full name",
+                minLength: { value: 2, message: "Min 2 characters required" },
+              })}
+              className={`field-input !h-10 text-xs sm:text-sm ${
+                errors.fullName ? "!border-rose-400 bg-rose-50/20" : ""
+              }`}
             />
-            {nameError && (
-              <p className="text-[11px] text-red-500 mt-1">Please enter your full name</p>
+            {errors.fullName && (
+              <p className="text-[11px] text-rose-600 mt-1">{errors.fullName.message}</p>
             )}
           </div>
 
@@ -175,14 +198,17 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="text"
               id="heroCompanyName"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              required
               placeholder="e.g. Al Khaleej Precision Metal LLC"
-              className="field-input !h-10 text-xs sm:text-sm"
+              {...register("companyName", {
+                required: "Please enter your company name",
+                minLength: { value: 2, message: "Min 2 characters required" },
+              })}
+              className={`field-input !h-10 text-xs sm:text-sm ${
+                errors.companyName ? "!border-rose-400 bg-rose-50/20" : ""
+              }`}
             />
-            {compError && (
-              <p className="text-[11px] text-red-500 mt-1">Please enter your company name</p>
+            {errors.companyName && (
+              <p className="text-[11px] text-rose-600 mt-1">{errors.companyName.message}</p>
             )}
           </div>
 
@@ -196,14 +222,20 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="email"
               id="heroBusinessEmail"
-              value={businessEmail}
-              onChange={(e) => setBusinessEmail(e.target.value)}
-              required
               placeholder="tariq@alkhaleejmetal.ae"
-              className="field-input !h-10 text-xs sm:text-sm"
+              {...register("businessEmail", {
+                required: "Please enter your work email",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email",
+                },
+              })}
+              className={`field-input !h-10 text-xs sm:text-sm ${
+                errors.businessEmail ? "!border-rose-400 bg-rose-50/20" : ""
+              }`}
             />
-            {emailError && (
-              <p className="text-[11px] text-red-500 mt-1">Please provide a valid company email</p>
+            {errors.businessEmail && (
+              <p className="text-[11px] text-rose-600 mt-1">{errors.businessEmail.message}</p>
             )}
           </div>
 
@@ -215,50 +247,65 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
               WhatsApp / Mobile (+971) *
             </label>
             <div className="relative flex items-center">
-              <div className="absolute left-3.5 flex items-center gap-1 text-brand-blue text-xs font-semibold">
+              <div className="absolute left-3.5 flex items-center gap-1 text-[#2140A6] text-xs font-semibold">
                 <span>+971</span>
               </div>
               <input
                 type="tel"
                 id="heroPhone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
                 placeholder="50 123 4567"
-                className="field-input !h-10 !pl-16 text-xs sm:text-sm"
+                {...register("phone", {
+                  required: "Please enter your mobile number",
+                  validate: (val) => {
+                    const digits = val.replace(/\D/g, "");
+                    return digits.length >= 7 || "Min 7 digits required";
+                  },
+                })}
+                className={`field-input !h-10 !pl-16 text-xs sm:text-sm ${
+                  errors.phone ? "!border-rose-400 bg-rose-50/20" : ""
+                }`}
               />
             </div>
-
-            {phoneError && (
-              <p className="text-[11px] text-red-500 mt-1">Please enter a valid phone number</p>
+            {errors.phone && (
+              <p className="text-[11px] text-rose-600 mt-1">{errors.phone.message}</p>
             )}
           </div>
 
           <button
             type="submit"
-            className="btn-primary w-full h-11 rounded-xl text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow"
+            disabled={isSubmitting}
+            className="w-full h-11 bg-[#83B773] hover:bg-[#72A363] text-white rounded-xl text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow transition-all active:scale-[0.99]"
           >
-            <span>Request Immediate Callback</span>
-            <span className="material-symbols-outlined text-[17px]">arrow_forward</span>
+            {isSubmitting ? (
+              <span className="inline-flex items-center gap-2">
+                <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                <span>Connecting...</span>
+              </span>
+            ) : (
+              <>
+                <span>Request Immediate Callback</span>
+                <span className="material-symbols-outlined text-[17px]">arrow_forward</span>
+              </>
+            )}
           </button>
 
           <div className="pt-2.5 border-t border-brand-line flex items-center justify-center gap-1.5 text-[10px] text-slate-400 text-center">
-            <span className="material-symbols-outlined text-[13px] text-brand-blue">lock</span>
+            <span className="material-symbols-outlined text-[13px] text-[#2140A6]">lock</span>
             <span>Strict UAE Data Confidentiality &amp; NDA Guaranteed • Direct Dubai Desk</span>
           </div>
         </form>
       ) : (
-        <div className="p-4 sm:p-5 rounded-xl bg-emerald-50 border border-brand-green/40 text-left">
-          <div className="flex items-center gap-2 text-brand-green-deep font-bold mb-1 text-sm">
+        <div className="p-4 sm:p-5 rounded-xl bg-emerald-50 border border-emerald-200 text-left">
+          <div className="flex items-center gap-2 text-emerald-800 font-bold mb-1 text-sm">
             <span className="material-symbols-outlined text-[20px]">verified</span>
             <span>Callback Request Confirmed!</span>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-            Thank you, <strong>{fullName}</strong>. A Senior UAE Business ERP Principal from our Dubai Marina office will contact you within 2 business hours with your preliminary roadmap outline for <strong>{companyName}</strong>.
+            Thank you, <strong>{submittedData?.fullName}</strong>. A Senior UAE Business ERP Principal from our Dubai Marina office will contact you within 2 business hours with your preliminary roadmap outline for <strong>{submittedData?.companyName}</strong>.
           </p>
-          <div className="flex items-center gap-1.5 text-xs text-brand-green-deep font-semibold">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-semibold">
             <span className="material-symbols-outlined text-[16px]">phone_iphone</span>
-            <span>Confirmation details sent to +971 {phone}</span>
+            <span>Confirmation details sent to +971 {submittedData?.phone}</span>
           </div>
         </div>
       )}

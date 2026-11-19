@@ -37,7 +37,7 @@ export default function PartnerLogos() {
             A Trusted Odoo Service Provider
           </p>
           <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-brand-ink leading-tight">
-            Chosen by Brands &amp; Industry Leaders Across the UAE &amp; Global Markets
+            Our Trusted Partners
           </h2>
         </div>
       </div>

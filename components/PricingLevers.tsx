@@ -97,7 +97,7 @@ export default function PricingLevers() {
             <button
               type="button"
               onClick={() => openBooking({ source: "pricing_levers", topic: "scoping" })}
-              className={`h-9 px-4 text-xs justify-center gap-1.5 bg-brand-blue hover:bg-brand-blue-bright text-white font-bold rounded-lg flex items-center transition-colors cursor-pointer shadow-xs ${focusRing}`}
+              className={`h-9 px-4 text-xs justify-center gap-1.5 bg-[#83B773] hover:bg-[#7da970] text-white font-bold rounded-lg flex items-center transition-colors cursor-pointer shadow-xs ${focusRing}`}
             >
               <span>Schedule a scoping review</span>
               <span aria-hidden="true" className="material-symbols-outlined text-[16px]">arrow_forward</span>
