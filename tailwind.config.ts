@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./data.ts",
   ],
   theme: {
     extend: {
@@ -21,9 +22,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ["var(--font-inter)", "'Inter'", "sans-serif"],
-        body: ["var(--font-inter)", "'Inter'", "sans-serif"],
-        sans: ["var(--font-inter)", "'Inter'", "sans-serif"],
+        heading: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "'Segoe UI'", "Roboto", "sans-serif"],
+        body: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "'Segoe UI'", "Roboto", "sans-serif"],
+        sans: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "'Segoe UI'", "Roboto", "sans-serif"],
       },
       boxShadow: {
         soft: "0 1px 2px rgba(20,20,20,0.04), 0 8px 24px rgba(20,20,20,0.06)",

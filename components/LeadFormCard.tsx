@@ -54,7 +54,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
     setSubmittedData(data);
 
     const cleanedPhone = data.phone.replace(/[^\d\s-]/g, "").trim();
-    const fullPhone = `+971 ${cleanedPhone}`;
+    const fullPhone = `+91 ${cleanedPhone}`;
     const targetWhatsAppNumber = "919560455637";
 
     const waMessage =
@@ -141,7 +141,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             Business ERP Audit
           </h3>
           <span className="text-[10px] font-mono font-bold text-[#2140A6] bg-[#2140A6]/10 px-2 py-0.5 rounded border border-[#2140A6]/20">
-            UAE Desk
+            India Desk
           </span>
         </div>
         <p className="text-[11px] text-slate-500 mt-0.5">
@@ -177,7 +177,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="text"
               id="heroFullName"
-              placeholder="e.g. Tariq Mansoor"
+              placeholder="e.g. Rahul Sharma"
               {...register("fullName", {
                 required: "Please enter your full name",
                 minLength: { value: 2, message: "Min 2 characters required" },
@@ -200,7 +200,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="text"
               id="heroCompanyName"
-              placeholder="e.g. Al Khaleej Precision Metal LLC"
+              placeholder="e.g. Precision Components Pvt Ltd"
               {...register("companyName", {
                 required: "Please enter your company name",
                 minLength: { value: 2, message: "Min 2 characters required" },
@@ -223,7 +223,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <input
               type="email"
               id="heroBusinessEmail"
-              placeholder="tariq@alkhaleejmetal.ae"
+              placeholder="rahul@company.in"
               {...register("businessEmail", {
                 required: "Please enter your work email",
                 pattern: {
@@ -244,16 +244,16 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
               className="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1"
               htmlFor="heroPhone"
             >
-              WhatsApp / Mobile (+971) *
+              WhatsApp / Mobile (+91) *
             </label>
             <div className="relative flex items-center">
               <div className="absolute left-3.5 flex items-center gap-1 text-[#2140A6] text-xs font-semibold">
-                <span>+971</span>
+                <span>+91</span>
               </div>
               <input
                 type="tel"
                 id="heroPhone"
-                placeholder="50 123 4567"
+                placeholder="98765 43210"
                 {...register("phone", {
                   required: "Please enter your mobile number",
                   validate: (val) => {
@@ -290,7 +290,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
 
           <div className="pt-2.5 border-t border-brand-line flex items-center justify-center gap-1.5 text-[10px] text-slate-400 text-center">
             <span className="material-symbols-outlined text-[13px] text-[#2140A6]">lock</span>
-            <span>Strict UAE Data Confidentiality &amp; NDA Guaranteed • Direct Dubai Desk</span>
+            <span>Strict Data Confidentiality &amp; NDA Guaranteed • Direct Gurgaon Desk</span>
           </div>
         </form>
       ) : (
@@ -300,11 +300,11 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
             <span>Callback Request Confirmed!</span>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-            Thank you, <strong>{submittedData?.fullName}</strong>. A Senior UAE Business ERP Principal from our Dubai Marina office will contact you within 2 business hours with your preliminary roadmap outline for <strong>{submittedData?.companyName}</strong>.
+            Thank you, <strong>{submittedData?.fullName}</strong>. A Senior Business ERP Principal from our Gurgaon office will contact you within 2 business hours with your preliminary roadmap outline for <strong>{submittedData?.companyName}</strong>.
           </p>
           <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mb-3">
             <span className="material-symbols-outlined text-[16px]">phone_iphone</span>
-            <span>Confirmation details sent to +971 {submittedData?.phone}</span>
+            <span>Confirmation details sent to +91 {submittedData?.phone}</span>
           </div>
 
           <a
@@ -315,7 +315,7 @@ export default function LeadFormCard({ onOpenBooking }: LeadFormCardProps) {
                   `👤 *Name:* ${submittedData.fullName}\n` +
                   `🏢 *Company:* ${submittedData.companyName}\n` +
                   `✉️ *Email:* ${submittedData.businessEmail}\n` +
-                  `📱 *Phone:* +971 ${submittedData.phone}\n` +
+                  `📱 *Phone:* +91 ${submittedData.phone}\n` +
                   `📍 *Source:* Quick Callback Form\n\n` +
                   `Please connect with this client for consultation.`
                 )}`

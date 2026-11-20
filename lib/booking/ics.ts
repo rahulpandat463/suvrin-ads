@@ -27,7 +27,7 @@ export function buildICS(p: ICSParams): string {
     `DTEND:${fmt(end)}`,
     `SUMMARY:${p.title} (Tentative)`,
     `DESCRIPTION:${p.description.replace(/\r\n|\r|\n/g, "\\n")}`,
-    p.location ? `LOCATION:${p.location}` : "LOCATION:Google Meet / Dubai Marina Desk",
+    p.location ? `LOCATION:${p.location}` : "LOCATION:Google Meet / Gurgaon Desk",
     "STATUS:TENTATIVE",
     "TRANSP:OPAQUE",
     "SEQUENCE:0",

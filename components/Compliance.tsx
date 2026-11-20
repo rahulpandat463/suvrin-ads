@@ -9,19 +9,19 @@ export default function Compliance() {
     <section
       id="chapter-compliance"
       data-chapter="3"
-      data-title="UAE Compliance"
+      data-title="India Compliance"
       className="chapter-section relative py-12 sm:py-16 border-t border-brand-line scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           <div className="lg:col-span-7 surface-panel p-6 sm:p-8">
             <div className="mb-6">
-              <span className="eyebrow mb-2">Built for UAE Regulations</span>
+              <span className="eyebrow mb-2">Built for Indian Regulations</span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-brand-ink mb-2.5">
-                Odoo ERP Implementation for UAE Industry
+                Odoo ERP Implementation for Indian Industry
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                Suvrin combines international Odoo enterprise architecture with localized UAE business practices, Federal Tax Authority compliance, and free zone structures.
+                Suvrin combines international Odoo enterprise architecture with localized Indian statutory practices, GST &amp; e-invoicing compliance, and multi-state SEZ/DTA structures.
               </p>
             </div>
 
@@ -45,7 +45,7 @@ export default function Compliance() {
 
             <div className="pt-4 border-t border-brand-line">
               <span className="text-xs uppercase tracking-wider text-brand-ink font-bold block mb-3">
-                Supported UAE Business Sectors
+                Supported Indian Business Sectors
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm">
                 {sectors.map((sec, idx) => (
@@ -63,24 +63,24 @@ export default function Compliance() {
           <div className="lg:col-span-5 flex flex-col gap-4">
             <div className="rounded-2xl bg-white border border-brand-line p-5 sm:p-6 shadow-sm">
               <span className="font-heading text-xs font-bold uppercase text-brand-blue tracking-wider">
-                FTA Ready
+                GST &amp; e-Invoice Ready
               </span>
               <p className="font-heading text-xl sm:text-2xl font-bold text-brand-ink mt-2 mb-1">
-                5% VAT · TRN Validated
+                CGST · SGST · IGST · e-Way
               </p>
               <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                Bilingual Arabic / English tax invoices and VAT 201 returns, configured for UAE business.
+                Automated GST e-invoicing, IRN generation, e-way bills, and GSTR-1/3B filing returns, configured for Indian businesses.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-brand-line p-5 sm:p-6 shadow-sm">
               <span className="font-heading text-xs font-bold uppercase text-brand-blue tracking-wider">
-                Free Zone Coverage
+                Multi-State &amp; SEZ Coverage
               </span>
               <p className="font-heading text-xl sm:text-2xl font-bold text-brand-ink mt-2 mb-1">
-                JAFZA · DAFZA · KIZAD
+                Gurgaon · Manesar · Pan-India
               </p>
               <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                Multi-company consolidation across mainland and free-zone entities in one ledger.
+                Multi-unit consolidation across SEZ, EOU, and Domestic Tariff Area (DTA) entities in one ledger.
               </p>
             </div>
           </div>

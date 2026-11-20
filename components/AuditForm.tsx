@@ -90,7 +90,7 @@ export default function AuditForm() {
             Discuss Your Factory ERP Requirements
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-            Our senior Dubai-based ERP architects will walk you through a tailored roadmap showing how Odoo connects your production, inventory, and UAE VAT accounting workflows.
+            Our senior Gurgaon-based ERP architects will walk you through a tailored roadmap showing how Odoo connects your production, inventory, and Indian GST accounting workflows.
           </p>
         </div>
 
@@ -163,7 +163,7 @@ export default function AuditForm() {
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       required
-                      placeholder="e.g. Al Khaleej Precision Metal LLC"
+                      placeholder="e.g. Precision Components Pvt Ltd"
                       className="field-input"
                     />
                     {compError && (
@@ -184,7 +184,7 @@ export default function AuditForm() {
                       value={businessEmail}
                       onChange={(e) => setBusinessEmail(e.target.value)}
                       required
-                      placeholder="tariq@alkhaleejmetal.ae"
+                      placeholder="rahul@company.in"
                       className="field-input"
                     />
                     {emailError && (
@@ -197,11 +197,11 @@ export default function AuditForm() {
                       className="block text-xs uppercase tracking-wider font-bold text-slate-600 mb-1.5"
                       htmlFor="inputPhone"
                     >
-                      WhatsApp / Mobile (+971) *
+                      WhatsApp / Mobile (+91) *
                     </label>
                     <div className="relative flex items-center">
                       <div className="absolute left-4 flex items-center gap-1 text-brand-blue text-xs font-semibold">
-                        <span>+971</span>
+                        <span>+91</span>
                       </div>
                       <input
                         type="tel"
@@ -209,12 +209,12 @@ export default function AuditForm() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         required
-                        placeholder="50 123 4567"
+                        placeholder="98765 43210"
                         className="field-input !pl-16"
                       />
                     </div>
                     <p className="text-[10px] text-slate-400 mt-1.5">
-                      Our Dubai team sends preliminary notes via WhatsApp / SMS.
+                      Our Gurgaon team sends preliminary notes via WhatsApp / SMS.
                     </p>
                     {phoneError && (
                       <p className="text-[11px] text-red-500 mt-1">Please enter a valid phone number</p>
@@ -296,7 +296,7 @@ export default function AuditForm() {
                       id="inputFacility"
                       value={facility}
                       onChange={(e) => setFacility(e.target.value)}
-                      placeholder="e.g. JAFZA South Plant + Al Quoz Depot"
+                      placeholder="e.g. IMT Manesar Plant + Gurgaon Depot"
                       className="field-input"
                     />
                   </div>
@@ -313,7 +313,7 @@ export default function AuditForm() {
                       rows={2}
                       value={bottlenecks}
                       onChange={(e) => setBottlenecks(e.target.value)}
-                      placeholder="e.g. Inaccurate job costing, stockout delays, spreadsheet sync, 5% UAE VAT ledger reconciliation..."
+                      placeholder="e.g. Inaccurate job costing, stockout delays, spreadsheet sync, Indian GST &amp; e-invoicing reconciliation..."
                       className="field-input !h-auto py-3"
                     ></textarea>
                   </div>
@@ -340,7 +340,7 @@ export default function AuditForm() {
 
               <div className="pt-3 border-t border-brand-line flex items-center justify-center gap-1.5 text-[10px] text-slate-400 text-center">
                 <span className="material-symbols-outlined text-[13px] text-brand-blue">lock</span>
-                <span>Strict UAE Data Confidentiality &amp; NDA Guaranteed • Direct Dubai Desk</span>
+                <span>Strict Data Confidentiality &amp; NDA Guaranteed • Direct Gurgaon Desk</span>
               </div>
             </form>
           ) : (
@@ -350,11 +350,11 @@ export default function AuditForm() {
                 <span>Consultation Request Confirmed!</span>
               </div>
               <p className="text-sm text-slate-600 leading-relaxed mb-3">
-                Thank you, <strong>{fullName}</strong>. A Senior UAE Business ERP Principal from our Dubai Marina office will contact you within 2 to 4 business hours with your preliminary BOM architecture outline for <strong>{companyName}</strong>.
+                Thank you, <strong>{fullName}</strong>. A Senior Business ERP Principal from our Gurgaon office will contact you within 2 to 4 business hours with your preliminary BOM architecture outline for <strong>{companyName}</strong>.
               </p>
               <div className="flex items-center gap-2 text-xs text-brand-green-deep font-semibold">
                 <span className="material-symbols-outlined text-[16px]">phone_iphone</span>
-                <span>Confirmation details sent to +971 {phone}</span>
+                <span>Confirmation details sent to +91 {phone}</span>
               </div>
             </div>
           )}
@@ -367,7 +367,7 @@ export default function AuditForm() {
               Prefer instant WhatsApp communication?
             </span>
             <span className="text-[11px] text-slate-500">
-              Direct technical chat with our Dubai ERP Principal
+              Direct technical chat with our Gurgaon ERP Principal
             </span>
           </div>
           <a

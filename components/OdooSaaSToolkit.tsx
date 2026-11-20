@@ -147,7 +147,16 @@ export default function OdooSaaSToolkit() {
               {/* Overlapping Floating Element 1 (Left): Server Name Pill */}
               <div className="absolute left-2 sm:left-4 top-[58%] -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-xl border border-blue-200/90 shadow-md p-2.5 sm:p-3 flex items-center gap-2.5 z-20 transition-transform hover:scale-105">
                 <div className="w-7 h-7 rounded-lg bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg
+                  width="16"
+                  height="16"
+                  style={{ width: "16px", height: "16px" }}
+                  className="w-4 h-4 shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                     <ellipse cx="12" cy="5" rx="9" ry="3" />
                     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                     <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -254,7 +263,16 @@ export default function OdooSaaSToolkit() {
                 className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 <span>Connect with Us for 30-Day Free Trial</span>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  width="16"
+                  height="16"
+                  style={{ width: "16px", height: "16px" }}
+                  className="w-4 h-4 shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>

@@ -21,15 +21,16 @@ interface ContactStepProps {
 }
 
 const COUNTRY_PREFIXES = [
+  { code: "+91", label: "India (+91)", flag: "🇮🇳" },
   { code: "+971", label: "UAE (+971)", flag: "🇦🇪" },
+  { code: "+1", label: "US / Canada (+1)", flag: "🇺🇸" },
+  { code: "+44", label: "UK (+44)", flag: "🇬🇧" },
   { code: "+966", label: "Saudi Arabia (+966)", flag: "🇸🇦" },
-  { code: "+968", label: "Oman (+968)", flag: "🇴🇲" },
+  { code: "+65", label: "Singapore (+65)", flag: "🇸🇬" },
   { code: "+974", label: "Qatar (+974)", flag: "🇶🇦" },
+  { code: "+968", label: "Oman (+968)", flag: "🇴🇲" },
   { code: "+973", label: "Bahrain (+973)", flag: "🇧🇭" },
   { code: "+965", label: "Kuwait (+965)", flag: "🇰🇼" },
-  { code: "+91", label: "India (+91)", flag: "🇮🇳" },
-  { code: "+44", label: "UK (+44)", flag: "🇬🇧" },
-  { code: "+1", label: "US / Canada (+1)", flag: "🇺🇸" },
 ];
 
 const SOFTWARE_OPTIONS = [
@@ -49,7 +50,7 @@ export default function ContactStep({
 }: ContactStepProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [countryPrefix, setCountryPrefix] = useState("+971");
+  const [countryPrefix, setCountryPrefix] = useState("+91");
   const [phoneRaw, setPhoneRaw] = useState("");
   const [company, setCompany] = useState("");
   const [currentSoftware, setCurrentSoftware] = useState("");
@@ -157,7 +158,7 @@ export default function ContactStep({
               setEmail(e.target.value);
               if (emailError) setEmailError("");
             }}
-            placeholder="tariq@company.ae"
+            placeholder="rahul@company.in"
             required
             className="field-input !h-10 text-xs sm:text-sm"
           />
@@ -194,7 +195,7 @@ export default function ContactStep({
                 setPhoneRaw(e.target.value);
                 if (phoneError) setPhoneError("");
               }}
-              placeholder="50 123 4567"
+              placeholder="98765 43210"
               required
               className="field-input !h-10 flex-1 text-xs sm:text-sm"
             />
@@ -219,7 +220,7 @@ export default function ContactStep({
             id="bookingCompany"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            placeholder="e.g. Al Khaleej Industries LLC"
+            placeholder="e.g. Precision Components Pvt Ltd"
             className="field-input !h-10 text-xs sm:text-sm"
           />
         </div>
@@ -310,7 +311,7 @@ export default function ContactStep({
 
       <div className="flex items-center justify-center gap-1 text-[10.5px] text-slate-400 text-center">
         <span className="material-symbols-outlined text-[13px] text-brand-blue">lock</span>
-        <span>Strict UAE Data Confidentiality &amp; NDA • Direct Dubai Marina Desk</span>
+        <span>Strict Data Confidentiality &amp; NDA • Direct Gurgaon Desk</span>
       </div>
     </form>
   );

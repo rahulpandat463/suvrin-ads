@@ -13,7 +13,7 @@ const PILLAR_DETAILS: Record<
 > = {
   "01 / CONSULTING": {
     extended:
-      "We walk your production lines and examine operational bottlenecks across Dubai, Sharjah, and Abu Dhabi plants before writing any code. Every workflow is audited against your physical materials, machine cycle times, scrap percentages, and multi-currency supply chain constraints.",
+      "We walk your production lines and examine operational bottlenecks across Gurgaon, Manesar, Faridabad, and Delhi NCR plants before writing any code. Every workflow is audited against your physical materials, machine cycle times, scrap percentages, and supply chain constraints.",
     highlights: [
       "Shop floor routing audit",
       "Scrap & wastage reduction",
@@ -27,7 +27,7 @@ const PILLAR_DETAILS: Record<
     highlights: [
       "Upgrade-safe Python architecture",
       "Automated PO trigger rules",
-      "Bilingual Arabic/English reports",
+      "GST & e-invoicing reports",
       "Custom approval matrices",
     ],
   },
@@ -43,12 +43,12 @@ const PILLAR_DETAILS: Record<
   },
   "04 / PRESENCE": {
     extended:
-      "Direct Dubai Marina engineering team providing physical on-site presence across JAFZA, Dubai Industrial City, KIZAD, and Al Quoz for discovery, hands-on staff training, and first month-end closing support.",
+      "Direct Gurgaon (DLF Cyber City) engineering team providing physical on-site presence across IMT Manesar, Udyog Vihar, Faridabad, Okhla, and Greater Noida for discovery, hands-on staff training, and first month-end closing support.",
     highlights: [
-      "Dubai Marina based team",
+      "Gurgaon & NCR based team",
       "Rapid on-site factory visits",
       "First month-end closing support",
-      "Strict UAE NDA & confidentiality",
+      "Strict NDA & confidentiality",
     ],
   },
 };

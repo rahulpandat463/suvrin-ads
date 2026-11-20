@@ -25,7 +25,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            Everything you need to know about Odoo ERP implementation for UAE businesses.
+            Everything you need to know about Odoo ERP implementation for Indian businesses.
           </p>
         </div>
 

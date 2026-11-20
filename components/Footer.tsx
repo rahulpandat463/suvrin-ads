@@ -23,7 +23,7 @@ export default function Footer() {
               />
             </a>
             <p className="text-slate-500 leading-relaxed max-w-md text-sm">
-              Authoritative enterprise digital transformation and Odoo ERP implementation partner for industrial businesses across Dubai, Abu Dhabi, and the GCC.
+              Authoritative enterprise digital transformation and Odoo ERP implementation partner for industrial businesses across Gurgaon, Delhi NCR, and pan-India.
             </p>
           </div>
           <div className="md:col-span-6 space-y-1.5 text-slate-500">
@@ -34,12 +34,11 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:underline hover:text-[#2140A6] transition-colors"
               >
-                Suvrin Technologies
-              </a>{" "}
-              / Maxcode Solutions LLC
+                Suvrin Technologies Pvt. Ltd.
+              </a>
             </p>
             <p>{COMPANY_INFO.address}</p>
-            <p className="text-[#83B773] font-bold">Direct GCC Desk: {COMPANY_INFO.phoneDisplay}</p>
+            <p className="text-[#83B773] font-bold">Direct Gurgaon / India Desk: {COMPANY_INFO.phoneDisplay}</p>
             <p className="text-xs text-slate-400">
               Email: {COMPANY_INFO.email} • Global: {COMPANY_INFO.globalPresence}
             </p>
@@ -54,9 +53,9 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:underline text-slate-500"
             >
-              Suvrin Technologies
+              Suvrin Technologies Pvt. Ltd.
             </a>
-            . In collaboration with Maxcode Solutions LLC, Dubai.
+            {" "}Gurgaon, Haryana, India.
           </p>
           <div className="flex items-center gap-3">
             <a
@@ -77,7 +76,7 @@ export default function Footer() {
               Terms
             </a>
             <span>•</span>
-            <span>ISO 9001 / GCC Compliant</span>
+            <span>ISO 9001 / GST Compliant</span>
           </div>
         </div>
       </div>

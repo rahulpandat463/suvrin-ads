@@ -1,19 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import ConsultantBookingModal from "@/components/booking/ConsultantBookingModal";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
 export const metadata: Metadata = {
-  title: "Suvrin Technologies | Business ERP Software Dubai & UAE",
+  title: "Suvrin Technologies | Business ERP Software India & Gurgaon",
   description:
-    "Turnkey Odoo Business ERP implementation for Dubai & UAE businesses. Shop floor routing, multi-warehouse JAFZA tracking, and FTA 5% VAT compliance.",
+    "Turnkey Odoo Business ERP implementation for Indian & Gurgaon businesses. Shop floor routing, multi-warehouse NCR tracking, and Indian GST & e-Invoicing compliance.",
   icons: {
     icon: "data:,",
   },
@@ -32,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="icon" href="data:," />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,7 +39,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className={`relative min-h-screen text-brand-ink bg-white selection:bg-brand-blue selection:text-white font-body ${inter.className}`}>
+      <body className="relative min-h-screen text-brand-ink bg-white selection:bg-brand-blue selection:text-white font-sans">
         <BookingProvider>
           <ConsultantBookingModal />
           {children}

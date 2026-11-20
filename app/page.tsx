@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -35,7 +37,7 @@ export default function Home() {
         {/* Chapter 2: Connected Pipeline Flow (Commented Out) */}
         {/* <PipelineFlow /> */}
 
-        {/* Chapter 3: UAE Compliance */}
+        {/* Chapter 3: India Compliance & GST */}
         <Compliance />
 
         {/* Chapter 4: What's Included */}

@@ -19,14 +19,14 @@ const TAB_TITLES: Record<string, string> = {
 
 // Elaborated second paragraphs for enterprise depth
 const PHASE_DESCRIPTIONS: Record<string, string> = {
-  "01": "Our certified ERP architects examine your actual shop floor routing, multi-warehouse movements, and accounting practices on-site in Dubai, Sharjah, or Abu Dhabi. We uncover hidden operational bottlenecks and legacy spreadsheet dependencies before a single line of code is configured.",
+  "01": "Our certified ERP architects examine your actual shop floor routing, multi-warehouse movements, and accounting practices on-site in Gurgaon, Manesar, or Delhi NCR. We uncover hidden operational bottlenecks and legacy spreadsheet dependencies before a single line of code is configured.",
   "02": "Every deliverable, milestone, integration boundary, and testing gate is locked into a fixed-scope contract. We eliminate unpredictable hourly billing so your leadership team has 100% budget certainty and guaranteed go-live deadlines from day one.",
-  "03": "We configure standard Odoo Enterprise apps to match your real-world factory flows — from multi-level Bills of Materials and work center run rates to automated minimum stock reordering rules and UAE FTA-compliant 5% VAT invoicing.",
-  "04": "When your industrial workflow requires specialized logic, our UAE engineering team writes clean Python modules adhering strictly to Odoo's official upgrade-safe guidelines, ensuring future version migrations are completely friction-free.",
+  "03": "We configure standard Odoo Enterprise apps to match your real-world factory flows — from multi-level Bills of Materials and work center run rates to automated minimum stock reordering rules and Indian GST-compliant e-invoicing & e-way bills.",
+  "04": "When your industrial workflow requires specialized logic, our India engineering team writes clean Python modules adhering strictly to Odoo's official upgrade-safe guidelines, ensuring future version migrations are completely friction-free.",
   "05": "We clean, deduplicate, and reconcile your legacy master data — vendors, item masters, opening inventory balances, and chart of accounts. Rigorous parallel runs ensure your Monday morning cutover happens with zero operational interruption.",
-  "06": "Connect Odoo directly with UAE bank feeds, shipping couriers, e-commerce storefronts, and factory hardware such as barcode scanners and weighing scales for real-time bidirectional data flow across your operations.",
-  "07": "Hands-on, department-specific training sessions conducted on-site or remotely in English and Arabic. We provide recorded video walkthroughs and standard operating procedures (SOPs) for continuous onboarding of new team members.",
-  "08": "Direct access to our Dubai Marina engineering desk with an 18-minute average first-response time. We sit with your finance team through the crucial first month-end closing, guaranteeing total system and operational stability.",
+  "06": "Connect Odoo directly with Indian bank feeds, payment gateways (Razorpay, Cashfree), logistics carriers, e-commerce storefronts, and factory hardware such as barcode scanners and weighing scales for real-time bidirectional data flow across your operations.",
+  "07": "Hands-on, department-specific training sessions conducted on-site or remotely in English and Hindi. We provide recorded video walkthroughs and standard operating procedures (SOPs) for continuous onboarding of new team members.",
+  "08": "Direct access to our Gurgaon engineering desk with an 18-minute average first-response time. We sit with your finance team through the crucial first month-end closing, guaranteeing total system and operational stability.",
 };
 
 // Scope highlights matching the existing deliverables
@@ -38,7 +38,7 @@ const SCOPE_DETAILS: Record<string, string[]> = {
     "Standalone written diagnostic report — yours to keep regardless of next steps",
   ],
   "02": [
-    "Comprehensive module architecture map tailored to UAE regulations",
+    "Comprehensive module architecture map tailored to Indian statutory regulations",
     "Third-party integration roadmap and API connector list",
     "Custom Python development scope and technical specification document",
     "100% fixed-scope, fixed-price quote with zero hourly overruns",
@@ -47,12 +47,12 @@ const SCOPE_DETAILS: Record<string, string[]> = {
     "Core Odoo Enterprise configuration (Sales, Purchase, Inventory, MRP)",
     "Shop floor routing, work centers, and multi-level Bills of Materials (BOM)",
     "Automated min/max procurement rules and approval hierarchies",
-    "Multi-currency UAE accounting with standard financial charts",
+    "Multi-state Indian accounting with GST compliant financial charts",
   ],
   "04": [
     "Bespoke Python modules written to official Odoo upgrade-safe patterns",
     "Automated workflow triggers, notifications, and custom status pipelines",
-    "Custom bilingual PDF reports (tax invoices, packing slips, job cards)",
+    "Custom GST-compliant PDF reports (e-invoices with QR code, e-way bills, packing slips, job cards)",
     "Shop floor touchscreen tablet interfaces for machine operators",
   ],
   "05": [
@@ -62,7 +62,7 @@ const SCOPE_DETAILS: Record<string, string[]> = {
     "Parallel dry-run testing ensuring zero Monday morning downtime",
   ],
   "06": [
-    "Two-way REST / JSON-RPC connectors to UAE bank feeds and payment gateways",
+    "Two-way REST / JSON-RPC connectors to Indian bank feeds and payment gateways",
     "Automated shipping and courier API integrations with live AWB generation",
     "E-commerce bi-directional stock synchronization (Shopify, Amazon, WooCommerce)",
     "Factory floor digital scale and hardware barcode scanner integration",
@@ -74,9 +74,9 @@ const SCOPE_DETAILS: Record<string, string[]> = {
     "Permanent onboarding documentation playbook for your future hires",
   ],
   "08": [
-    "18-minute average first-response time during GCC business hours",
+    "18-minute average first-response time during Indian business hours",
     "Hands-on technical presence for your finance team's critical first month-end closing",
-    "Direct Dubai Marina engineering desk with rapid on-site factory visits",
+    "Direct Gurgaon engineering desk with rapid on-site factory visits",
     "Seamless handoff to optional SLA retainer or on-demand support",
   ],
 };

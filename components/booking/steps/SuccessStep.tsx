@@ -44,16 +44,16 @@ export default function SuccessStep({
 
     // Use primary (first) preferred slot for calendar invite
     const primarySlot = selectedSlots[0];
-    const startUTC = new Date(`${primarySlot.date}T${primarySlot.time}:00+04:00`);
+    const startUTC = new Date(`${primarySlot.date}T${primarySlot.time}:00+05:30`);
     const minutes = topic?.minutes || 30;
 
     const description = [
-      `Consultation Request with Suvrin Technologies UAE Desk`,
+      `Consultation Request with Suvrin Technologies Gurgaon Desk`,
       `Reference: ${reference}`,
       `Topic: ${topic?.label}`,
       `Format: ${format?.label}`,
       `Preferred Slots: ${slotsSummary}`,
-      `Status: Tentative. Our Dubai desk will confirm within 2 business hours with final link or venue.`,
+      `Status: Tentative. Our Gurgaon desk will confirm within 2 business hours with final link or venue.`,
       `WhatsApp: +${BOOKING_CONFIG.whatsappNumber}`,
     ].join("\n");
 
@@ -84,7 +84,7 @@ export default function SuccessStep({
           Booking Request Received
         </h3>
         <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mt-1 leading-relaxed">
-          Thank you, <strong>{contactName}</strong>. A Senior ERP Consultant from our Dubai Marina desk will confirm your slot within <strong>{BOOKING_CONFIG.confirmWithinText}</strong>.
+          Thank you, <strong>{contactName}</strong>. A Senior ERP Consultant from our Gurgaon desk will confirm your slot within <strong>{BOOKING_CONFIG.confirmWithinText}</strong>.
         </p>
       </div>
 

@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="relative w-full h-full">
           <Image
             src="/hero-consulting.jpg"
-            alt="Suvrin Odoo ERP Specialists in Dubai UAE"
+            alt="Suvrin Odoo ERP Specialists in Gurgaon India"
             fill
             priority
             className="object-cover object-center lg:object-right"
@@ -39,24 +39,24 @@ export default function Hero() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur border border-slate-200 shadow-2xs mb-4">
             <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
             <span className="font-heading text-xs uppercase tracking-wider font-bold text-brand-blue">
-              Dubai &amp; UAE Business ERP
+              India &amp; Gurgaon Business ERP
             </span>
           </div>
 
           {/* Suvrin's Exact Original Headline */}
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-slate-900 leading-[1.12] tracking-tight mb-4">
             Business ERP for <br className="hidden sm:inline" />
-            Dubai &amp; UAE Industry
+            India &amp; Gurgaon Industry
           </h1>
 
           {/* Suvrin's Exact Original Subtitle */}
           <p className="text-base sm:text-lg text-slate-800 font-semibold mb-3 leading-snug max-w-xl">
-            Connect Production, Multi-Warehouse Inventory, Procurement &amp; UAE VAT Accounting
+            Connect Production, Multi-Warehouse Inventory, Procurement &amp; Indian GST Accounting
           </p>
 
           {/* Suvrin's Exact Original Description */}
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-8 max-w-xl">
-            Suvrin helps UAE businesses implement and customise Odoo ERP around real-world factory routing, finite capacity, scrap control, and bilingual compliance across Dubai, Sharjah, and Abu Dhabi plants.
+            Suvrin helps Indian businesses implement and customise Odoo ERP around real-world factory routing, finite capacity, scrap control, and GST &amp; e-invoicing compliance across Gurgaon, Manesar, Delhi NCR, and pan-India plants.
           </p>
 
           {/* Primary CTA Button (opens Lead Form Modal directly) */}

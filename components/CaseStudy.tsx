@@ -17,7 +17,7 @@ export default function CaseStudy() {
           Precision Industrial Business Case Study
         </h2>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-          A multi-facility precision business group in the UAE replaced disconnected spreadsheets with an end-to-end Odoo Enterprise solution connecting shop floor machines to VAT accounting.
+          A multi-facility precision business group in India replaced disconnected spreadsheets with an end-to-end Odoo Enterprise solution connecting shop floor machines to GST accounting.
         </p>
       </div>
 
@@ -59,7 +59,7 @@ export default function CaseStudy() {
               Planned vs Actual Output
             </span>
             <span className="text-[11px] text-slate-500 block">
-              Monthly units across Emirates plants (Q1 2026)
+              Monthly units across North India plants (Q1 2026)
             </span>
           </div>
           <div className="w-full h-40 flex items-end rounded-xl bg-transparent border border-brand-line px-3 pt-4 pb-2">
@@ -100,7 +100,7 @@ export default function CaseStudy() {
               Cost Absorption Variance
             </span>
             <span className="text-[11px] text-slate-500 block mb-4">
-              Real-time absorption across UAE batches
+              Real-time absorption across production batches
             </span>
             <div className="flex items-center gap-6">
               <div className="relative w-28 h-28 shrink-0 flex items-center justify-center">

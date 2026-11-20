@@ -17,7 +17,7 @@ export interface BookingFormat {
 export const BOOKING_CONFIG = {
   provider: "native" as "native" | "calcom",
   calcomLink: "suvrin/consultation",
-  timezone: "Asia/Dubai",
+  timezone: "Asia/Kolkata",
   workingDays: [1, 2, 3, 4, 5], // 1 = Monday, 5 = Friday
   saturdayEnabled: false, // flip to true to include Saturdays
   daysAhead: 14, // business days to display
@@ -27,7 +27,7 @@ export const BOOKING_CONFIG = {
   confirmWithinText: "2 business hours",
   whatsappNumber: COMPANY_INFO.whatsappNumber || "919560455637",
   holidays: [
-    // UAE Public Holidays (YYYY-MM-DD format)
+    // Indian Public Holidays (YYYY-MM-DD format)
   ] as string[],
   topics: [
     {
@@ -50,9 +50,9 @@ export const BOOKING_CONFIG = {
     },
     {
       id: "vat",
-      label: "UAE FTA VAT & Multi-Entity",
+      label: "Indian GST, e-Invoicing & Multi-Entity",
       minutes: 30,
-      desc: "5% FTA compliance, e-invoicing & inter-company journals",
+      desc: "GST compliance, e-Way bills, e-invoicing & inter-company journals",
     },
   ] as BookingTopic[],
   formats: [
@@ -70,7 +70,7 @@ export const BOOKING_CONFIG = {
     },
     {
       id: "onsite",
-      label: "On-site Visit (Dubai / Abu Dhabi / Sharjah)",
+      label: "On-site Visit (Gurgaon / Delhi NCR / Manesar)",
       icon: "apartment",
       desc: "In-person consultation at your facility or office",
     },

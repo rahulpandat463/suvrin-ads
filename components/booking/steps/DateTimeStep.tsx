@@ -29,7 +29,7 @@ export default function DateTimeStep({
 }: DateTimeStepProps) {
   const [dates, setDates] = useState<AvailableDate[]>([]);
   const [selectedDate, setSelectedDate] = useState<AvailableDate | null>(null);
-  const [visitorTz, setVisitorTz] = useState<string>("Asia/Dubai");
+  const [visitorTz, setVisitorTz] = useState<string>("Asia/Kolkata");
   const [showLocalTz, setShowLocalTz] = useState(false);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export default function DateTimeStep({
             </span>
             {showLocalTz && (
               <span className="text-[11px] text-slate-500">
-                Displaying UAE (GST) + Local ({visitorTz})
+                Displaying India (IST) + Local ({visitorTz})
               </span>
             )}
           </div>

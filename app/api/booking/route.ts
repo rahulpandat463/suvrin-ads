@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
         const phoneParts = body.phone.trim().split(" ");
         const inferredCountryCode =
           body.countryCode ||
-          (phoneParts.length > 1 && phoneParts[0].startsWith("+") ? phoneParts[0] : "+971");
+          (phoneParts.length > 1 && phoneParts[0].startsWith("+") ? phoneParts[0] : "+91");
         const inferredPhone =
           phoneParts.length > 1 && phoneParts[0].startsWith("+")
             ? phoneParts.slice(1).join(" ")
@@ -139,7 +139,7 @@ export async function POST(req: NextRequest) {
             ...(leadsSyncSecret ? { "x-api-key": leadsSyncSecret } : {}),
           },
           body: JSON.stringify({
-            region: "uae",
+            region: "india",
             source: body.source || "web",
             referenceCode: reference,
             name: bookingRecord.customer.name,
@@ -165,7 +165,7 @@ export async function POST(req: NextRequest) {
       ok: true,
       reference,
       confirmWithin: BOOKING_CONFIG.confirmWithinText,
-      message: "Consultation request received. Our Dubai team will confirm your slot within 2 business hours.",
+      message: "Consultation request received. Our Gurgaon team will confirm your slot within 2 business hours.",
     });
   } catch (err: unknown) {
     console.error("[Booking API Error]", err);

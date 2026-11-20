@@ -21,15 +21,15 @@ export interface CompanyContact {
 }
 
 export const COMPANY_INFO: CompanyContact = {
-  phoneDisplay: "+971 501 359 238",
-  phoneTel: "+971551120975",
+  phoneDisplay: "+91 95604 55637",
+  phoneTel: "+919560455637",
   whatsappUrl:
-    "https://wa.me/919560455637?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Dubai",
+    "https://wa.me/919560455637?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Gurgaon",
   whatsappNumber: "919560455637",
   email: "sudeep@suvrin.com",
-  address: "Living Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, UAE",
-  legalName: "Suvrin Technologies / Maxcode Solutions LLC",
-  globalPresence: "India (Delhi NCR) • USA (Delaware)",
+  address: "P1/55, DLF Phase 2, Cyber City, Gurgaon — 122002",
+  legalName: "Suvrin Technologies Pvt. Ltd.",
+  globalPresence: "UAE (Dubai) • USA (Delaware)",
 };
 
 // ------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ export const CHAPTERS: ChapterInfo[] = [
   { id: "chapter-hero", number: "01", title: "Overview" },
   { id: "chapter-transformation", number: "02", title: "Transformation" },
   { id: "chapter-pipeline", number: "03", title: "Connected Flow" },
-  { id: "chapter-compliance", number: "04", title: "UAE Compliance" },
+  { id: "chapter-compliance", number: "04", title: "India Compliance" },
   { id: "chapter-included", number: "05", title: "What's Included" },
   { id: "chapter-ownership", number: "06", title: "Ownership" },
   { id: "chapter-pricing", number: "07", title: "Pricing Levers" },
@@ -62,11 +62,11 @@ export interface HeroHighlight {
 
 export const HERO_HIGHLIGHTS: HeroHighlight[] = [
   { title: "Odoo MRP", subtitle: "Shop Floor App" },
-  { title: "Multi-WH", subtitle: "JAFZA / KIZAD" },
-  { title: "FTA VAT", subtitle: "5% Tax Ready" },
+  { title: "Multi-WH", subtitle: "Gurgaon / NCR" },
+  { title: "GST Ready", subtitle: "e-Invoice & e-Way" },
   { title: "Costing", subtitle: "Live Job Costing" },
-  { title: "Bilingual", subtitle: "Arabic & English" },
-  { title: "Audits", subtitle: "On-Site in UAE" },
+  { title: "Bilingual", subtitle: "Hindi & English" },
+  { title: "Audits", subtitle: "On-Site in Gurgaon" },
 ];
 
 // ------------------------------------------------------------------------------
@@ -104,8 +104,8 @@ export const ADVISORY_PILLARS: AdvisoryPillar[] = [
   },
   {
     num: "04 / PRESENCE",
-    title: "UAE & GCC Delivery",
-    desc: "Direct Dubai Marina desk. Rapid on-site factory visits across Dubai Industrial City, JAFZA, KIZAD, and Al Quoz.",
+    title: "Gurgaon & Pan-India Delivery",
+    desc: "Direct Gurgaon desk. Rapid on-site factory visits across IMT Manesar, Udyog Vihar, Faridabad, Okhla, and Greater Noida.",
     borderColor: "border-brand-green",
     numColor: "text-brand-green-deep",
   },
@@ -127,7 +127,7 @@ export const PIPELINE_STEPS: PipelineStep[] = [
     num: "01",
     icon: "trending_up",
     title: "Sales & Demand Forecast",
-    desc: "AED sales orders convert automatically into business demand forecasts and delivery commitments.",
+    desc: "INR (₹) sales orders convert automatically into business demand forecasts and delivery commitments.",
     linkText: "➔ Feeds MRP engine",
   },
   {
@@ -141,7 +141,7 @@ export const PIPELINE_STEPS: PipelineStep[] = [
     num: "03",
     icon: "shopping_cart",
     title: "Automated Procurement",
-    desc: "Auto-generate RFQs and LPOs based on minimum stock rules and supplier lead times with multi-tier approvals.",
+    desc: "Auto-generate RFQs and purchase orders based on minimum stock rules and supplier lead times with multi-tier approvals.",
     linkText: "➔ Routes to Goods Receipt",
   },
   {
@@ -168,21 +168,21 @@ export const PIPELINE_STEPS: PipelineStep[] = [
   {
     num: "07",
     icon: "local_shipping",
-    title: "Packaging & UAE Dispatch",
-    desc: "Serialised finished goods packaging, automated packing lists, delivery notes, and transport dispatch.",
+    title: "Packaging & Dispatch / e-Way Bill",
+    desc: "Serialised finished goods packaging, automated packing lists, delivery notes, and e-way bill transport dispatch.",
     linkText: "➔ Triggers customer delivery",
   },
   {
     num: "08",
     icon: "receipt_long",
-    title: "Job Costing & UAE VAT",
-    desc: "Instant WIP-to-COGS entries, actual cost vs standard variance analysis, and FTA-compliant 5% e-invoicing.",
+    title: "Job Costing & Indian GST",
+    desc: "Instant WIP-to-COGS entries, actual cost vs standard variance analysis, and GST-compliant e-invoicing & e-way bills.",
     linkText: "✓ Live Financial Settlement",
   },
 ];
 
 // ------------------------------------------------------------------------------
-// 6. UAE COMPLIANCE & INDUSTRY SECTORS
+// 6. INDIA COMPLIANCE & INDUSTRY SECTORS
 // ------------------------------------------------------------------------------
 export interface CompliancePoint {
   title: string;
@@ -196,28 +196,28 @@ export interface IndustrySector {
 
 export const COMPLIANCE_POINTS: CompliancePoint[] = [
   {
-    title: "FTA UAE VAT-Ready:",
-    desc: "Automated 5% tax reports and electronic tax invoice generation.",
+    title: "Indian GST & e-Invoicing Ready:",
+    desc: "Automated CGST/SGST/IGST tax reports, e-Way bills, and B2B e-invoicing generation.",
   },
   {
-    title: "AED-Centric Accounting:",
-    desc: "Multi-currency conversion (USD, EUR, SAR) with live FX rates.",
+    title: "INR-Centric Accounting:",
+    desc: "Multi-currency conversion (USD, EUR, AED, GBP) with live FX rates.",
   },
   {
-    title: "Multi-Company & Free Zones:",
-    desc: "Unified consolidation for mainland and JAFZA/DAFZA/KIZAD.",
+    title: "Multi-State & SEZ/EOU:",
+    desc: "Unified consolidation for multi-state GSTINs and SEZ/EOU units.",
   },
   {
     title: "Multi-Warehouse Routing:",
-    desc: "Inter-warehouse transfers between Dubai, Abu Dhabi, and Sharjah depots.",
+    desc: "Inter-warehouse transfers between Gurgaon, Manesar, Delhi NCR, and regional depots.",
   },
   {
     title: "Bilingual System:",
-    desc: "Native Arabic and English documentation, reports, and UI toggles.",
+    desc: "Native English and Hindi documentation, reports, and UI toggles.",
   },
   {
     title: "On-Site Factory Audits:",
-    desc: "Suvrin engineers physically walk your production lines in JAFZA, DIC, or Al Quoz.",
+    desc: "Suvrin engineers physically walk your production lines in IMT Manesar, Udyog Vihar, Faridabad, or Greater Noida.",
   },
 ];
 
@@ -227,7 +227,7 @@ export const INDUSTRY_SECTORS: IndustrySector[] = [
   { title: "Plastics & Polymers", desc: "Extrusion & regrind" },
   { title: "Packaging", desc: "GSM & die-cuts" },
   { title: "Joinery & Wood", desc: "Project BOMs" },
-  { title: "Food & Beverage", desc: "Halal & expiry" },
+  { title: "Food & Beverage", desc: "FSSAI & expiry" },
   { title: "Switchgear", desc: "Testing sign-offs" },
   { title: "Chemicals", desc: "MSDS & blending" },
 ];
@@ -374,8 +374,8 @@ export const STAGES: StageItem[] = [
     icon: "verified_user",
     clientRole: "Direct Ticket Channel",
     clientDetail: "Raise queries and operational tweak requests through the dedicated named channel.",
-    suvrinRole: "Dedicated UAE Support Team",
-    suvrinDetail: "90 days of dedicated UAE-based support with named senior Odoo consultants.",
+    suvrinRole: "Dedicated India Support Team",
+    suvrinDetail: "90 days of dedicated India-based support with named senior Odoo consultants.",
   },
 ];
 
@@ -414,7 +414,7 @@ export const TIMELINE_TIERS: TimelineTier[] = [
     desc: "A typical mid-market implementation runs 12–20 weeks from kickoff to go-live, covering end-to-end departmental operations.",
     features: [
       "End-to-end manufacturing & inventory",
-      "UAE FTA VAT & multi-currency accounting",
+      "Indian GST, e-Invoicing & multi-currency accounting",
       "3 external API / ERP integrations",
       "Live UAT sandbox & parallel dry-run",
     ],
@@ -428,9 +428,9 @@ export const TIMELINE_TIERS: TimelineTier[] = [
     desc: "Large multi-entity rollouts phased by subsidiary or manufacturing division to maintain complete business continuity.",
     features: [
       "Inter-company automation & consolidation",
-      "Phased rollout across divisions/free zones",
+      "Phased rollout across divisions/states",
       "Multi-facility shop floor tablet routing",
-      "Dedicated UAE engineering team on-site",
+      "Dedicated Gurgaon engineering team on-site",
     ],
   },
 ];
@@ -475,7 +475,7 @@ export const PRICING_LEVERS: PricingLever[] = [
     summary:
       "Not our implementation fee, but usually the biggest number in the overall ERP budget. Since Odoo 20, staff who only need time off, expenses, attendance, shop-floor kiosks, barcode scanning, or field-service screens can be configured as Light Users instead of full users. Our discovery models the split before you order.",
     keyPoints: [
-      "Odoo 20 Light User Pricing: Staff who only access shop-floor apps, barcode scanners, time off, attendance, or expenses qualify as Light Users (₹195 per user per month in India on Odoo's price list, 22 October 2026; approx. AED 9–25 / $2.50–$7/user/mo in UAE/GCC) instead of standard Full Users (AED 80–120 / $24–$35/mo).",
+      "Odoo 20 Light User Pricing: Staff who only access shop-floor apps, barcode scanners, time off, attendance, or expenses qualify as Light Users (₹195 per user per month in India on Odoo's price list, 22 October 2026) instead of standard Full Users (~₹800–₹1,200/user/mo).",
       "Shop-Floor Reality: In a 100-person factory or warehouse, typically 65–80 floor workers only need barcode scanning or tablet clocking. Placing them on Light User seats saves 60–75% annually on subscription fees.",
       "Discovery Seat Modeling: During our 1-Week Discovery, we audit your organizational chart and model the precise split before you order licenses from Odoo, preventing multi-year license overspend.",
     ],
@@ -488,7 +488,7 @@ export const PRICING_LEVERS: PricingLever[] = [
       leanTitle: "Unoptimized (100% Full Users)",
       leanDesc: "Paying full license fees for shop floor operators who only clock in or scan barcodes.",
       scaleTitle: "Optimized Hybrid Model",
-      scaleDesc: "Floor workers on Light seats (₹195 / ~AED 15/mo); managers on Full seats.",
+      scaleDesc: "Floor workers on Light seats (₹195/mo); managers on Full seats.",
     },
     discoveryAdvantage:
       "Discovery models your exact seat split before contract signing so you never overpay Odoo for unneeded full seats.",
@@ -562,7 +562,7 @@ export const PRICING_LEVERS: PricingLever[] = [
     summary:
       "Each connector to a third-party system (CRM, e-commerce, payment, shipping, vertical SaaS, or plant hardware) is roughly 1–3 weeks of work depending on complexity and the third party's API quality.",
     keyPoints: [
-      "Modern REST/GraphQL APIs: E-commerce platforms (Shopify, WooCommerce, Amazon UAE) and payment gateways (Stripe, Telr) typically take 1–2 weeks for bi-directional order and stock sync.",
+      "Modern REST/GraphQL APIs: E-commerce platforms (Shopify, WooCommerce, Amazon India) and payment gateways (Razorpay, Cashfree, PayU) typically take 1–2 weeks for bi-directional order and stock sync.",
       "Legacy ERP & Finance Bridges: Bi-directional sync with Tally Prime or legacy custom software requires reconciliation rules and data transformation (~2 weeks).",
       "Factory Floor Hardware: Weighbridges (RS-232 serial), machine cycle PLCs/SCADA, and thermal barcode printers require 2–3 weeks including on-site factory floor calibration.",
     ],
@@ -593,7 +593,7 @@ export const PRICING_LEVERS: PricingLever[] = [
     keyPoints: [
       "Master Data Deduplication: Cleaning up raw material codes, standardizing units of measure (UoMs), and organizing supplier pricing matrices.",
       "Transactional History Depth: Migrating clean opening balance sheets and active open orders (fast, recommended) vs. reconstructing 3–5 years of closed journal entries.",
-      "Parallel Reconciliation Dry-Run: We run pre-cutover reconciliation tests comparing trial balance and inventory valuation down to the exact Dirham/fils.",
+      "Parallel Reconciliation Dry-Run: We run pre-cutover reconciliation tests comparing trial balance and inventory valuation down to the exact Rupee/paise.",
     ],
     impactCallout: {
       label: "Data Cleanup Window",
@@ -618,11 +618,11 @@ export const PRICING_LEVERS: PricingLever[] = [
     badgeType: "compliance",
     icon: "domain",
     summary:
-      "Multi-country rollouts add localization (statutory tax, e-invoicing, statutory reports, regional payroll) and consolidated reporting. Each additional legal entity adds roughly 1–2 weeks.",
+      "Multi-country or multi-state rollouts add localization (statutory GST, e-invoicing, e-way bills, regional payroll) and consolidated reporting. Each additional legal entity adds roughly 1–2 weeks.",
     keyPoints: [
-      "GCC & Statutory Localization: UAE FTA 5% VAT (with bilingual Arabic/English tax invoices and VAT 201), Saudi ZATCA Phase 2 e-invoicing, and local labor statutory rules.",
-      "Free Zones vs. Mainland: Handling inter-entity transfers between free zones (JAFZA, DAFZA, KIZAD) and mainland UAE with customs duty and customs bill tracking.",
-      "Inter-Company Automation: Automated SO-to-PO mirroring between subsidiaries, central purchasing, and consolidated multi-currency financial balance sheets (AED, SAR, USD, EUR, INR).",
+      "Statutory GST Localization: Indian GST (CGST/SGST/IGST), automated e-Invoicing (IRN generation via IRP), e-Way bill integration, and GSTR-1/3B reconciliation.",
+      "SEZ vs. DTA: Handling inter-entity transfers between Special Economic Zones (SEZ) and Domestic Tariff Area (DTA) with bill of entry and customs tracking.",
+      "Inter-Company Automation: Automated SO-to-PO mirroring between subsidiaries, central purchasing, and consolidated multi-currency financial balance sheets (INR, USD, EUR, AED).",
     ],
     impactCallout: {
       label: "Per Entity Addition",
@@ -680,7 +680,7 @@ export interface FAQItem {
 export const FAQS: FAQItem[] = [
   {
     q: "1. What is Business ERP vs basic accounting software?",
-    a: "Basic accounting records historical numbers after production finishes. Business ERP actively coordinates the physical plant: multi-level BOMs, machine routing, scrap % calculation, WIP buffers, and barcode scanning, generating automated VAT ledger entries on execution.",
+    a: "Basic accounting records historical numbers after production finishes. Business ERP actively coordinates the physical plant: multi-level BOMs, machine routing, scrap % calculation, WIP buffers, and barcode scanning, generating automated GST ledger entries on execution.",
   },
   {
     q: "2. Why choose Odoo over Tier-1 ERPs (SAP/Oracle)?",
@@ -691,12 +691,12 @@ export const FAQS: FAQItem[] = [
     a: "Yes. Odoo supports unlimited hierarchical BOM nesting from parent assemblies through sub-assemblies to raw fasteners and chemicals, with engineering change orders (ECO) and scrap management.",
   },
   {
-    q: "4. Can Odoo track raw materials and WIP across Emirates?",
-    a: "Yes. Every movement is barcode-scanned in real time: from raw stock at JAFZA port depots, to production floor WIP staging, through to finished stock at Dubai or Abu Dhabi fulfillment hubs.",
+    q: "4. Can Odoo track raw materials and WIP across Indian states and warehouses?",
+    a: "Yes. Every movement is barcode-scanned in real time: from raw stock intake at port or vendor depots, to production floor WIP staging at Gurgaon and Manesar, through to finished stock at Delhi NCR and regional fulfillment hubs.",
   },
   {
-    q: "5. Is the system compliant with UAE FTA 5% VAT?",
-    a: "Completely. Suvrin UAE deployments come pre-configured with FTA-compliant VAT rate rules, bilingual Arabic/English tax invoices with mandatory TRN validation, and push-button generation of VAT 201 returns.",
+    q: "5. Is the system compliant with Indian GST & e-Invoicing?",
+    a: "Completely. Suvrin India deployments come pre-configured with GST rate rules, HSN/SAC code mapping, automated e-invoicing (IRN generation), e-Way bill integration, and push-button generation of GSTR-1 and GSTR-3B reports.",
   },
   {
     q: "6. Can you integrate Odoo with our existing Tally software?",
@@ -707,8 +707,8 @@ export const FAQS: FAQItem[] = [
     a: "A focused implementation for a single-plant discrete business takes 8 to 12 weeks from initial audit to live go-live. Multi-plant hybrid operations typically range from 14 to 20 weeks.",
   },
   {
-    q: "8. Do you offer physical on-site audits in Dubai?",
-    a: "Yes. Our team is stationed at Living Marina Gate, Dubai Marina. We conduct physical walkthroughs and scoping sessions in DIC, JAFZA, KIZAD, Al Quoz, Sharjah, and across the Emirates.",
+    q: "8. Do you offer physical on-site audits in Gurgaon & Delhi NCR?",
+    a: "Yes. Our team is stationed at DLF Cyber City, Gurgaon. We conduct physical walkthroughs and scoping sessions in IMT Manesar, Udyog Vihar, Faridabad, Okhla, Noida, and across Delhi NCR and India.",
   },
   {
     q: "9. How does fixed-scope pricing work and what affects our quote?",
@@ -780,7 +780,7 @@ export const BOTTLENECK_STEPS: BottleneckStep[] = [
     badge: "Accounting Silos",
     icon: "account_balance_wallet",
     title: "Isolated Accounting (Tally Silos)",
-    desc: "Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed UAE FTA VAT filings.",
+    desc: "Legacy systems operate disconnected from shop floor reality, forcing duplicate entries and delayed Indian GST & e-invoicing filings.",
     impact: "Culminates in direct annual profit margin drain",
     impactIcon: "warning",
   },
@@ -812,7 +812,7 @@ export const CASE_STUDY_KPIS: CaseStudyKPI[] = [
   {
     stat: "99.4%",
     label: "On-Time Dispatch",
-    sub: "Across Emirates fleet",
+    sub: "Across North India fleet",
     color: "text-brand-ink",
   },
   {
@@ -856,7 +856,7 @@ export const ODOO_MODULES: OdooModule[] = [
   {
     num: "04",
     title: "Multi-Warehouse",
-    desc: "JAFZA, KIZAD & Al Quoz transfers with live barcode lot tracking.",
+    desc: "Gurgaon, Manesar & regional hub transfers with live barcode lot tracking.",
   },
   {
     num: "05",
@@ -885,15 +885,15 @@ export const ODOO_MODULES: OdooModule[] = [
   },
   {
     num: "10",
-    title: "UAE VAT Finance",
-    desc: "FTA-compliant VAT returns, multi-currency ledger (AED/USD/SAR).",
+    title: "Indian GST Finance",
+    desc: "GST e-invoicing, e-Way bills, GSTR returns, multi-currency ledger (INR/USD/EUR/AED).",
   },
 ];
 
 export const INTEGRATIONS: IntegrationItem[] = [
   { title: "Tally Prime", desc: "Bi-directional bridge" },
   { title: "SCADA / PLCs", desc: "Machine cycle sync" },
-  { title: "UAE Banks", desc: "ENBD, ADCB, FAB" },
+  { title: "Indian Banks", desc: "HDFC, ICICI, SBI, Axis" },
   { title: "Weighbridges", desc: "RS232 Serial sync" },
 ];
 

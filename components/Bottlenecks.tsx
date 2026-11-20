@@ -20,7 +20,7 @@ export default function Bottlenecks() {
           Is Your Factory Still Hamstrung by <span className="text-red-600">Disconnected Systems?</span>
         </h2>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-          In UAE business, disconnected spreadsheets don&apos;t operate in isolation — they trigger a compounding chain reaction across departments that silently drains operational margins.
+          In Indian business, disconnected spreadsheets don&apos;t operate in isolation — they trigger a compounding chain reaction across departments that silently drains operational margins.
         </p>
       </div>
 
@@ -75,10 +75,10 @@ export default function Bottlenecks() {
             </div>
             <div className="w-full">
               <h4 className="font-heading text-base sm:text-lg font-bold text-brand-ink mb-1">
-                The Cost of Unconnected Operations in UAE
+                The Cost of Unconnected Operations in Indian Industry
               </h4>
               <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
-                Industrial businesses across Dubai, JAFZA, and Abu Dhabi lose up to 14% operating margin every year due to this unbroken chain of disconnected spreadsheets.
+                Industrial businesses across Gurgaon, Manesar, and Delhi NCR lose up to 14% operating margin every year due to this unbroken chain of disconnected spreadsheets.
               </p>
             </div>
           </div>

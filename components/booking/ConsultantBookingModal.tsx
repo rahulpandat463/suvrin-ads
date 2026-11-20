@@ -116,7 +116,7 @@ export default function ConsultantBookingModal() {
   const onSubmit = async (data: BookingFormData) => {
     setSubmitError(null);
 
-    const countryPrefix = "+971";
+    const countryPrefix = "+91";
     const cleanedPhone = data.phoneRaw.replace(/[^\d\s-]/g, "").trim();
     const fullPhone = `${countryPrefix} ${cleanedPhone}`;
     const elapsedSeconds = Math.max(3, (Date.now() - mountTimeRef.current) / 1000);
@@ -162,7 +162,7 @@ export default function ConsultantBookingModal() {
       visitorTz:
         typeof Intl !== "undefined"
           ? Intl.DateTimeFormat().resolvedOptions().timeZone
-          : "Asia/Dubai",
+          : "Asia/Kolkata",
       elapsedSeconds,
     };
 
@@ -217,7 +217,7 @@ export default function ConsultantBookingModal() {
                 Schedule a Discovery Call
               </h2>
               <p className="text-[11px] text-slate-500">
-                Direct consultation with our Dubai Solutions Principal • No Obligation
+                Direct consultation with our Gurgaon Solutions Principal • No Obligation
               </p>
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function ConsultantBookingModal() {
                 <input
                   type="text"
                   id="modalFullName"
-                  placeholder="e.g. Tariq Mansoor"
+                  placeholder="e.g. Rajesh Sharma"
                   {...register("fullName", {
                     required: "Please enter your full name.",
                     minLength: {
@@ -278,7 +278,7 @@ export default function ConsultantBookingModal() {
                 <input
                   type="text"
                   id="modalCompanyName"
-                  placeholder="e.g. Al Khaleej Precision Metal LLC"
+                  placeholder="e.g. Apex Precision Engineering Pvt. Ltd."
                   {...register("companyName", {
                     required: "Please enter your company name.",
                     minLength: {
@@ -309,7 +309,7 @@ export default function ConsultantBookingModal() {
                 <input
                   type="email"
                   id="modalEmail"
-                  placeholder="tariq@alkhaleejmetal.ae"
+                  placeholder="rajesh@apexengineering.in"
                   {...register("businessEmail", {
                     required: "Please enter your work email.",
                     pattern: {
@@ -329,7 +329,7 @@ export default function ConsultantBookingModal() {
                 )}
               </div>
 
-              {/* WhatsApp / Phone with Fixed UAE +971 Prefix */}
+              {/* WhatsApp / Phone with Fixed India +91 Prefix */}
               <div>
                 <label
                   className="block text-xs uppercase tracking-wider font-bold text-slate-700 mb-1"
@@ -344,16 +344,16 @@ export default function ConsultantBookingModal() {
                     }`}
                 >
                   <div className="bg-slate-50 border-r border-slate-200 px-3.5 py-2.5 flex items-center gap-1.5 shrink-0 text-slate-700 font-semibold text-sm select-none">
-                    <span>🇦🇪</span>
-                    <span>+971</span>
+                    <span>🇮🇳</span>
+                    <span>+91</span>
                   </div>
 
                   <input
                     type="tel"
                     id="modalPhone"
-                    placeholder="50 123 4567"
+                    placeholder="98765 43210"
                     {...register("phoneRaw", {
-                      required: "Please enter your UAE mobile number.",
+                      required: "Please enter your mobile number.",
                       validate: (val) => {
                         const digits = val.replace(/\D/g, "");
                         return (
@@ -400,7 +400,7 @@ export default function ConsultantBookingModal() {
               {/* Trust Footer */}
               <div className="text-center pt-1 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
                 <span className="material-symbols-outlined text-[14px] text-slate-400">lock</span>
-                <span>Strict UAE Data Confidentiality &amp; NDA Guaranteed • Direct Dubai Desk</span>
+                <span>Strict Data Confidentiality &amp; NDA Guaranteed • Direct Gurgaon Desk</span>
               </div>
             </form>
           ) : (

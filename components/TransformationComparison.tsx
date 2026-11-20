@@ -52,13 +52,13 @@ const COMPARISON_DATA: ComparisonItem[] = [
       badge: "Paper Job Cards & Guesswork",
       description:
         "Job cards get oil-stained and lost. Nobody tracks actual machine electricity, scrap percentage, or operator hours. Gross margins on custom manufacturing are pure guesswork.",
-      quote: "\"We quoted AED 120 per unit based on standard cost, but ended up spending AED 145.\"",
+      quote: "\"We quoted ₹1,200 per unit based on standard cost, but ended up spending ₹1,450.\"",
       metric: "15% unaccounted scrap & margin erosion",
     },
     after: {
       badge: "Tablet Work Centers & Live Timer",
       description:
-        "Operators scan barcodes at work centers using rugged tablets. Real-time timer logs labor and machine runtime. Odoo automatically calculates exact unit cost down to the fil.",
+        "Operators scan barcodes at work centers using rugged tablets. Real-time timer logs labor and machine runtime. Odoo automatically calculates exact unit cost down to the rupee.",
       solution: "Dynamic Bill of Materials (BOM) routing with real-time scrap tracking per production lot.",
       metric: "99.4% accurate gross margin per finished batch",
     },
@@ -66,41 +66,41 @@ const COMPARISON_DATA: ComparisonItem[] = [
   {
     id: "warehouse",
     category: "warehouse",
-    categoryLabel: "JAFZA & Freezone Warehouse",
-    title: "Multi-Location Inventory & Customs Traceability",
+    categoryLabel: "Multi-State & Hub Warehouse",
+    title: "Multi-Location Inventory & Stock Traceability",
     before: {
-      badge: "Discrepancies & Audit Panic",
+      badge: "Stock Mismatch & Audit Friction",
       description:
-        "Physical inventory in JAFZA / DAFZA warehouses never matches the spreadsheets. Cross-docking transfers between Freezone and mainland require hours of manual paperwork.",
-      quote: "\"The spreadsheet says we have 40 pallets in Bin C-12, but the warehouse is completely empty.\"",
+        "Physical inventory across Gurgaon, Manesar, and regional depots never matches the spreadsheets. Stock transfers between state warehouses require hours of manual paperwork and e-way bill generation.",
+      quote: "\"The spreadsheet says we have 400 units in Bin C-12, but the warehouse is completely empty.\"",
       metric: "18% inventory variance during annual audit",
     },
     after: {
       badge: "Wireless Barcode & Zone Tracking",
       description:
         "Every pallet, roll, and box has a serialized barcode. Putaway rules, lot tracking, and internal transfers reflect immediately on mobile scanners with clean audit trails.",
-      solution: "Automated customs declaration records and multi-warehouse Freezone valuation.",
+      solution: "Automated e-way bill generation, multi-warehouse stock valuation, and serial/lot tracking.",
       metric: "100% audit-compliant real-time stock accuracy",
     },
   },
   {
     id: "finance",
     category: "finance",
-    categoryLabel: "Finance & UAE FTA VAT",
-    title: "Month-End Closing & 5% VAT Compliance",
+    categoryLabel: "Finance & Indian GST",
+    title: "Month-End Closing & GST / e-Invoicing Compliance",
     before: {
       badge: "Tally Silos & 2-Week Closing",
       description:
         "Accounting sits in a disconnected Tally silo. Finance staff re-types hundreds of paper invoices and delivery orders. Month-end closing takes 14 days of stressful reconciliation.",
-      quote: "\"VAT filing deadline is in 2 days and the sales team still hasn't sent over their Excel files.\"",
+      quote: "\"GSTR-1 filing deadline is in 2 days and the sales team still hasn't sent over their verified invoice files.\"",
       metric: "14-day delay in monthly financial closing",
     },
     after: {
-      badge: "1-Click FTA Audit & E-Invoicing",
+      badge: "1-Click GST Reconciliation & E-Invoicing",
       description:
-        "Every sales order and purchase order flows automatically into journals. QR-code FTA compliant e-invoices generate automatically. Bank feeds reconcile in minutes.",
-      solution: "Native UAE VAT returns generated in 1 click, with complete transaction-level drilldown.",
-      metric: "Same-day closing & zero FTA penalty risk",
+        "Every sales order and purchase order flows automatically into journals. QR-code GST compliant e-invoices and e-way bills generate automatically. Bank feeds reconcile in minutes.",
+      solution: "Native Indian GST returns generated in 1 click, with complete transaction-level drilldown.",
+      metric: "Same-day closing & zero GST compliance penalty risk",
     },
   },
 ];
@@ -108,8 +108,8 @@ const COMPARISON_DATA: ComparisonItem[] = [
 const CATEGORIES = [
   { id: "procurement", label: "Procurement", icon: "shopping_cart" },
   { id: "manufacturing", label: "Shop Floor MRP", icon: "precision_manufacturing" },
-  { id: "warehouse", label: "JAFZA Warehouse", icon: "warehouse" },
-  { id: "finance", label: "FTA VAT & Finance", icon: "receipt_long" },
+  { id: "warehouse", label: "Multi-WH Inventory", icon: "warehouse" },
+  { id: "finance", label: "GST & Finance", icon: "receipt_long" },
 ];
 
 export default function TransformationComparison() {
@@ -136,7 +136,7 @@ export default function TransformationComparison() {
             Manual Operations vs. <span className="text-brand-blue">Odoo Automation</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-slate-600 mt-2 leading-relaxed">
-            See the exact operational shift when your Dubai or UAE business transitions from disconnected spreadsheets to a unified, real-time Odoo Enterprise architecture.
+            See the exact operational shift when your Gurgaon or Indian business transitions from disconnected spreadsheets to a unified, real-time Odoo Enterprise architecture.
           </p>
         </div>
 
@@ -278,7 +278,7 @@ export default function TransformationComparison() {
               Ready to replace manual spreadsheets with turnkey automation?
             </h4>
             <p className="text-xs text-slate-500 mt-0.5">
-              Book a 30-minute scoping session. Our Dubai ERP architect will audit your workflows and deliver a fixed-scope roadmap.
+              Book a 30-minute scoping session. Our Gurgaon ERP architect will audit your workflows and deliver a fixed-scope roadmap.
             </p>
           </div>
 

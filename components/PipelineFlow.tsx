@@ -65,7 +65,7 @@
 //                   Zero Silos. Total Operational Control.
 //                 </h4>
 //                 <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
-//                   Connect shop floor supervisors, warehouse managers, and UAE finance teams into one unified Odoo ERP workflow.
+//                   Connect shop floor supervisors, warehouse managers, and Indian finance teams into one unified Odoo ERP workflow.
 //                 </p>
 //               </div>
 //             </div>
@@ -196,7 +196,7 @@ export default function PipelineFlow() {
                   Zero Silos. Total Operational Control.
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-500 max-w-xl leading-relaxed">
-                  Connect shop floor supervisors, warehouse managers, and UAE finance teams into one
+                  Connect shop floor supervisors, warehouse managers, and Indian finance teams into one
                   unified Odoo ERP workflow.
                 </p>
               </div>

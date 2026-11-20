@@ -124,7 +124,7 @@ export default function ProgressRail() {
 
       {/* Brand Subtitle Footer */}
       <div className="mt-3 px-1 text-[9px] font-heading font-bold uppercase tracking-widest text-slate-400 whitespace-nowrap">
-        Suvrin ERP UAE
+        Suvrin ERP India
       </div>
     </aside>
   );

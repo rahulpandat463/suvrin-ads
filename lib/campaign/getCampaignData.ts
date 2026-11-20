@@ -5,7 +5,7 @@
  * Falls back to `data.ts` defaults if the backend is unreachable or not configured.
  *
  * Usage (server component or route handler):
- *   const content = await getCampaignData("odoo-uae");
+ *   const content = await getCampaignData("odoo-india");
  *   const hero = content.hero ?? defaultHeroData;
  */
 

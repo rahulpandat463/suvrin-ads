@@ -25,7 +25,7 @@ export default function MobileStickyBar({ onOpenBooking }: MobileStickyBarProps)
       <a
         href={`tel:${COMPANY_INFO.phoneTel}`}
         className="w-11 h-11 rounded-xl border border-brand-line text-brand-blue flex items-center justify-center shrink-0 bg-white active:scale-95"
-        aria-label="Call Dubai Desk"
+        aria-label="Call Gurgaon Desk"
       >
         <span className="material-symbols-outlined text-[20px]">call</span>
       </a>
