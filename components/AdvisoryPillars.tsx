@@ -210,8 +210,8 @@ export default function AdvisoryPillars() {
                   type="button"
                   onClick={() => setActiveNum(item.num)}
                   className={`w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 border group ${isActive
-                    ? "bg-[#0062fb] border-[#0062fb] text-white shadow-sm font-semibold"
-                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#0062fb]/40"
+                    ? "bg-[#83B773] border-[#83B773] text-white shadow-sm font-semibold"
+                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#83B773]/40"
                     }`}
                   aria-current={isActive ? "true" : undefined}
                 >
