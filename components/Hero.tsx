@@ -64,7 +64,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => openBooking({ source: "hero_discovery_cta" })}
-              className="bg-[#83B773] hover:bg-[#7da970] text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2.5"
+              className="bg-[#0062fb] hover:bg-[#0052d6] text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2.5"
             >
               <span className="material-symbols-outlined text-[20px] text-white">
                 calendar_today

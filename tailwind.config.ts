@@ -12,9 +12,9 @@ const config: Config = {
       colors: {
         brand: {
           ink: "#141414",
-          blue: "#83B773", // Primary brand color changed to #83B773
-          "blue-bright": "#a6d198",
-          "blue-hover": "#7da970",
+          blue: "#0062fb", // Official Suvrin Blue from website
+          "blue-bright": "#1a75ff",
+          "blue-hover": "#0052d6",
           green: "#83B773",
           "green-deep": "#5F9450",
           mist: "#F5F7FA",

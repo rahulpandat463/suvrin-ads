@@ -209,7 +209,7 @@ export default function WhatsIncluded() {
                             topic: title,
                           })
                         }
-                        className="bg-[#83B773] hover:bg-[#72a363] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-xs transition-all cursor-pointer"
+                        className="bg-[#0062fb] hover:bg-[#0052d6] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-xs transition-all cursor-pointer"
                       >
                         Schedule Scoping Review
                       </button>
@@ -330,7 +330,7 @@ export default function WhatsIncluded() {
                       topic: displayTitle,
                     })
                   }
-                  className="bg-[#83B773] hover:bg-[#72a363] text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-lg shadow-xs hover:shadow transition-all cursor-pointer"
+                  className="bg-[#0062fb] hover:bg-[#0052d6] text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-lg shadow-xs hover:shadow transition-all cursor-pointer"
                 >
                   Schedule Scoping Review
                 </button>

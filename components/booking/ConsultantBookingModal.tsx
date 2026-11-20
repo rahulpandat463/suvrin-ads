@@ -384,7 +384,7 @@ export default function ConsultantBookingModal() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-12 bg-[#83B773] hover:bg-[#72A363] disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base active:scale-[0.99]"
+                  className="w-full h-12 bg-[#0062fb] hover:bg-[#0052d6] disabled:bg-slate-300 text-white font-bold rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base active:scale-[0.99]"
                 >
                   {isSubmitting ? (
                     <span className="inline-flex items-center gap-2">
@@ -474,7 +474,7 @@ export default function ConsultantBookingModal() {
                 <button
                   type="button"
                   onClick={closeBooking}
-                  className="w-full h-11 bg-[#83B773] hover:bg-[#72A363] text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                  className="w-full h-11 bg-[#0062fb] hover:bg-[#0052d6] text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center transition-all cursor-pointer shadow-sm"
                 >
                   Done
                 </button>

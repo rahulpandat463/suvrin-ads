@@ -44,7 +44,7 @@ export default function OdooBenefits() {
               <button
                 type="button"
                 onClick={() => openBooking({ source: "odoo_benefits_cta" })}
-                className="bg-[#83B773] hover:bg-[#7da970] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm transition-colors cursor-pointer"
+                className="bg-[#0062fb] hover:bg-[#0052d6] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm transition-colors cursor-pointer"
               >
                 Get a Free Odoo Consultation
               </button>

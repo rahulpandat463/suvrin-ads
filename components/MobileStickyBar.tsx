@@ -50,7 +50,7 @@ export default function MobileStickyBar({ onOpenBooking }: MobileStickyBarProps)
       <button
         type="button"
         onClick={handleClick}
-        className="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-[#83B773] hover:bg-[#7da970] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
+        className="flex-[1.3] min-h-[44px] px-3 rounded-xl bg-[#0062fb] hover:bg-[#0052d6] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
       >
         <span className="material-symbols-outlined text-[16px]">calendar_today</span>
         <span>Book a Consultant</span>

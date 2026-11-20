@@ -169,7 +169,7 @@ export default function AdvisoryPillars() {
                             topic: item.title,
                           })
                         }
-                        className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-xs px-4 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer"
+                        className="bg-[#0062fb] hover:bg-[#0052d6] text-white font-semibold text-xs px-4 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer"
                       >
                         Schedule a Consultation
                       </button>
@@ -210,8 +210,8 @@ export default function AdvisoryPillars() {
                   type="button"
                   onClick={() => setActiveNum(item.num)}
                   className={`w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 border group ${isActive
-                    ? "bg-[#83B773] border-[#83B773] text-white shadow-sm font-semibold"
-                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#83B773]/40"
+                    ? "bg-[#0062fb] border-[#0062fb] text-white shadow-sm font-semibold"
+                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#0062fb]/40"
                     }`}
                   aria-current={isActive ? "true" : undefined}
                 >
@@ -287,7 +287,7 @@ export default function AdvisoryPillars() {
                       topic: currentPillar.title,
                     })
                   }
-                  className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow transition-all cursor-pointer inline-flex items-center justify-center"
+                  className="bg-[#0062fb] hover:bg-[#0052d6] text-white font-semibold text-sm px-6 py-3 rounded-lg shadow-sm hover:shadow transition-all cursor-pointer inline-flex items-center justify-center"
                 >
                   Schedule a Consultation
                 </button>

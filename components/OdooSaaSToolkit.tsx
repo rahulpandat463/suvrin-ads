@@ -260,7 +260,7 @@ export default function OdooSaaSToolkit() {
               <button
                 type="button"
                 onClick={() => openBooking({ source: "odoo_saas_trial_cta" })}
-                className="bg-[#83B773] hover:bg-[#72a363] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+                className="bg-[#0062fb] hover:bg-[#0052d6] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 <span>Connect with Us for 30-Day Free Trial</span>
                 <svg
