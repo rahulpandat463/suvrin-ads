@@ -117,7 +117,8 @@ export async function POST(req: NextRequest) {
     // C. Sync lead to Suvrin main backend (admin panel CRM)
     //    Set MAIN_BACKEND_URL and LEADS_SYNC_SECRET in .env.local to activate.
     // -------------------------------------------------------------------------
-    const mainBackendUrl = process.env.MAIN_BACKEND_URL;
+    const mainBackendUrl =
+      process.env.MAIN_BACKEND_URL || "https://suvrin-website-backend-3vq7.vercel.app";
     const leadsSyncSecret = process.env.LEADS_SYNC_SECRET;
     if (mainBackendUrl) {
       try {
@@ -139,7 +140,7 @@ export async function POST(req: NextRequest) {
             ...(leadsSyncSecret ? { "x-api-key": leadsSyncSecret } : {}),
           },
           body: JSON.stringify({
-            region: process.env.LEAD_REGION || "uae",
+            region: (process.env.LEAD_REGION || "india").toLowerCase(),
             source: body.source || "web",
             referenceCode: reference,
             name: bookingRecord.customer.name,
