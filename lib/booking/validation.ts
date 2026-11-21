@@ -27,7 +27,7 @@ export interface ValidationResult {
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-// Accepts international format e.g. +91 95604 55637, +91 9811021616, etc.
+// Accepts international format e.g. +91 98110 21616, +91 9811021616, etc.
 const PHONE_REGEX = /^\+?[0-9\s\-().]{7,25}$/;
 
 export function validateBookingPayload(data: Partial<BookingPayload>): ValidationResult {

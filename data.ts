@@ -21,7 +21,7 @@ export interface CompanyContact {
 }
 
 export const COMPANY_INFO: CompanyContact = {
-  phoneDisplay: "+91 95604 55637",
+  phoneDisplay: "+91 98110 21616",
   phoneTel: "+919560455637",
   whatsappUrl:
     "https://wa.me/919560455637?text=Hi%20Suvrin%20team,%20I'm%20interested%20in%20Odoo%20Business%20ERP%20in%20Gurgaon",
