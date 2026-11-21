@@ -139,7 +139,7 @@ export async function POST(req: NextRequest) {
             ...(leadsSyncSecret ? { "x-api-key": leadsSyncSecret } : {}),
           },
           body: JSON.stringify({
-            region: process.env.LEAD_REGION || "india",
+            region: process.env.LEAD_REGION || "uae",
             source: body.source || "web",
             referenceCode: reference,
             name: bookingRecord.customer.name,
