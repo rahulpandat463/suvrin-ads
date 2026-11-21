@@ -104,7 +104,7 @@ export default function AdvisoryPillars() {
                   onClick={() => setActiveNum(isOpen ? "" : item.num)}
                   className={`w-full px-4 py-3.5 text-left flex items-center justify-between gap-3 transition-colors cursor-pointer ${
                     isOpen
-                      ? "bg-[#83B773] text-white font-bold"
+                      ? "bg-[#0062fb] text-white font-bold"
                       : "bg-white hover:bg-slate-50 text-slate-800 font-medium"
                   }`}
                   aria-expanded={isOpen}
@@ -153,7 +153,7 @@ export default function AdvisoryPillars() {
                           key={hIdx}
                           className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-100 text-xs text-slate-800 font-medium"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] shrink-0"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#0062fb] shrink-0"></span>
                           <span className="truncate">{point}</span>
                         </div>
                       ))}
@@ -210,8 +210,8 @@ export default function AdvisoryPillars() {
                   type="button"
                   onClick={() => setActiveNum(item.num)}
                   className={`w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 border group ${isActive
-                    ? "bg-[#83B773] border-[#83B773] text-white shadow-sm font-semibold"
-                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#83B773]/40"
+                    ? "bg-[#0062fb] border-[#0062fb] text-white shadow-sm font-semibold"
+                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800 font-medium hover:border-[#0062fb]/40"
                     }`}
                   aria-current={isActive ? "true" : undefined}
                 >
@@ -270,7 +270,7 @@ export default function AdvisoryPillars() {
                       key={idx}
                       className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 text-xs sm:text-[13px] text-slate-800 font-medium"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0062fb] shrink-0"></span>
                       <span className="truncate">{point}</span>
                     </div>
                   ))}

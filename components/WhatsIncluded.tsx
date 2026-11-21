@@ -101,8 +101,8 @@ export default function WhatsIncluded() {
         {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-10 sm:mb-12">
           <div className="lg:col-span-7 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#83B773]/10 border border-[#83B773]/30 text-[#3b6630] font-heading text-[11px] font-extrabold uppercase tracking-wider mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#83B773] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0062fb]/10 border border-[#0062fb]/30 text-[#0062fb] font-heading text-[11px] font-extrabold uppercase tracking-wider mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0062fb] animate-pulse"></span>
               Fixed-Scope Delivery
             </div>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-ink leading-tight">
@@ -131,7 +131,7 @@ export default function WhatsIncluded() {
               <div
                 key={item.number}
                 className={`rounded-xl border transition-all duration-200 overflow-hidden ${isOpen
-                    ? "border-[#83B773] shadow-sm bg-white"
+                    ? "border-[#0062fb] shadow-sm bg-white"
                     : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
               >
@@ -248,8 +248,8 @@ export default function WhatsIncluded() {
                   type="button"
                   onClick={() => setActiveNumber(item.number)}
                   className={`w-full py-3.5 px-4 sm:px-5 rounded-lg text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 text-sm sm:text-[15px] font-heading group ${isActive
-                      ? "bg-[#83B773] !text-white shadow-sm font-bold"
-                      : "text-slate-800 hover:bg-[#83B773] hover:!text-white font-medium"
+                      ? "bg-[#0062fb] !text-white shadow-sm font-bold"
+                      : "text-slate-800 hover:bg-[#0062fb] hover:!text-white font-medium"
                     }`}
                   style={isActive ? { color: "#ffffff" } : undefined}
                   aria-current={isActive ? "true" : undefined}
@@ -281,7 +281,7 @@ export default function WhatsIncluded() {
               {/* Subtle Decorative Curve in Bottom Right (matching reference style) */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full border-[16px] border-[#83B773]/20 opacity-70"
+                className="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full border-[16px] border-[#0062fb]/20 opacity-70"
               />
 
               {/* Title */}
@@ -309,7 +309,7 @@ export default function WhatsIncluded() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {highlights.map((point, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <span className="material-symbols-outlined text-[#83B773] text-[17px] shrink-0 mt-0.5">
+                      <span className="material-symbols-outlined text-[#0062fb] text-[17px] shrink-0 mt-0.5">
                         check_circle
                       </span>
                       <span className="text-xs sm:text-[13px] text-slate-600 leading-snug">
